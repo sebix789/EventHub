@@ -5,6 +5,9 @@
   />
   <div class="landing-page">
     <div class="top-app-bar">
+      <div class="title">
+        <img src="../assets/title.png" alt="EventHub" />
+      </div>
       <div class="search-container">
         <input
           type="text"
@@ -71,8 +74,14 @@ body {
   background-repeat: no-repeat;
 }
 
+.title {
+  position: absolute;
+  left: 0;
+  padding-left: 3rem;
+}
+
 .top-app-bar {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
