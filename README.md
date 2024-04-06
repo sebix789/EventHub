@@ -2,7 +2,7 @@
 
 EventHub is a web application made for creating, sharing, managing and searching events available in selected area. Application allows users to registering accounts and organizing events.
 
-Link to UX in Figma: https://www.figma.com/file/MFShbVGAifpyu9dJTD91UC/Landing-Page?type=design&node-id=0%3A1&mode=design&t=MLVPXzXqBDh5T8xA-1
+Link to UX in Figma: https://www.figma.com/file/MFShbVGAifpyu9dJTD91UC/Landing-Page?type=design&node-id=0%3A1&mode=design&t=Asw57yESECFsdS0Y-1
 
 Technical Overview:
 - Start Page: users can see all events available in selected area. This view also allows users to search the specific event
