@@ -25,7 +25,7 @@
         :is="currentView"
         :key="currentViewKey"
         @close="handleClose"
-        @change="handleChange"
+        @switch-card="handleSwitch"
       />
       <h2 v-else class="header">Welcome to EventHub</h2>
     </transition>
@@ -58,7 +58,7 @@ export default defineComponent({
       login.value = !login.value
     }
 
-    const handleChange = () => {
+    const handleSwitch = () => {
       if (login.value) {
         login.value = false
         signup.value = true
@@ -90,7 +90,7 @@ export default defineComponent({
       handleSearch,
       toggleLogin,
       toggleSingup,
-      handleChange,
+      handleSwitch,
       currentView,
       currentViewKey,
       handleClose

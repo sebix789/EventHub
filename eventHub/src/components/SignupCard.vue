@@ -12,8 +12,13 @@
           placeholder="Email"
           v-model="email"
           type="text"
+          @blur="isTouched = true"
+          :class="{ 'is-invalid': !isValid && isTouched }"
           required
         />
+        <span v-if="!isValid && isTouched" class="bottom-label error-message">
+          Please enter a valid email address.
+        </span>
       </div>
       <div class="content-wrapper">
         <label class="card-label" for="password">Password:</label>
@@ -29,36 +34,51 @@
       <div class="content-wrapper">
         <label class="card-label" for="password">Repeat Password:</label>
         <input
+          :class="{ 'is-invalid': !passwordCheck && isTouched }"
           class="card-input"
           id="repeatPassword"
           placeholder="Repeat Password"
           v-model="repeatPassword"
+          @blur="isTouched = true"
           type="password"
           required
         />
-        <p class="bottom-label helper-text" v-if="passwordCheck">
+        <p
+          v-if="isPasswordValid"
+          class="bottom-label"
+          :class="{
+            'error-message': !passwordCheck,
+            'success-message': passwordCheck
+          }"
+        >
           {{ passwordMatchMessage }}
         </p>
         <div class="terms-conditions-wrapper content-wrapper">
-          <input type="checkbox" id="agreeTerms" v-model="agreeTerms" />
+          <input
+            type="checkbox"
+            id="agreeTerms"
+            :checked="agreeTerms"
+            @change="handleUpdateTerms"
+            v-model="agreeTerms"
+          />
           <label class="bottom-label" for="agreeTerms"
             >Agree to terms & conditions</label
           >
         </div>
       </div>
-      <button class="btn login-button" type="submit" :disabled="!agreeTerms">
+      <button class="btn login-button" type="submit" :disabled="isDisabled">
         Create an account
       </button>
     </form>
     <label class="bottom-label card-label" for="singup"
       >Already have an account?</label
     >
-    <button class="singup-button" @click.prevent.stop="handleChangeCard">Log in</button>
+    <button class="singup-button" @click="handleSwitchCard">Log in</button>
   </div>
 </template>
 
 <script>
-import { defineComponent, ref, computed } from 'vue'
+import { defineComponent, ref, computed, watch } from 'vue'
 import '@/assets/card.css'
 
 export default defineComponent({
@@ -68,21 +88,32 @@ export default defineComponent({
     const password = ref('')
     const repeatPassword = ref('')
     const agreeTerms = ref(false)
+    const isTouched = ref(false)
+    const passwordCheck = ref(false)
 
-    const passwordCheck = computed(() => repeatPassword.value.length > 0)
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    const isValid = computed(() => emailRegex.test(email.value))
+    const isDisabled = computed(() => !agreeTerms.value)
 
-    const passwordMatchMessage = computed(() => {
+    const isPasswordValid = computed(() => {
       if (repeatPassword.value.length === 0) {
-        return ''
+        return (passwordCheck.value = false)
       }
       return password.value === repeatPassword.value
+        ? (passwordCheck.value = true)
+        : (passwordCheck.value = false)
+    })
+
+    const passwordMatchMessage = computed(() => {
+      return passwordCheck
         ? 'Password match correctly'
         : "Password didn't match"
     })
 
     const handleSubmit = () => {
-      if (!passwordCheck.value || !agreeTerms.value) {
-        alert('Passwords do not match. Please try again.')
+      isTouched.value = true
+      if (!isPasswordValid.value || !agreeTerms.value || !isValid.value) {
+        alert('Please correct the errors before submitting')
         return
       }
       alert('Form submitted successfully!')
@@ -98,18 +129,31 @@ export default defineComponent({
       emit('close')
     }
 
-    const handleChangeCard = (event) => {
-      event.stopPropagation()
-      emit('change')
+    const handleSwitchCard = () => {
+      emit('switch-card')
     }
+
+    const handleUpdateTerms = event => {
+      agreeTerms.value = event.target.checked
+    }
+
+    watch(agreeTerms, (newValue, oldValue) => {
+      console.log(`Checkbox value changed from ${oldValue} to ${newValue}`)
+    })
 
     return {
       email,
       password,
+      isDisabled,
+      isTouched,
+      isValid,
+      emailRegex,
       emit,
       handleClose,
       handleSubmit,
-      handleChangeCard,
+      handleSwitchCard,
+      handleUpdateTerms,
+      isPasswordValid,
       repeatPassword,
       passwordCheck,
       passwordMatchMessage

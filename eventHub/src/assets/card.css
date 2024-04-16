@@ -36,13 +36,6 @@
   justify-content: center;
 }
 
-.helper-text {
-  display: flex;
-  justify-content: flex-start;
-  padding-top: -10px;
-  margin-top: 0;
-}
-
 .card-input {
   background-color: #fff;
   color: #000;
@@ -82,4 +75,22 @@
   font-family: 'Roboto';
   padding-top: 0;
   color: #333;
+}
+
+/*//////////////////////*/
+/*///FORM VALIDATION///*/
+/*////////////////////*/
+
+.is-invalid {
+  border-color: red;
+}
+.error-message {
+  color: red;
+  font-size: 0.8rem;
+  display: flex;
+}
+
+.success-message {
+  color: green;
+  font-size: 0.8rem;
 }

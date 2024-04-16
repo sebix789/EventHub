@@ -29,9 +29,7 @@
       <button class="btn login-button" type="submit">Log in</button>
     </form>
     <label class="bottom-label card-label" for="singup">Need an account?</label>
-    <button class="singup-button" @click.prevent.stop="handleChangeCard">
-      Sing Up
-    </button>
+    <button class="singup-button" @click="handleSwitchCard">Sing Up</button>
   </div>
 </template>
 
@@ -46,6 +44,7 @@ export default defineComponent({
     const password = ref('')
 
     const handleSubmit = () => {
+      alert('Log in successfully!')
       console.log(
         'Login attempt with email: ',
         email.value,
@@ -58,9 +57,8 @@ export default defineComponent({
       emit('close')
     }
 
-    const handleChangeCard = (event) => {
-      event.stopPropagation()
-      emit('change')
+    const handleSwitchCard = () => {
+      emit('switch-card')
     }
 
     return {
@@ -69,7 +67,7 @@ export default defineComponent({
       emit,
       handleClose,
       handleSubmit,
-      handleChangeCard
+      handleSwitchCard
     }
   }
 })
