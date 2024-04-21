@@ -28,47 +28,34 @@
       </div>
       <button class="btn login-button" type="submit">Log in</button>
     </form>
-    <label class="bottom-label card-label" for="singup">Need an account?</label>
-    <button class="singup-button" @click="handleSwitchCard">Sing Up</button>
+    <label class="bottom-label card-label" for="signup">Need an account?</label>
+    <button class="signup-button" @click="handleSwitchCard">Sign Up</button>
   </div>
 </template>
 
-<script>
-import { defineComponent, ref } from 'vue'
+<script setup>
+import { ref, defineEmits } from 'vue'
 import '@/assets/card.css'
 
-export default defineComponent({
-  name: 'LoginCard',
-  setup(props, { emit }) {
-    const email = ref('')
-    const password = ref('')
+const emit = defineEmits(['close', 'switch-card'])
+const email = ref('')
+const password = ref('')
 
-    const handleSubmit = () => {
-      alert('Log in successfully!')
-      console.log(
-        'Login attempt with email: ',
-        email.value,
-        ' and password: ',
-        password.value
-      )
-    }
+const handleSubmit = () => {
+  alert('Log in successfully!')
+  console.log(
+    'Login attempt with email:',
+    email.value,
+    'and password:',
+    password.value
+  )
+}
 
-    const handleClose = () => {
-      emit('close')
-    }
+const handleClose = () => {
+  emit('close')
+}
 
-    const handleSwitchCard = () => {
-      emit('switch-card')
-    }
-
-    return {
-      email,
-      password,
-      emit,
-      handleClose,
-      handleSubmit,
-      handleSwitchCard
-    }
-  }
-})
+const handleSwitchCard = () => {
+  emit('switch-card')
+}
 </script>

@@ -13,10 +13,10 @@
           type="text"
           class="search-input"
           placeholder="Search for events"
+          v-model="searchQuery"
         />
         <i @click="handleSearch" class="fas fa-search search-icon"></i>
       </div>
-
       <button @click="toggleLogin" class="login-button">Log in</button>
     </div>
     <transition name="slide-fade" mode="out-in">
@@ -32,69 +32,50 @@
   </div>
 </template>
 
-<script>
-import { defineComponent, ref, computed } from 'vue'
+<script setup>
+import { ref, computed } from 'vue'
 import LoginCard from './LoginCard.vue'
 import SignupCard from './SignupCard.vue'
 import '@/assets/landingPage.css'
 
-export default defineComponent({
-  name: 'LandingPage',
-  components: { LoginCard, SignupCard },
-  setup() {
-    const searchQuery = ref('')
-    const login = ref(false)
-    const signup = ref(false)
+const searchQuery = ref('')
+const login = ref(false)
+const signup = ref(false)
 
-    const handleSearch = () => {
-      alert(`Searching for: ${searchQuery.value}`)
-    }
+const handleSearch = () => {
+  alert(`Searching for: ${searchQuery.value}`)
+}
 
-    const toggleSingup = () => {
-      signup.value = !signup.value
-    }
+const toggleSignup = () => {
+  signup.value = !signup.value
+}
 
-    const toggleLogin = () => {
-      login.value = !login.value
-    }
+const toggleLogin = () => {
+  login.value = !login.value
+}
 
-    const handleSwitch = () => {
-      if (login.value) {
-        login.value = false
-        signup.value = true
-      } else if (signup.value) {
-        login.value = true
-        signup.value = false
-      }
-    }
-
-    const handleClose = () => {
-      login.value = false
-      signup.value = false
-    }
-
-    const currentView = computed(() => {
-      if (login.value) return LoginCard
-      if (signup.value) return SignupCard
-      return null
-    })
-
-    const currentViewKey = computed(() => {
-      return login.value ? 'login' : signup.value ? 'signup' : 'none'
-    })
-
-    return {
-      searchQuery,
-      login,
-      signup,
-      handleSearch,
-      toggleLogin,
-      toggleSingup,
-      handleSwitch,
-      currentView,
-      currentViewKey,
-      handleClose
-    }
+const handleSwitch = () => {
+  if (login.value) {
+    login.value = false
+    signup.value = true
+  } else if (signup.value) {
+    login.value = true
+    signup.value = false
   }
+}
+
+const handleClose = () => {
+  login.value = false
+  signup.value = false
+}
+
+const currentView = computed(() => {
+  if (login.value) return LoginCard
+  if (signup.value) return SignupCard
+  return null
+})
+
+const currentViewKey = computed(() => {
+  return login.value ? 'login' : signup.value ? 'signup' : 'none'
 })
 </script>
