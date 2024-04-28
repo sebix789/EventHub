@@ -1,0 +1,100 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  width: 100vw;
+  height: calc(100vh - 4px);
+}
+
+.header {
+  font-size: 3rem;
+}
+
+.landing-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../assets//backgroundImage.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.title {
+  position: absolute;
+  left: 0;
+  padding-left: 3rem;
+}
+
+.top-app-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+  background: linear-gradient(to right, #695d5d, #fff);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.top-app-bar .login-button {
+  margin-right: 2.5rem;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  font-size: 12px;
+}
+
+.login-button {
+  margin-left: 10px;
+}
+
+.login-button {
+  cursor: pointer;
+}
+
+.search-container {
+  position: relative;
+  display: inline-block;
+}
+
+.search-input {
+  background-color: white;
+  color: #000;
+  padding: 10px 100px 10px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  color: #333;
+  cursor: pointer;
+}
+
+/*///////////////////////////
+/////////ANIMATIONS/////////
+/////////////////////////// */
+
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
+}
