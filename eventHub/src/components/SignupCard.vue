@@ -5,6 +5,17 @@
     </button>
     <form class="login-form" @submit.prevent="handleSubmit">
       <div class="content-wrapper">
+        <label class="card-label" for="username">Username:</label>
+        <input
+          class="card-input"
+          id="username"
+          placeholder="Username"
+          v-model="username"
+          type="text"
+          required
+        />
+      </div>
+      <div class="content-wrapper">
         <label class="card-label" for="email">Email:</label>
         <input
           class="card-input"
@@ -69,9 +80,13 @@
 
 <script setup>
 import { ref, computed, defineEmits, watch } from 'vue'
+import axios from 'axios'
 import '@/assets/card.css'
 
+axios.defaults.baseURL = 'http://localhost:5000'
+
 const emit = defineEmits(['close', 'switch-card'])
+const username = ref('')
 const email = ref('')
 const password = ref('')
 const repeatPassword = ref('')
@@ -85,18 +100,19 @@ const isDisabled = computed(
   () => !agreeTerms.value || !isValid.value || !passwordCheck.value
 )
 
-const handleSubmit = () => {
+const handleSubmit = async () => {
   isTouched.value = true
   if (!isDisabled.value) {
-    alert('Form submitted successfully!')
-    console.log(
-      'Account creation with Email:',
-      email.value,
-      'Password:',
-      password.value
-    )
-  } else {
-    alert('Please correct the errors before submitting')
+    try {
+      const response = await axios.post('/api/auth/signup', {
+        username: username.value,
+        email: email.value,
+        password: password.value
+      })
+      alert('Form submitted successfully!')
+    } catch (error) {
+      console.error(error)
+    }
   }
 }
 
@@ -107,8 +123,4 @@ const handleClose = () => {
 const handleSwitchCard = () => {
   emit('switch-card')
 }
-
-watch(agreeTerms, (newValue, oldValue) => {
-  console.log(`Checkbox value changed from ${oldValue} to ${newValue}`)
-})
 </script>
