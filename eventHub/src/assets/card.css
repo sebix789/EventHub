@@ -12,6 +12,7 @@
   opacity: 1;
   transform: translateY(0);
   padding-bottom: 0.5rem;
+  margin-top: 5rem;
 }
 
 .content-wrapper {
@@ -19,8 +20,7 @@
 }
 
 .terms-conditions-wrapper {
-  padding-bottom: 0;
-  padding-top: 0.5rem;
+  padding-bottom: 1rem;
   font-size: 14px;
 }
 

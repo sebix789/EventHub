@@ -5,12 +5,12 @@
     </button>
     <form class="login-form" @submit.prevent="handleSubmit">
       <div class="content-wrapper">
-        <label class="card-label" for="email">Email:</label>
+        <label class="card-label" for="username">Username:</label>
         <input
           class="card-input"
-          id="email"
-          placeholder="Email"
-          v-model="email"
+          id="username"
+          placeholder="Username"
+          v-model="username"
           type="text"
           required
         />
@@ -26,6 +26,7 @@
           required
         />
       </div>
+      <p v-if="errorMessage" class="bottom-label error-message err">{{ errorMessage }}</p>
       <button class="btn login-button" type="submit">Log in</button>
     </form>
     <label class="bottom-label card-label" for="signup">Need an account?</label>
@@ -34,21 +35,38 @@
 </template>
 
 <script setup>
-import { ref, defineEmits } from 'vue'
+import { ref, defineEmits, inject, watch } from 'vue'
+import { useRouter } from 'vue-router'
+import axios from 'axios'
 import '@/assets/card.css'
 
-const emit = defineEmits(['close', 'switch-card'])
-const email = ref('')
-const password = ref('')
+axios.defaults.baseURL = 'http://localhost:5000'
 
-const handleSubmit = () => {
-  alert('Log in successfully!')
-  console.log(
-    'Login attempt with email:',
-    email.value,
-    'and password:',
-    password.value
-  )
+const emit = defineEmits(['close', 'switch-card'])
+const username = ref('')
+const password = ref('')
+const router = useRouter()
+const isLoggedIn = inject('isLoggedIn')
+const errorMessage = ref('')
+
+const handleSubmit = async () => {
+  try {
+    const response = await axios.post('/api/auth/login', {
+      username: username.value,
+      password: password.value
+    })
+    isLoggedIn.value = true
+    console.log('Received token:', response.data.token)
+    localStorage.setItem('token', response.data.token)
+    localStorage.setItem('username', response.data.username)
+    router.push({ name: 'LoggedMainPage' })
+  } catch (error) {
+    if (error.response && error.response.status === 401) {
+      errorMessage.value = 'Username or password is incorrect'
+    } else {
+      errorMessage.value = 'An unknown error occurred'
+    }
+  }
 }
 
 const handleClose = () => {
@@ -58,4 +76,14 @@ const handleClose = () => {
 const handleSwitchCard = () => {
   emit('switch-card')
 }
+
+watch([username, password], () => {
+  errorMessage.value = ''
+})
 </script>
+
+<style scoped>
+.err {
+  margin-top: 0;
+}
+</style>
