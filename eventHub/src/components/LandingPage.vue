@@ -29,33 +29,33 @@
     </div>
     <div class="main-container">
       <div class="left-bar-container">
-      <slot name="left-bar"></slot>
-    </div>
-    <div class="header-container">
-      <slot name="header">
-        <transition name="slide-fade" mode="out-in">
-          <component
-            v-if="currentView"
-            :is="currentView"
-            :key="currentViewKey"
-            @close="handleClose"
-            @switch-card="handleSwitch"
-          />
-          <div v-else class="header header-wrapper">
-            <h2 class="header">Welcome to EventHub</h2>
-            <button class="header-filter">Today</button>
-            <button class="header-filter">Tomorrow</button>
-            <button class="header-filter">This week</button>
-          </div>
-        </transition>
-      </slot>
-    </div>
+        <slot name="left-bar"></slot>
+      </div>
+      <div class="header-container">
+        <slot name="header">
+          <transition name="slide-fade" mode="out-in">
+            <component
+              v-if="currentView"
+              :is="currentView"
+              :key="currentViewKey"
+              @close="handleClose"
+              @switch-card="handleSwitch"
+            />
+            <div v-else class="header header-wrapper">
+              <h2 class="header">Welcome to EventHub</h2>
+              <button class="header-filter">Today</button>
+              <button class="header-filter">Tomorrow</button>
+              <button class="header-filter">This week</button>
+            </div>
+          </transition>
+        </slot>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, inject, defineProps } from 'vue'
+import { ref, computed, inject, defineProps, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import LoginCard from './LoginCard.vue'
 import SignupCard from './SignupCard.vue'
@@ -70,6 +70,11 @@ const isLoggedIn = inject('isLoggedIn')
 
 const props = defineProps({
   isLoggedIn: Boolean
+})
+
+onMounted(() => {
+  const token = localStorage.getItem('token')
+  isLoggedIn.value = !!token
 })
 
 const handleSearch = () => {

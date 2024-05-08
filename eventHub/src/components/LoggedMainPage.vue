@@ -15,19 +15,26 @@
       </template>
       <template v-slot:header>
         <div class="main-page-container">
-          <div class="header-section card">
-          <h1 class="title-section">Plan Your Events</h1>
-          <span>Organize your upcoming events seamlessly</span>
-          <button class="login-button create-btn">Create Event</button>
-        </div>
-        <div class="header-section card">
-          <h1>Upcoming Events</h1>
-          <div class="btn-header-container">
-            <button class="header-filter">Today</button>
-            <button class="header-filter">Tomorrow</button>
-            <button class="header-filter">{{ username }}</button>
+          <div v-if="!showCreateEventForm" class="header-section card">
+            <h1 class="title-section">Plan Your Events</h1>
+            <span>Organize your upcoming events seamlessly</span>
+            <button class="login-button create-btn" @click="handleCreateEvent">
+              Create Event
+            </button>
           </div>
-        </div>
+          <CreateEvent
+            class="header-section card"
+            v-else
+            @close="handleClose"
+          />
+          <div class="header-section card">
+            <h1>Upcoming Events</h1>
+            <div class="btn-header-container">
+              <button class="header-filter">Today</button>
+              <button class="header-filter">Tomorrow</button>
+              <button class="header-filter">{{ username }}</button>
+            </div>
+          </div>
         </div>
       </template>
     </LandingPage>
@@ -37,16 +44,14 @@
 <script setup>
 import { ref, onMounted, inject } from 'vue'
 import LandingPage from './LandingPage.vue'
+import CreateEvent from './CreateEvent.vue'
 import '@/assets/loggedMainPage.css'
 import '@/assets/card.css'
 import '@/assets/landingPage.css'
 
 const username = ref('')
+const showCreateEventForm = ref(false)
 const isLoggedIn = inject('isLoggedIn')
-
-const handleClick = (section) => {
-  console.log(`Clicked on ${section}`);
-}
 
 onMounted(() => {
   try {
@@ -60,4 +65,16 @@ onMounted(() => {
     console.error(error)
   }
 })
+
+const handleClick = section => {
+  console.log(`Clicked on ${section}`)
+}
+
+const handleCreateEvent = () => {
+  showCreateEventForm.value = true
+}
+
+const handleClose = () => {
+  showCreateEventForm.value = false
+}
 </script>
