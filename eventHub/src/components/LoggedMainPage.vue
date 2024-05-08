@@ -7,7 +7,7 @@
             <i class="fas fa-user"></i>
             <span>My Profile</span>
           </div>
-          <div class="section" @click="handleClick('events')">
+          <div class="section" @click="handleEvent">
             <i class="fas fa-calendar-alt"></i>
             <span>My Events</span>
           </div>
@@ -32,7 +32,7 @@
             <div class="btn-header-container">
               <button class="header-filter">Today</button>
               <button class="header-filter">Tomorrow</button>
-              <button class="header-filter">{{ username }}</button>
+              <button class="header-filter">This Week</button>
             </div>
           </div>
         </div>
