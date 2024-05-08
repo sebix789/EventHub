@@ -3,6 +3,7 @@ import mongoose, { ConnectOptions } from 'mongoose'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import authRoutes from './routes/authRoutes'
+import eventRoutes from './routes/eventRoutes'
 
 const app: Application = express()
 
@@ -27,6 +28,7 @@ mongoose
 
 // Routes
 app.use('/api/auth', authRoutes)
+app.use('/api/events', eventRoutes)
 
 const PORT = process.env.PORT || 5000
 

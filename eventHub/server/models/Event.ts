@@ -11,7 +11,7 @@ export interface EventInterface extends Document {
 
 const eventSchema = new Schema<EventInterface>({
   username: { type: String, required: true },
-  title: { type: String, required: true },
+  title: { type: String, required: true, unique: true },
   date: { type: Date, required: true },
   location: { type: String, required: true },
   description: { type: String, required: true },
