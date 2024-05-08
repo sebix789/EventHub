@@ -2,8 +2,11 @@ import express, { Request, Response } from 'express'
 import bcrypt from 'bcryptjs'
 import User, { UserInterface } from '../models/User'
 import { authenticateUser } from '../middleware/authenticateService'
+import multer from 'multer'
+import Event, { EventInterface } from '../models/Event'
 
 const router = express.Router()
+const upload = multer()
 
 router.post('/signup', async (req: Request, res: Response) => {
   try {
@@ -51,6 +54,33 @@ router.post('/login', async (req: Request, res: Response) => {
     }
   }
 })
+
+router.post(
+  '/createEvent',
+  upload.single('image'),
+  async (req: Request, res: Response) => {
+    try {
+      const { username, title, date, location, description } = req.body
+      const image = req.file?.buffer.toString('base64')
+
+      const newEvent: EventInterface = new Event({
+        username,
+        title,
+        date,
+        location,
+        description,
+        image
+      })
+
+      await newEvent.save()
+
+      res.status(201).json({ message: 'Event created successfully' })
+    } catch (error) {
+      console.error(error)
+      res.status(500).json({ message: 'Internal Server Error' })
+    }
+  }
+)
 
 /////TO FIX GET ROUTE/////
 // router.get('/user', authenticateToken, (req: CustomRequest, res: Response) => {
