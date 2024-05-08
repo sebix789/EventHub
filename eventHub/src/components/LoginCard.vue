@@ -26,7 +26,9 @@
           required
         />
       </div>
-      <p v-if="errorMessage" class="bottom-label error-message err">{{ errorMessage }}</p>
+      <p v-if="errorMessage" class="bottom-label error-message err">
+        {{ errorMessage }}
+      </p>
       <button class="btn login-button" type="submit">Log in</button>
     </form>
     <label class="bottom-label card-label" for="signup">Need an account?</label>
@@ -55,7 +57,6 @@ const handleSubmit = async () => {
       username: username.value,
       password: password.value
     })
-    isLoggedIn.value = true
     console.log('Received token:', response.data.token)
     localStorage.setItem('token', response.data.token)
     localStorage.setItem('username', response.data.username)

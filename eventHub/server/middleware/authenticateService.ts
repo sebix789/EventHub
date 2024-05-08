@@ -4,24 +4,34 @@ import bcrypt from 'bcryptjs'
 import User from '../models/User'
 import { CustomRequest } from '../types/customRequest'
 
-export const authenticateToken = async (
-  req: CustomRequest,
-  res: Response,
-  next: NextFunction
-) => {
-  const authHeader = req.headers['authorization']
-  const token = authHeader && authHeader.split(' ')[1]
+////TO FIX LATER////
+// let tokenBlacklist: string[] = []
 
-  if (token == null) return res.sendStatus(401)
+// export const invalidateToken = (token: string) => {
+//   // Add the token to the blacklist
+//   tokenBlacklist.push(token)
+// }
 
-  jwt.verify(token, 'secretkey', (err: any, user: any) => {
-    if (err) {
-      res.status(403).send('Forbidden')
-      ;(req as CustomRequest).user = user
-    }
-    next()
-  })
-}
+// export const authenticateToken = (
+//   req: CustomRequest,
+//   res: Response,
+//   next: NextFunction
+// ) => {
+//   const authHeader = req.headers['authorization']
+//   const token = authHeader && authHeader.split(' ')[1]
+
+//   if (token == null) return res.sendStatus(401)
+
+//   if (tokenBlacklist.includes(token)) return res.sendStatus(403)
+
+//   jwt.verify(token, 'secretkey', (err: any, user: any) => {
+//     if (err) {
+//       res.status(403).send('Forbidden')
+//       ;(req as CustomRequest).user = user
+//     }
+//     next()
+//   })
+// }
 
 export const authenticateUser = async (username: string, password: string) => {
   const user = await User.findOne({ username })
