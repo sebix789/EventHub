@@ -30,9 +30,36 @@
           <div class="header-section card">
             <h1>Upcoming Events</h1>
             <div class="btn-header-container">
-              <button class="header-filter">Today</button>
-              <button class="header-filter">Tomorrow</button>
-              <button class="header-filter">This Week</button>
+              <button class="header-filter" @click="fetchEventsByDate('Today')">
+                Today
+              </button>
+              <button
+                class="header-filter"
+                @click="fetchEventsByDate('Tomorrow')"
+              >
+                Tomorrow
+              </button>
+              <button class="header-filter" @click="fetchEventsForThisWeek()">
+                This Week
+              </button>
+            </div>
+          </div>
+          <!-- Dodaj sekcję na wyświetlanie wydarzeń -->
+          <div v-if="events.length > 0" class="events-container">
+            <div class="events-container">
+              <div v-for="event in events" :key="event._id" class="event-card">
+                <h2>{{ event.title }}</h2>
+                <p>Date:{{ formatDate(event.date) }}</p>
+                <!-- Formatowanie daty przy użyciu metody formatDate -->
+                <p>Location: {{ event.location }}</p>
+                <p>Description: {{ event.description }}</p>
+              </div>
+            </div>
+            <div
+              v-if="showNoEventsMessage && events.length === 0"
+              class="no-events-message"
+            >
+              No events to display.
             </div>
           </div>
         </div>
@@ -43,6 +70,7 @@
 
 <script setup>
 import { ref, onMounted, inject } from 'vue'
+import axios from 'axios'
 import LandingPage from './LandingPage.vue'
 import CreateEvent from './CreateEvent.vue'
 import '@/assets/loggedMainPage.css'
@@ -52,6 +80,12 @@ import '@/assets/landingPage.css'
 const username = ref('')
 const showCreateEventForm = ref(false)
 const isLoggedIn = inject('isLoggedIn')
+const events = ref([]) // Nowa zmienna reaktywna na wydarzenia
+const showNoEventsMessage = ref(false) // Flaga dla komunikatu o braku wydarzeń
+
+const axiosInstanceEvent = axios.create({
+  baseURL: 'http://localhost:5000/api/events'
+})
 
 onMounted(() => {
   try {
@@ -77,4 +111,75 @@ const handleCreateEvent = () => {
 const handleClose = () => {
   showCreateEventForm.value = false
 }
+
+const fetchEventsByDate = async date => {
+  try {
+    let searchDate = new Date()
+
+    switch (date) {
+      case 'Today':
+        searchDate = searchDate.toISOString().split('T')[0] // Dzisiejsza data
+        break
+      case 'Tomorrow':
+        searchDate.setDate(searchDate.getDate() + 1)
+        searchDate = searchDate.toISOString().split('T')[0] // Jutrzejsza data
+        break
+    }
+
+    console.log('Search Date:', searchDate)
+
+    const response = await axiosInstanceEvent.get(
+      `/getEventsByDate/${searchDate}`,
+      {
+        params: {
+          date: searchDate
+        }
+      }
+    )
+
+    events.value = response.data
+    console.log(response.data) // Wyświetlenie odpowiedzi w konsoli
+  } catch (error) {
+    console.error('Error while fetching events:', error)
+  }
+}
+
+const formatDate = date => {
+  const eventDate = new Date(date)
+  const options = { day: '2-digit', month: '2-digit', year: 'numeric' }
+  return eventDate.toLocaleDateString('en-GB', options) // Ustawienia regionalne dla formatu DD-MM-YYYY
+}
+
+const fetchEventsForThisWeek = async () => {
+  try {
+    const response = await axiosInstanceEvent.get('/getEventsThisWeek')
+    events.value = response.data
+    console.log(response.data) // Wyświetlenie odpowiedzi w konsoli
+  } catch (error) {
+    console.error('Error while fetching events:', error)
+  }
+}
 </script>
+
+<style>
+/* Style dla wydarzeń */
+.events-container {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: white;
+}
+
+.event-card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+}
+
+/* Styl dla komunikatu o braku wydarzeń */
+.no-events-message {
+  margin-top: 20px;
+  font-weight: bold;
+  color: red;
+}
+</style>

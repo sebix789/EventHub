@@ -75,7 +75,7 @@ const handleClose = () => {
 }
 
 const handleSwitchCard = () => {
-  emit('switch-card')
+  router.push('/singup')
 }
 
 watch([username, password], () => {

@@ -82,6 +82,9 @@
 import { ref, computed, defineEmits, watch } from 'vue'
 import axios from 'axios'
 import '@/assets/card.css'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 axios.defaults.baseURL = 'http://localhost:5000'
 
@@ -109,7 +112,7 @@ const handleSubmit = async () => {
         email: email.value,
         password: password.value
       })
-      alert('Form submitted successfully!')
+      router.push('/login')
     } catch (error) {
       console.error(error)
     }

@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import LandingPage from '../components/LandingPage.vue'
-import LoggedMainPage from '../components/LoggedMainPage.vue'
+import LandingPage from '@/components/LandingPage.vue'
+import LoggedMainPage from '@/components/LoggedMainPage.vue'
+import SignupCard from '@/components/SignupCard.vue'
+import LoginCard from '@/components/LoginCard.vue'
 
 const routes = [
   {
@@ -13,6 +15,18 @@ const routes = [
     name: 'LoggedMainPage',
     component: LoggedMainPage,
     meta: { requiresAuth: true }
+  },
+  {
+    path: '/singup',
+    name: 'SingupCard',
+    component: SignupCard,
+    
+  },
+  {
+    path: '/login',
+    name: 'LoginCard',
+    component: LoginCard,
+    
   }
 ]
 

@@ -20,7 +20,6 @@ router.post(
           .status(400)
           .json({ message: 'An event with this title already exists' })
       }
-
       const newEvent: EventInterface = new Event({
         username,
         title,
@@ -50,6 +49,65 @@ router.get('/getEvents/:username', async (req: Request, res: Response) => {
     res.status(200).json(events)
   } catch (error) {
     console.error(error)
+    res.status(500).json({ message: 'Internal Server Error' })
+  }
+})
+
+router.get('/getAllEvents', async (req: Request, res: Response) => {
+  try {
+    const today: Date = new Date()
+    today.setHours(0, 0, 0, 0)
+
+    const events = await Event.find({ date: { $gte: today } }).sort({ date: 1 })
+    res.status(200).json(events)
+  } catch (error) {
+    console.error('Error while fetching events:', error)
+    res.status(500).json({ message: 'Internal Server Error' })
+  }
+})
+
+router.get('/getEventsByDate/:date', async (req: Request, res: Response) => {
+  try {
+    const date = req.params.date
+
+    const events = await Event.find({ date: { $eq: new Date(date) } }).sort({
+      date: 1
+    })
+    res.status(200).json(events)
+  } catch (error) {
+    console.error('Error while fetching events:', error)
+    res.status(500).json({ message: 'Internal Server Error' })
+  }
+})
+
+router.get('/getEventsThisWeek', async (req: Request, res: Response) => {
+  try {
+    // Pobranie dzisiejszej daty
+    const today = new Date()
+
+    // Obliczenie daty początkowej bieżącego tygodnia (poniedziałek)
+    const startOfWeek = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate() - today.getDay() + 1
+    )
+
+    // Obliczenie daty końcowej bieżącego tygodnia (niedziela)
+    const endOfWeek = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      startOfWeek.getDate() + 6
+    )
+
+    // Znalezienie wydarzeń w zakresie od startOfWeek do endOfWeek
+    const events = await Event.find({
+      date: { $gte: startOfWeek, $lte: endOfWeek }
+    }).sort({ date: 1 })
+
+    // Wysłanie znalezionych wydarzeń w odpowiedzi
+    res.status(200).json(events)
+  } catch (error) {
+    console.error('Error while fetching events:', error)
     res.status(500).json({ message: 'Internal Server Error' })
   }
 })

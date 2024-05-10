@@ -20,7 +20,7 @@
       <button
         v-if="!isLoggedIn"
         :isLoggedIn="isLoggedIn"
-        @click="toggleLogin"
+        @click="redirectToLogin"
         class="login-button"
       >
         Log in
@@ -43,12 +43,38 @@
             />
             <div v-else class="header header-wrapper">
               <h2 class="header">Welcome to EventHub</h2>
-              <button class="header-filter">Today</button>
-              <button class="header-filter">Tomorrow</button>
-              <button class="header-filter">This week</button>
+              <button class="header-filter" @click="fetchEventsByDate('Today')">
+                Today
+              </button>
+              <button
+                class="header-filter"
+                @click="fetchEventsByDate('Tomorrow')"
+              >
+                Tomorrow
+              </button>
+              <button class="header-filter" @click="fetchEventsForThisWeek()">
+                This week
+              </button>
             </div>
           </transition>
         </slot>
+        <div v-if="events.length > 0" class="events-container">
+          <div class="events-container">
+            <div v-for="event in events" :key="event._id" class="event-card">
+              <h2>{{ event.title }}</h2>
+              <p>Date:{{ formatDate(event.date) }}</p>
+              <!-- Formatowanie daty przy użyciu metody formatDate -->
+              <p>Location: {{ event.location }}</p>
+              <p>Description: {{ event.description }}</p>
+            </div>
+          </div>
+          <div
+            v-if="showNoEventsMessage && events.length === 0"
+            class="no-events-message"
+          >
+            No events to display.
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -60,6 +86,7 @@ import { useRouter } from 'vue-router'
 import LoginCard from './LoginCard.vue'
 import SignupCard from './SignupCard.vue'
 import '@/assets/landingPage.css'
+import axios from 'axios'
 
 const router = useRouter()
 
@@ -67,9 +94,14 @@ const searchQuery = ref('')
 const login = ref(false)
 const signup = ref(false)
 const isLoggedIn = inject('isLoggedIn')
+const events = ref([])
 
 const props = defineProps({
   isLoggedIn: Boolean
+})
+
+const axiosInstanceEvent = axios.create({
+  baseURL: 'http://localhost:5000/api/events'
 })
 
 onMounted(() => {
@@ -120,4 +152,78 @@ const logout = () => {
   localStorage.removeItem('token')
   router.push({ name: 'LandingPage' })
 }
+
+const redirectToLogin = () => {
+  router.push('/login')
+}
+
+const fetchEventsByDate = async date => {
+  try {
+    let searchDate = new Date()
+
+    switch (date) {
+      case 'Today':
+        searchDate = searchDate.toISOString().split('T')[0] // Dzisiejsza data
+        break
+      case 'Tomorrow':
+        searchDate.setDate(searchDate.getDate() + 1)
+        searchDate = searchDate.toISOString().split('T')[0] // Jutrzejsza data
+        break
+    }
+
+    console.log('Search Date:', searchDate)
+
+    const response = await axiosInstanceEvent.get(
+      `/getEventsByDate/${searchDate}`,
+      {
+        params: {
+          date: searchDate
+        }
+      }
+    )
+
+    events.value = response.data
+    console.log(response.data) // Wyświetlenie odpowiedzi w konsoli
+  } catch (error) {
+    console.error('Error while fetching events:', error)
+  }
+}
+
+const formatDate = date => {
+  const eventDate = new Date(date)
+  const options = { day: '2-digit', month: '2-digit', year: 'numeric' }
+  return eventDate.toLocaleDateString('en-GB', options) // Ustawienia regionalne dla formatu DD-MM-YYYY
+}
+
+const fetchEventsForThisWeek = async () => {
+  try {
+    const response = await axiosInstanceEvent.get('/getEventsThisWeek')
+    events.value = response.data
+    console.log(response.data) // Wyświetlenie odpowiedzi w konsoli
+  } catch (error) {
+    console.error('Error while fetching events:', error)
+  }
+}
 </script>
+<style>
+/* Style dla wydarzeń */
+.events-container {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: white;
+}
+
+.event-card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+}
+
+/* Styl dla komunikatu o braku wydarzeń */
+.no-events-message {
+  margin-top: 20px;
+  font-weight: bold;
+  color: red;
+}
+</style>
