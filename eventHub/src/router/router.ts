@@ -19,14 +19,12 @@ const routes = [
   {
     path: '/singup',
     name: 'SingupCard',
-    component: SignupCard,
-    
+    component: SignupCard
   },
   {
     path: '/login',
     name: 'LoginCard',
-    component: LoginCard,
-    
+    component: LoginCard
   }
 ]
 
