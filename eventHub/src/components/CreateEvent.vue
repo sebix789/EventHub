@@ -67,9 +67,7 @@
           {{ imageFile ? imageFile.name : 'Upload Image' }}
         </label>
       </div>
-      <button class="btn login-button" type="submit" @click="handleSubmit">
-        Save Event
-      </button>
+      <button class="btn login-button" type="submit">Save Event</button>
     </form>
   </div>
 </template>

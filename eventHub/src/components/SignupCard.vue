@@ -1,4 +1,33 @@
 <template>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+  <div class="landing-page">
+    <div class="top-app-bar">
+      <div class="title">
+        <router-link to="/" class="title">
+            <img src="../assets/title.png" alt="EventHub" />
+        </router-link>
+
+      </div>
+
+      <button
+        v-if="!isLoggedIn"
+        :isLoggedIn="isLoggedIn"
+        @click="redirectToLogin"
+        class="login-button"
+      >
+        Log in
+      </button>
+      <button v-else @click="logout" class="login-button">Logout</button>
+    </div>
+    <div class="main-container">
+      <div class="left-bar-container">
+        <slot name="left-bar"></slot>
+      </div>
+    </div>
+  </div>
   <div class="card">
     <button class="close-button" @click="handleClose">
       <i class="fas fa-times"></i>
@@ -82,6 +111,9 @@
 import { ref, computed, defineEmits, watch } from 'vue'
 import axios from 'axios'
 import '@/assets/card.css'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 axios.defaults.baseURL = 'http://localhost:5000'
 
@@ -109,7 +141,7 @@ const handleSubmit = async () => {
         email: email.value,
         password: password.value
       })
-      alert('Form submitted successfully!')
+      router.push('/login')
     } catch (error) {
       console.error(error)
     }

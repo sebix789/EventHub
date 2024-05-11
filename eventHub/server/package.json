@@ -11,5 +11,11 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/preset-env": "^7.24.5"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.3.4"
   }
 }
