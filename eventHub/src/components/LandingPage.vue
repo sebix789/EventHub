@@ -5,9 +5,9 @@
   />
   <div class="landing-page">
     <div class="top-app-bar">
-      <div class="title">
-        <img src="../assets/title.png" alt="EventHub" />
-      </div>
+        <router-link to="/" class="title">
+            <img src="../assets/title.png" alt="EventHub" />
+        </router-link>
       <div class="search-container">
         <input
           type="text"

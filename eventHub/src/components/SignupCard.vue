@@ -6,7 +6,10 @@
   <div class="landing-page">
     <div class="top-app-bar">
       <div class="title">
-        <img src="../assets/title.png" alt="EventHub" />
+        <router-link to="/" class="title">
+            <img src="../assets/title.png" alt="EventHub" />
+        </router-link>
+
       </div>
 
       <button
