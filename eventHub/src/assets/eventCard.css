@@ -1,0 +1,10 @@
+.event-container {
+  display: flex;
+}
+.event-detail {
+  flex: 1;
+}
+
+.location {
+  flex: 1;
+}

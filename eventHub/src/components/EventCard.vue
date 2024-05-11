@@ -15,52 +15,29 @@
       </template>
       <template v-slot:header>
         <div class="main-page-container">
-          <div v-if="!showCreateEventForm" class="header-section card">
-            <h1 class="title-section">Plan Your Events</h1>
-            <span>Organize your upcoming events seamlessly</span>
-            <button class="login-button create-btn" @click="handleCreateEvent">
-              Create Event
-            </button>
-          </div>
-          <CreateEvent
-            class="header-section card"
-            v-else
-            @close="handleClose"
-          />
-          <div class="header-section card">
-            <h1>Upcoming Events</h1>
-            <div class="btn-header-container">
-              <button class="header-filter" @click="fetchEventsByDate('Today')">
-                Today
-              </button>
-              <button
-                class="header-filter"
-                @click="fetchEventsByDate('Tomorrow')"
-              >
-                Tomorrow
-              </button>
-              <button class="header-filter" @click="fetchEventsForThisWeek()">
-                This Week
-              </button>
-            </div>
-          </div>
-          <!-- Dodaj sekcję na wyświetlanie wydarzeń -->
-          <div v-if="events.length > 0" class="events-container">
-            <div class="events-container">
-              <div v-for="event in events" :key="event._id" class="event-card">
-                <h2>{{ event.title }}</h2>
-                <p>Date:{{ formatDate(event.date) }}</p>
-                <!-- Formatowanie daty przy użyciu metody formatDate -->
-                <p>Location: {{ event.location }}</p>
-                <p>Description: {{ event.description }}</p>
-                <img :src="getImageUrl(event.image)" alt="Event Image" />
+          <div class="card">
+            <h1>event name</h1>
+            <div class="event-container">
+              <div class="event-detail">
+                <div class="image-event">
+                  <img src="" alt="" />
+                </div>
+                <div class="source-info">
+                  <span>summer cos tam</span>
+                  <span>data 00.00.00</span>
+                  <h3>About</h3>
+                  <p class="description">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Debitis, atque, dolores nam, omnis totam fugit voluptatibus
+                    dolor hic illo consequatur pariatur excepturi distinctio
+                    ratione maiores consequuntur unde numquam! Esse, voluptate!
+                  </p>
+                </div>
               </div>
-            </div>
-            <div
-              v-if="showNoEventsMessage && events.length === 0"
-              class="no-events-message"
-            >
-              No events to display.
+              <div class="location">
+                <div class="map">xd</div>
+                <button>Edit</button>
+              </div>
             </div>
           </div>
         </div>
@@ -77,6 +54,7 @@ import CreateEvent from './CreateEvent.vue'
 import '@/assets/loggedMainPage.css'
 import '@/assets/card.css'
 import '@/assets/landingPage.css'
+import '@/assets/eventCard.css'
 
 const username = ref('')
 const showCreateEventForm = ref(false)
