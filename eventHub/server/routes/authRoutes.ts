@@ -1,35 +1,45 @@
 import express, { Request, Response } from 'express'
 import bcrypt from 'bcryptjs'
+import multer from 'multer'
 import User, { UserInterface } from '../models/User'
 import { authenticateUser } from '../middleware/authenticateService'
 
 const router = express.Router()
+const upload = multer()
 
-router.post('/signup', async (req: Request, res: Response) => {
-  try {
-    const { username, email, password } = req.body
+router.post(
+  '/signup',
+  upload.single('userImage'),
+  async (req: Request, res: Response) => {
+    try {
+      const { username, email, password, firstname, surname } = req.body
+      const userImage = req.file?.buffer.toString('base64')
 
-    const existingUser = await User.findOne({ email })
-    if (existingUser) {
-      return res.status(400).json({ message: 'Email already exist' })
+      const existingUser = await User.findOne({ email })
+      if (existingUser) {
+        return res.status(400).json({ message: 'Email already exist' })
+      }
+
+      const hashedPassword = await bcrypt.hash(password, 10)
+
+      const newUser: UserInterface = new User({
+        username,
+        email,
+        password: hashedPassword,
+        firstname,
+        surname,
+        userImage
+      })
+
+      await newUser.save()
+
+      res.status(201).json({ message: 'User created successfully' })
+    } catch (error) {
+      console.error(error)
+      res.status(500).json({ message: 'Internal Server Error' })
     }
-
-    const hashedPassword = await bcrypt.hash(password, 10)
-
-    const newUser: UserInterface = new User({
-      username,
-      email,
-      password: hashedPassword
-    })
-
-    await newUser.save()
-
-    res.status(201).json({ message: 'User created successfully' })
-  } catch (error) {
-    console.error(error)
-    res.status(500).json({ message: 'Internal Server Error' })
   }
-})
+)
 
 router.post('/login', async (req: Request, res: Response) => {
   try {
