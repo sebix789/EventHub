@@ -79,6 +79,8 @@ body {
 
 .login-button {
   cursor: pointer;
+  background-color: #000;
+  color: #fff;
 }
 
 .search-container {
@@ -117,6 +119,10 @@ body {
   justify-content: center;
   align-items: center;
   flex-grow: 1;
+}
+
+.event-data {
+  color: #000;
 }
 
 /*///////////////////////////

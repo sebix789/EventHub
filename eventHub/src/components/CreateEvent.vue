@@ -1,4 +1,8 @@
 <template>
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Roboto:400,700"
+  />
   <div class="card">
     <button class="close-button" @click="handleClose">
       <i class="fas fa-times"></i>
@@ -73,7 +77,7 @@
 </template>
 
 <script setup>
-import { ref, defineEmits, onMounted, watch } from 'vue'
+import { ref, defineEmits, watch } from 'vue'
 import axios from 'axios'
 import '@/assets/card.css'
 import '@/assets/createEvent.css'
@@ -88,13 +92,6 @@ const description = ref('')
 const image = ref(null)
 const imageFile = ref(null)
 const errorMessage = ref('')
-
-onMounted(async () => {
-  let link = document.createElement('link')
-  link.href = 'https://fonts.googleapis.com/css?family=Roboto:400,700'
-  link.rel = 'stylesheet'
-  document.head.appendChild(link)
-})
 
 const handleSubmit = async () => {
   // Get the username from local storage

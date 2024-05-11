@@ -51,6 +51,10 @@
   font-size: 1rem;
 }
 
+.login-button.btn-disabled {
+  color: rgb(117, 116, 122) !important;
+}
+
 .close-button {
   position: absolute;
   top: 0;
@@ -93,4 +97,8 @@
 .success-message {
   color: green;
   font-size: 0.8rem;
+}
+
+.card.login-signup-card {
+  margin-top: 0;
 }

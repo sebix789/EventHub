@@ -71,12 +71,15 @@
 
 <script setup>
 import { ref, onMounted, inject } from 'vue'
+import { useRouter } from 'vue-router'
 import axios from 'axios'
 import LandingPage from './LandingPage.vue'
 import CreateEvent from './CreateEvent.vue'
 import '@/assets/loggedMainPage.css'
 import '@/assets/card.css'
 import '@/assets/landingPage.css'
+
+const router = useRouter()
 
 const username = ref('')
 const showCreateEventForm = ref(false)
@@ -111,6 +114,7 @@ const handleCreateEvent = () => {
 
 const handleClose = () => {
   showCreateEventForm.value = false
+  router.push('/logged-main-page')
 }
 
 const fetchEventsByDate = async date => {
@@ -163,11 +167,11 @@ const fetchEventsForThisWeek = async () => {
 
 const getImageUrl = base64Image => {
   if (base64Image) {
-    return `data:image/jpeg;base64,${base64Image}`;
+    return `data:image/jpeg;base64,${base64Image}`
   }
   // Default image URL or placeholder if no image available
-  return 'https://via.placeholder.com/150';
-};
+  return 'https://via.placeholder.com/150'
+}
 </script>
 
 <style>
@@ -191,7 +195,7 @@ const getImageUrl = base64Image => {
   font-weight: bold;
   color: red;
 }
-img{
+img {
   width: 150px;
 }
 </style>
