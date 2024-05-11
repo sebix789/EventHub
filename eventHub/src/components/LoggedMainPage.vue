@@ -53,6 +53,7 @@
                 <!-- Formatowanie daty przy użyciu metody formatDate -->
                 <p>Location: {{ event.location }}</p>
                 <p>Description: {{ event.description }}</p>
+                <img :src="getImageUrl(event.image)" alt="Event Image" />
               </div>
             </div>
             <div
@@ -159,6 +160,14 @@ const fetchEventsForThisWeek = async () => {
     console.error('Error while fetching events:', error)
   }
 }
+
+const getImageUrl = base64Image => {
+  if (base64Image) {
+    return `data:image/jpeg;base64,${base64Image}`;
+  }
+  // Default image URL or placeholder if no image available
+  return 'https://via.placeholder.com/150';
+};
 </script>
 
 <style>
@@ -181,5 +190,8 @@ const fetchEventsForThisWeek = async () => {
   margin-top: 20px;
   font-weight: bold;
   color: red;
+}
+img{
+  width: 150px;
 }
 </style>
