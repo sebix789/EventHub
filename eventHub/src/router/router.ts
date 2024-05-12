@@ -3,6 +3,7 @@ import LandingPage from '@/components/LandingPage.vue'
 import LoggedMainPage from '@/components/LoggedMainPage.vue'
 import SignupCard from '@/components/SignupCard.vue'
 import LoginCard from '@/components/LoginCard.vue'
+import MyProfile from '@/components/MyProfile.vue'
 
 const routes = [
   {
@@ -25,6 +26,11 @@ const routes = [
     path: '/login',
     name: 'LoginCard',
     component: LoginCard
+  },
+  {
+    path: '/myProfile',
+    name: 'MyProfile',
+    component: MyProfile
   }
 ]
 
