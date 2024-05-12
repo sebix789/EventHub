@@ -11,7 +11,7 @@ app.use(cors())
 app.use(bodyParser.json())
 
 // Connect to MongoDB
-const mongoURI = 'mongodb://localhost:27017/eventHubDB'
+const mongoURI = 'mongodb://127.0.0.1:27017/eventHubDB'
 const mongooseOptions: ConnectOptions = {
   useNewUrlParser: true,
   useUnifiedTopology: true
