@@ -15,16 +15,23 @@
       </template>
       <template v-slot:header>
         <div class="main-page-container">
-          <div v-if="!showCreateEventForm" class="header-section card">
+          <div
+            v-if="!showCreateEventForm && !showMyEvents"
+            class="header-section card"
+          >
             <h1 class="title-section">Plan Your Events</h1>
             <span>Organize your upcoming events seamlessly</span>
             <button class="login-button create-btn" @click="handleCreateEvent">
               Create Event
             </button>
           </div>
+          <MyEvents
+            v-else-if="showMyEvents && !showCreateEventForm"
+            @close="handleClose"
+          />
           <CreateEvent
             class="header-section card"
-            v-else
+            v-else-if="showCreateEventForm && !showMyEvents"
             @close="handleClose"
           />
           <div class="header-section card">
@@ -77,6 +84,7 @@ import CreateEvent from './CreateEvent.vue'
 import '@/assets/loggedMainPage.css'
 import '@/assets/card.css'
 import '@/assets/landingPage.css'
+import MyEvents from './MyEvents.vue'
 
 const username = ref('')
 const showCreateEventForm = ref(false)
@@ -87,6 +95,7 @@ const showNoEventsMessage = ref(false) // Flaga dla komunikatu o braku wydarzeń
 const axiosInstanceEvent = axios.create({
   baseURL: 'http://localhost:5000/api/events'
 })
+const showMyEvents = ref(false)
 
 onMounted(() => {
   try {
@@ -105,12 +114,17 @@ const handleClick = section => {
   console.log(`Clicked on ${section}`)
 }
 
+const handleEvent = () => {
+  showMyEvents.value = true
+}
+
 const handleCreateEvent = () => {
   showCreateEventForm.value = true
 }
 
 const handleClose = () => {
   showCreateEventForm.value = false
+  showMyEvents.value = false
 }
 
 const fetchEventsByDate = async date => {
