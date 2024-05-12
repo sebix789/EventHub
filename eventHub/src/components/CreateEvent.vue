@@ -3,7 +3,7 @@
     rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Roboto:400,700"
   />
-  <div class="card">
+  <div class="card event-container">
     <button class="close-button" @click="handleClose">
       <i class="fas fa-times"></i>
     </button>
@@ -84,7 +84,7 @@ import '@/assets/createEvent.css'
 
 axios.defaults.baseURL = 'http://localhost:5000'
 
-const emit = defineEmits(['close', 'switch-card'])
+const emit = defineEmits(['close'])
 const title = ref('')
 const date = ref('')
 const location = ref('')

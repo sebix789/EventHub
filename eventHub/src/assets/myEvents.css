@@ -1,9 +1,12 @@
+.my-events-card {
+  width: 80%;
+}
 
-.myevent-card{
+.myevent-card {
   align-items: center;
   background-color: transparent;
   border: 1px solid;
-  border-color:  #000;
+  border-color: #000;
   border-radius: 6px;
   display: flex;
   flex: 1;
@@ -13,6 +16,7 @@
   position: relative;
   scroll-snap-type: x mandatory;
 }
+
 .myevent-image-container {
   align-items: flex-start;
   background-color: transparent;
@@ -22,9 +26,14 @@
   overflow: hidden;
   position: relative;
   max-width: 100%;
-  border: 1px solid #ccc; 
-  
+  border: 1px solid #ccc;
 }
+
+.myevent-slider {
+  display: flex;
+  gap: 1rem;
+}
+
 .myevent-image {
   align-self: auto;
   background-color: #d8d8d880;
@@ -34,13 +43,14 @@
   object-fit: cover; /* Ensure the entire image is visible while maintaining aspect ratio */
   /* max-width: 100%; /* Limit the image width to 100% of the container */
   max-height: 100%; /* Limit the image height to 100% of the container */
-  width: auto; /* Allow the width to adjust based on the container's dimensions */
-  height: auto; /* Allow the height to adjust based on the container's dimensions */
+  width: 100%; /* Allow the width to adjust based on the container's dimensions */
+  height: 100%; /* Allow the height to adjust based on the container's dimensions */
   position: absolute; /* Position the image relative to the container */
   top: 50%; /* Position the image vertically centered */
   left: 50%; /* Position the image horizontally centered */
   transform: translate(-50%, -50%);
 }
+
 .myevent-text-content {
   align-items: flex-start;
   align-self: stretch;
@@ -53,20 +63,22 @@
   position: relative;
   width: 100%;
 }
+
 .myevent.title {
   align-self: stretch;
   background-color: transparent;
-  color:  #000;
+  color: #000;
   font-family: 'Roboto';
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
-  letter-spacing: 0.00px;
+  letter-spacing: 0px;
   line-height: 24px;
   margin-top: -1px;
   position: relative;
   text-align: left;
 }
+
 .myevent-date {
   align-self: stretch;
   background-color: transparent;
@@ -75,7 +87,7 @@
   font-size: var(--font-size-l);
   font-style: normal;
   font-weight: 500;
-  letter-spacing: 0.00px;
+  letter-spacing: 0px;
   line-height: 28px;
   position: relative;
   text-align: left;
@@ -95,11 +107,17 @@
   width: 100%;
   z-index: 0;
   gap: 20px;
-  width: 780px;
   padding-left: 20px;
+  padding-right: 20px;
 }
+
 .slider-container {
   position: relative;
   overflow: hidden;
 }
 
+.myevent-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
