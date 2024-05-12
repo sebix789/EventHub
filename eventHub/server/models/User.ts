@@ -13,8 +13,8 @@ const userSchema = new Schema<UserInterface>({
   username: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  firstname: { type: String, required: true },
-  surname: { type: String, required: true },
+  firstname: { type: String },
+  surname: { type: String },
   userImage: { type: String }
 })
 

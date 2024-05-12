@@ -3,7 +3,7 @@
     <LandingPage :isLoggedIn="isLoggedIn.value">
       <template v-slot:left-bar>
         <div class="left-bar">
-          <div class="section" @click="handleClick('profile')">
+          <div class="section" @click="handleProfile">
             <i class="fas fa-user"></i>
             <span>My Profile</span>
           </div>
@@ -16,8 +16,12 @@
       <template v-slot:header>
         <div class="main-page-container">
           <div
-            v-if="!showCreateEventForm && !showMyEvents"
-            class="header-section card"
+            v-if="
+              !$route.path.includes('/my-events') &&
+              !$route.path.includes('/create-event') &&
+              !$route.path.includes('/my-profile')
+            "
+            class="header-section card logged-card"
           >
             <h1 class="title-section">Plan Your Events</h1>
             <span>Organize your upcoming events seamlessly</span>
@@ -25,16 +29,11 @@
               Create Event
             </button>
           </div>
-          <MyEvents
-            v-else-if="showMyEvents && !showCreateEventForm"
+          <router-view
             @close="handleClose"
-          />
-          <CreateEvent
             class="header-section card"
-            v-else-if="showCreateEventForm && !showMyEvents"
-            @close="handleClose"
-          />
-          <div class="header-section card">
+          ></router-view>
+          <div class="header-section card logged-card">
             <h1>Upcoming Events</h1>
             <div class="btn-header-container">
               <button class="header-filter" @click="fetchEventsByDate('Today')">
@@ -49,18 +48,41 @@
               <button class="header-filter" @click="fetchEventsForThisWeek()">
                 This Week
               </button>
+              <button class="header-filter" @click="fetchAllEvents()">
+                All Events
+              </button>
             </div>
           </div>
           <!-- Dodaj sekcję na wyświetlanie wydarzeń -->
-          <div v-if="events.length > 0" class="events-container">
-            <div class="events-container">
-              <div v-for="event in events" :key="event._id" class="event-card">
-                <h2>{{ event.title }}</h2>
-                <p>Date:{{ formatDate(event.date) }}</p>
+          <div
+            v-if="events.length > 0 && events.length <= 2"
+            class="logged-event-container"
+          >
+            <button
+              class="slider-button left btn-slide-left"
+              @click="scrollSlider(-1)"
+            >
+              <!-- Left Navigation Button -->
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="events-container events-wrapper">
+              <div
+                v-for="event in visibleEvents"
+                :key="event._id"
+                class="event-card"
+              >
+                <div class="myevent-image-container">
+                  <img
+                    class="myevent-image"
+                    :src="getImageUrl(event.image)"
+                    alt="Event Image"
+                  />
+                </div>
+                <h2 class="event-data">{{ event.title }}</h2>
+                <p class="event-data">{{ formatDate(event.date) }}</p>
                 <!-- Formatowanie daty przy użyciu metody formatDate -->
-                <p>Location: {{ event.location }}</p>
-                <p>Description: {{ event.description }}</p>
-                <img :src="getImageUrl(event.image)" alt="Event Image" />
+                <p class="event-data">{{ event.location }}</p>
+                <p class="event-data">{{ event.description }}</p>
               </div>
             </div>
             <div
@@ -69,6 +91,13 @@
             >
               No events to display.
             </div>
+            <button
+              class="slider-button right btn-slide-right"
+              @click="scrollSlider(1)"
+            >
+              <!-- Right Navigation Button -->
+              <i class="fas fa-chevron-right"></i>
+            </button>
           </div>
         </div>
       </template>
@@ -77,15 +106,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted, inject } from 'vue'
+import { ref, onMounted, inject, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
 import LandingPage from './LandingPage.vue'
-import CreateEvent from './CreateEvent.vue'
 import '@/assets/loggedMainPage.css'
 import '@/assets/card.css'
 import '@/assets/landingPage.css'
-import MyEvents from './MyEvents.vue'
 
 const router = useRouter()
 
@@ -94,6 +121,7 @@ const showCreateEventForm = ref(false)
 const isLoggedIn = inject('isLoggedIn')
 const events = ref([]) // Nowa zmienna reaktywna na wydarzenia
 const showNoEventsMessage = ref(false) // Flaga dla komunikatu o braku wydarzeń
+const visibleEventsIndex = ref(0)
 
 const axiosInstanceEvent = axios.create({
   baseURL: 'http://localhost:5000/api/events'
@@ -113,16 +141,16 @@ onMounted(() => {
   }
 })
 
-const handleClick = section => {
-  console.log(`Clicked on ${section}`)
+const handleProfile = section => {
+  router.push('/logged-main-page/my-profile')
 }
 
 const handleEvent = () => {
-  showMyEvents.value = true
+  router.push('/logged-main-page/my-events')
 }
 
 const handleCreateEvent = () => {
-  showCreateEventForm.value = true
+  router.push('/logged-main-page/create-event')
 }
 
 const handleClose = () => {
@@ -163,6 +191,24 @@ const fetchEventsByDate = async date => {
   }
 }
 
+const scrollSlider = direction => {
+  const totalEvents = events.value.length
+  visibleEventsIndex.value =
+    (visibleEventsIndex.value + direction + totalEvents) % totalEvents
+}
+
+const visibleEvents = computed(() => {
+  const startIndex = visibleEventsIndex.value
+  const endIndex = startIndex + 2
+  return [
+    ...events.value.slice(startIndex, endIndex),
+    ...events.value.slice(
+      0,
+      Math.max(0, 2 - (events.value.length - startIndex))
+    )
+  ]
+})
+
 const formatDate = date => {
   const eventDate = new Date(date)
   const options = { day: '2-digit', month: '2-digit', year: 'numeric' }
@@ -172,6 +218,16 @@ const formatDate = date => {
 const fetchEventsForThisWeek = async () => {
   try {
     const response = await axiosInstanceEvent.get('/getEventsThisWeek')
+    events.value = response.data
+    console.log(response.data) // Wyświetlenie odpowiedzi w konsoli
+  } catch (error) {
+    console.error('Error while fetching events:', error)
+  }
+}
+
+const fetchAllEvents = async () => {
+  try {
+    const response = await axiosInstanceEvent.get('/getAllEvents')
     events.value = response.data
     console.log(response.data) // Wyświetlenie odpowiedzi w konsoli
   } catch (error) {
