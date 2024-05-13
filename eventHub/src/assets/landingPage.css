@@ -190,3 +190,16 @@ body {
 img {
   width: 150px;
 }
+
+.search-item {
+  margin: 2rem auto;
+  max-width: 500px;
+  width: 95%;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+.search-item hr {
+  color: lightgray;
+  border-top: none;
+  margin: -1.3rem 0 0.5rem 0;
+}

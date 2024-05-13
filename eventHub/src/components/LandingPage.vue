@@ -14,7 +14,21 @@
           class="search-input"
           placeholder="Search for events"
           v-model="searchQuery"
+          @keyup="handleSearch"
         />
+        <div v-if="!state.noSearch && state.searchResult.length > 0">
+          <div
+            class="search-item"
+            v-for="(result, index) in state.searchResult"
+            :key="index"
+          >
+            <hr v-if="index > 0" />
+            <p @click="handleClickEvent(result)">{{ result }}</p>
+          </div>
+        </div>
+        <div v-else-if="!state.noSearch" class="search-item">
+          <p>Sorry. No Results</p>
+        </div>
         <i @click="handleSearch" class="fas fa-search search-icon"></i>
       </div>
       <button
@@ -54,6 +68,7 @@
         </slot>
         <div v-if="events.length > 0" class="events-container">
           <button
+            v-if="events.length > 2"
             class="slider-button left btn-slide-left"
             @click="scrollSlider(-1)"
           >
@@ -61,7 +76,11 @@
             <i class="fas fa-chevron-left"></i>
           </button>
           <div class="events-container events-wrapper">
-            <div v-for="event in events" :key="event._id" class="event-card">
+            <div
+              v-for="event in visibleEvents"
+              :key="event._id"
+              class="event-card"
+            >
               <div class="myevent-image-container">
                 <img
                   class="myevent-image"
@@ -76,13 +95,9 @@
               <p class="event-data">{{ event.description }}</p>
             </div>
           </div>
-          <div
-            v-if="showNoEventsMessage && events.length === 0"
-            class="no-events-message"
-          >
-            No events to display.
-          </div>
+
           <button
+            v-if="events.length > 2"
             class="slider-button right btn-slide-right"
             @click="scrollSlider(1)"
           >
@@ -90,13 +105,19 @@
             <i class="fas fa-chevron-right"></i>
           </button>
         </div>
+        <div
+          v-if="showNoEventsMessage && events != null && events.length === 0"
+          class="no-events-message"
+        >
+          No events to display.
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, inject, defineProps, onMounted } from 'vue'
+import { ref, inject, defineProps, onMounted, computed, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import '@/assets/landingPage.css'
 import '@/assets/myEvents.css'
@@ -109,6 +130,8 @@ const login = ref(false)
 const signup = ref(false)
 const isLoggedIn = inject('isLoggedIn')
 const events = ref([])
+const visibleEventsIndex = ref(0)
+const showNoEventsMessage = ref(false)
 
 const props = defineProps({
   isLoggedIn: Boolean
@@ -118,13 +141,33 @@ const axiosInstanceEvent = axios.create({
   baseURL: 'http://localhost:5000/api/events'
 })
 
+const state = reactive({
+  searchResult: [],
+  noSearch: true
+})
+
 onMounted(() => {
   const token = localStorage.getItem('token')
   isLoggedIn.value = !!token
 })
 
-const handleSearch = () => {
-  alert(`Searching for: ${searchQuery.value}`)
+const handleSearch = async event => {
+  try {
+    let searchQuery = event.target.value.trim()
+
+    const res = await axiosInstanceEvent.post('/search', {
+      searchQuery
+    })
+
+    if (searchQuery === '') {
+      state.noSearch = true
+      return
+    }
+    state.noSearch = false
+    state.searchResult = res.data.map(event => event.title)
+  } catch (error) {
+    console.error('Error while searching:', error)
+  }
 }
 
 const logout = () => {
@@ -164,7 +207,7 @@ const fetchEventsByDate = async date => {
     )
 
     events.value = response.data
-    console.log(response.data) // Wyświetlenie odpowiedzi w konsoli
+    showNoEventsMessage.value = events.value.length === 0
   } catch (error) {
     console.error('Error while fetching events:', error)
   }
@@ -181,6 +224,7 @@ const fetchEventsForThisWeek = async () => {
     const response = await axiosInstanceEvent.get('/getEventsThisWeek')
     events.value = response.data
     console.log(response.data) // Wyświetlenie odpowiedzi w konsoli
+    showNoEventsMessage.value = events.value.length === 0
   } catch (error) {
     console.error('Error while fetching events:', error)
   }
@@ -191,6 +235,7 @@ const fetchAllEvents = async () => {
     const response = await axiosInstanceEvent.get('/getAllEvents')
     events.value = response.data
     console.log(response.data) // Wyświetlenie odpowiedzi w konsoli
+    showNoEventsMessage.value = events.value.length === 0
   } catch (error) {
     console.error('Error while fetching events:', error)
   }
@@ -202,5 +247,31 @@ const getImageUrl = base64Image => {
   }
   // Default image URL or placeholder if no image available
   return 'https://via.placeholder.com/150'
+}
+
+const scrollSlider = direction => {
+  const totalEvents = events.value.length
+  visibleEventsIndex.value =
+    (visibleEventsIndex.value + direction + totalEvents) % totalEvents
+}
+
+const visibleEvents = computed(() => {
+  const totalEvents = events.value.length
+
+  if (totalEvents === 1) {
+    return events.value
+  }
+
+  const startIndex = visibleEventsIndex.value
+  const endIndex = startIndex + 2
+
+  return [
+    ...events.value.slice(startIndex, endIndex),
+    ...events.value.slice(0, Math.max(0, 2 - (totalEvents - startIndex)))
+  ]
+})
+
+const handleClickEvent = result => {
+  console.log('Click on:' + result)
 }
 </script>
