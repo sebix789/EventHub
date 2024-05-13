@@ -9,7 +9,10 @@
       <div class="myevent-arrowSlider">
         <div v-for="event in events" :key="event._id" class="myevent-card">
           <!-- Event Card -->
-          <div class="myevent-image-container">
+          <div
+            class="myevent-image-container"
+            @click="handleOnClickEvent(event)"
+          >
             <div class="myevent-image">
               <img :src="getImageUrl(event.image)" alt="Event Image" />
             </div>
@@ -64,6 +67,7 @@ import { ref, defineEmits, onMounted, computed } from 'vue'
 import axios from 'axios'
 import '@/assets/card.css'
 import '@/assets/myEvents.css'
+import router from '@/router/router'
 
 const username = ref('')
 const events = ref([])
@@ -117,4 +121,10 @@ const visibleEvents = computed(() => {
     )
   ]
 })
+
+const handleOnClickEvent = clickedEvent => {
+  // Emitowanie zdarzenia 'onSelectedEvent' z przekazanym obiektem event
+  const eventId = clickedEvent._id
+  router.push(`/event/${eventId}`)
+}
 </script>

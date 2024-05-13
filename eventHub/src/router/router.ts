@@ -3,6 +3,8 @@ import LandingPage from '@/components/LandingPage.vue'
 import LoggedMainPage from '@/components/LoggedMainPage.vue'
 import SignupCard from '@/components/SignupCard.vue'
 import LoginCard from '@/components/LoginCard.vue'
+import EventCard from '@/components/EventCard.vue'
+
 import MyProfile from '@/components/MyProfile.vue'
 import MyEvents from '@/components/MyEvents.vue'
 import CreateEvent from '@/components/CreateEvent.vue'
@@ -33,6 +35,11 @@ const routes = [
     path: '/login',
     name: 'LoginCard',
     component: LoginCard
+  },
+  {
+    path: '/event/:id',
+    name: 'EventCard',
+    component: EventCard
   }
 ]
 
