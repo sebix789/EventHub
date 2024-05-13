@@ -30,7 +30,7 @@
           >
           <input
             class="card-input"
-            id="title"
+            id="firstname"
             placeholder="First Name"
             v-model="firstname"
             type="text"
@@ -150,6 +150,13 @@ onMounted(async () => {
   try {
     const response = await axios.get(`/api/auth/users/${localUsername.value}`)
     users.value = response.data
+    console.log('User data:', users.value)
+    if (users.value.length > 0) {
+      firstname.value = users.value[0].firstname
+      surname.value = users.value[0].surname
+      email.value = users.value[0].email
+      console.log('Firstname:', firstname.value)
+    }
   } catch (error) {
     console.error('Failed to fetch profile:', error)
   }
@@ -199,6 +206,18 @@ const handleSubmit = async () => {
       userImage.value = null
       imageFile.value = null
       alert('Profile updated')
+
+      // After successful update, update form fields
+      const response = await axios.get(
+        `/api/auth/users/${localStorage.getItem('username')}`
+      )
+      users.value = response.data
+      if (users.value.length > 0) {
+        const user = users.value[0]
+        firstname.value = user.firstname
+        surname.value = user.surname
+        email.value = user.email
+      }
     } catch (error) {
       console.error('Failed to update profile:', error)
       if (error.response && error.response.status === 500) {

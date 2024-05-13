@@ -54,11 +54,9 @@
             </div>
           </div>
           <!-- Dodaj sekcję na wyświetlanie wydarzeń -->
-          <div
-            v-if="events.length > 0 && events.length <= 2"
-            class="logged-event-container"
-          >
+          <div v-if="events.length > 0" class="logged-event-container">
             <button
+              v-if="events.length > 2"
               class="slider-button left btn-slide-left"
               @click="scrollSlider(-1)"
             >
@@ -85,19 +83,20 @@
                 <p class="event-data">{{ event.description }}</p>
               </div>
             </div>
-            <div
-              v-if="showNoEventsMessage && events.length === 0"
-              class="no-events-message"
-            >
-              No events to display.
-            </div>
             <button
+              v-if="events.length > 2"
               class="slider-button right btn-slide-right"
               @click="scrollSlider(1)"
             >
               <!-- Right Navigation Button -->
               <i class="fas fa-chevron-right"></i>
             </button>
+          </div>
+          <div
+            v-if="showNoEventsMessage && events != null && events.length === 0"
+            class="no-events-message"
+          >
+            No events to display.
           </div>
         </div>
       </template>
@@ -173,8 +172,6 @@ const fetchEventsByDate = async date => {
         break
     }
 
-    console.log('Search Date:', searchDate)
-
     const response = await axiosInstanceEvent.get(
       `/getEventsByDate/${searchDate}`,
       {
@@ -186,6 +183,7 @@ const fetchEventsByDate = async date => {
 
     events.value = response.data
     console.log(response.data) // Wyświetlenie odpowiedzi w konsoli
+    showNoEventsMessage.value = events.value.length === 0
   } catch (error) {
     console.error('Error while fetching events:', error)
   }
@@ -198,14 +196,18 @@ const scrollSlider = direction => {
 }
 
 const visibleEvents = computed(() => {
+  const totalEvents = events.value.length
+
+  if (totalEvents === 1) {
+    return events.value
+  }
+
   const startIndex = visibleEventsIndex.value
   const endIndex = startIndex + 2
+
   return [
     ...events.value.slice(startIndex, endIndex),
-    ...events.value.slice(
-      0,
-      Math.max(0, 2 - (events.value.length - startIndex))
-    )
+    ...events.value.slice(0, Math.max(0, 2 - (totalEvents - startIndex)))
   ]
 })
 
@@ -219,7 +221,7 @@ const fetchEventsForThisWeek = async () => {
   try {
     const response = await axiosInstanceEvent.get('/getEventsThisWeek')
     events.value = response.data
-    console.log(response.data) // Wyświetlenie odpowiedzi w konsoli
+    showNoEventsMessage.value = events.value.length === 0
   } catch (error) {
     console.error('Error while fetching events:', error)
   }
@@ -229,7 +231,7 @@ const fetchAllEvents = async () => {
   try {
     const response = await axiosInstanceEvent.get('/getAllEvents')
     events.value = response.data
-    console.log(response.data) // Wyświetlenie odpowiedzi w konsoli
+    showNoEventsMessage.value = events.value.length === 0
   } catch (error) {
     console.error('Error while fetching events:', error)
   }

@@ -112,4 +112,15 @@ router.get('/getEventsThisWeek', async (req: Request, res: Response) => {
   }
 })
 
+router.post('/search', async (req: Request, res: Response) => {
+  let search = req.body.searchQuery
+  let find = await Event.find({
+    title: { $regex: new RegExp('.*' + search + '.*', 'i') }
+  })
+    .limit(5)
+    .exec()
+
+  res.send(find)
+})
+
 export default router

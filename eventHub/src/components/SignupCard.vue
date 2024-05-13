@@ -22,6 +22,28 @@
             />
           </div>
           <div class="content-wrapper">
+            <label class="card-label" for="firstname">First Name:</label>
+            <input
+              class="card-input"
+              id="firstname"
+              placeholder="First Name"
+              v-model="firstName"
+              type="text"
+              required
+            />
+          </div>
+          <div class="content-wrapper">
+            <label class="card-label" for="surname">Surname:</label>
+            <input
+              class="card-input"
+              id="surname"
+              placeholder="Surname"
+              v-model="surname"
+              type="text"
+              required
+            />
+          </div>
+          <div class="content-wrapper">
             <label class="card-label" for="email">Email:</label>
             <input
               class="card-input"
@@ -111,7 +133,8 @@ const router = useRouter()
 axios.defaults.baseURL = 'http://localhost:5000'
 
 const emit = defineEmits(['close', 'switch-card'])
-const username = ref('')
+const firstName = ref('')
+const surname = ref('')
 const email = ref('')
 const password = ref('')
 const repeatPassword = ref('')
@@ -133,7 +156,9 @@ const handleSubmit = async () => {
       await axios.post('/api/auth/signup', {
         username: username.value,
         email: email.value,
-        password: password.value
+        password: password.value,
+        firstname: firstname.value,
+        surname: surname.value
       })
       router.push('/login')
     } catch (error) {

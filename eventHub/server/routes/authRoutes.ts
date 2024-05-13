@@ -9,7 +9,7 @@ const upload = multer()
 
 router.post('/signup', async (req: Request, res: Response) => {
   try {
-    const { username, email, password } = req.body
+    const { username, email, password, firstname, surname } = req.body
 
     const existingUser = await User.findOne({ email })
     if (existingUser) {
@@ -21,7 +21,9 @@ router.post('/signup', async (req: Request, res: Response) => {
     const newUser: UserInterface = new User({
       username,
       email,
-      password: hashedPassword
+      password: hashedPassword,
+      firstname,
+      surname
     })
 
     await newUser.save()
