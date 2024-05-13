@@ -14,13 +14,9 @@
         </div>
       </template>
       <template v-slot:header>
-        <div class="main-page-container">
+        <div v-if="event != null" class="main-page-container">
           <div class="card">
-            <div
-              class="event-container"
-              v-for="event in events"
-              :key="event._id"
-            >
+            <div class="event-container">
               <div class="event-detail">
                 <div class="image-event">
                   <img :src="getImageUrl(event.image)" alt="Event Image" />
@@ -54,12 +50,12 @@ import '@/assets/loggedMainPage.css'
 import '@/assets/card.css'
 import '@/assets/landingPage.css'
 import '@/assets/eventCard.css'
+import router from '@/router/router'
 
 const event = ref(null)
 const username = ref('')
 const showCreateEventForm = ref(false)
 const isLoggedIn = inject('isLoggedIn')
-const events = ref([])
 const showNoEventsMessage = ref(false)
 
 const axiosGetMyEvents = axios.create({
@@ -71,7 +67,10 @@ onMounted(async () => {
   if (localUsername) {
     username.value = localUsername
     const response = await axiosGetMyEvents.get(`getEvents/${username.value}`)
-    events.value = response.data
+    const events = response.data
+    event.value = events.find(
+      ({ _id }) => _id === router.currentRoute['_value'].params.id
+    )
   }
 })
 

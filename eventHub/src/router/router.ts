@@ -37,7 +37,7 @@ const routes = [
     component: LoginCard
   },
   {
-    path: '/event',
+    path: '/event/:id',
     name: 'EventCard',
     component: EventCard
   }

@@ -67,6 +67,7 @@ import { ref, defineEmits, onMounted, computed } from 'vue'
 import axios from 'axios'
 import '@/assets/card.css'
 import '@/assets/myEvents.css'
+import router from '@/router/router'
 
 const username = ref('')
 const events = ref([])
@@ -123,7 +124,7 @@ const visibleEvents = computed(() => {
 
 const handleOnClickEvent = clickedEvent => {
   // Emitowanie zdarzenia 'onSelectedEvent' z przekazanym obiektem event
-  emit('onSelectedEvent', clickedEvent)
-  console.log('clg shdfbvgjhdsfvbgjhd')
+  const eventId = clickedEvent._id
+  router.push(`/event/${eventId}`)
 }
 </script>
