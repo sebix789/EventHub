@@ -14,7 +14,7 @@ body {
 }
 
 .header-wrapper {
-  margin-bottom: 15rem;
+  margin-bottom: 3rem;
 }
 
 .header-filter {
@@ -79,6 +79,8 @@ body {
 
 .login-button {
   cursor: pointer;
+  background-color: #000;
+  color: #fff;
 }
 
 .search-container {
@@ -119,6 +121,15 @@ body {
   flex-grow: 1;
 }
 
+.event-data {
+  color: #000;
+}
+
+.header-base-container {
+  display: flex;
+  flex-direction: column;
+}
+
 /*///////////////////////////
 /////////ANIMATIONS/////////
 /////////////////////////// */
@@ -133,4 +144,49 @@ body {
 .slide-fade-leave-to {
   opacity: 0;
   transform: translateY(20px);
+}
+
+/*///////////////////////////
+/////////WYDARZENIA/////////
+/////////////////////////// */
+
+.btn-slide-right {
+  background-color: rgba(217, 217, 217, 0.7);
+  color: #000;
+  margin-left: 1rem;
+}
+
+.btn-slide-left {
+  background-color: rgba(217, 217, 217, 0.7);
+  color: #000;
+  margin-right: 1rem;
+}
+
+/* Style dla wydarzeń */
+.events-container {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: transparent;
+  border-radius: 8px;
+}
+
+.events-container.events-wrapper {
+  background-color: #fff;
+}
+
+.event-card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+}
+
+/* Styl dla komunikatu o braku wydarzeń */
+.no-events-message {
+  margin-top: 20px;
+  font-weight: bold;
+  color: red;
+}
+img {
+  width: 150px;
 }

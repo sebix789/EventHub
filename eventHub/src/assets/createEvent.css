@@ -1,3 +1,7 @@
+.event-container {
+  width: 70%;
+}
+
 .event-title {
   margin-top: 0;
 }
@@ -25,5 +29,6 @@
 
 .event-button {
   background-color: rgba(217, 217, 217, 0.5);
+  color: #000;
   border-radius: 8px;
 }

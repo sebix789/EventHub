@@ -43,7 +43,7 @@ router.get('/getEvents/:username', async (req: Request, res: Response) => {
   try {
     const username = req.params.username
 
-    // Query the database for all events with the given username
+    // Wypytanie bazy danych o wszystkie wydarzenia przypisane do użytkownika
     const events = await Event.find({ username })
 
     res.status(200).json(events)

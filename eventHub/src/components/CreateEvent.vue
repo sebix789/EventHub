@@ -1,5 +1,9 @@
 <template>
-  <div class="card">
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Roboto:400,700"
+  />
+  <div class="card event-container">
     <button class="close-button" @click="handleClose">
       <i class="fas fa-times"></i>
     </button>
@@ -73,14 +77,14 @@
 </template>
 
 <script setup>
-import { ref, defineEmits, onMounted, watch } from 'vue'
+import { ref, defineEmits, watch } from 'vue'
 import axios from 'axios'
 import '@/assets/card.css'
 import '@/assets/createEvent.css'
 
 axios.defaults.baseURL = 'http://localhost:5000'
 
-const emit = defineEmits(['close', 'switch-card'])
+const emit = defineEmits(['close'])
 const title = ref('')
 const date = ref('')
 const location = ref('')
@@ -88,13 +92,6 @@ const description = ref('')
 const image = ref(null)
 const imageFile = ref(null)
 const errorMessage = ref('')
-
-onMounted(async () => {
-  let link = document.createElement('link')
-  link.href = 'https://fonts.googleapis.com/css?family=Roboto:400,700'
-  link.rel = 'stylesheet'
-  document.head.appendChild(link)
-})
 
 const handleSubmit = async () => {
   // Get the username from local storage
