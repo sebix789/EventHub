@@ -23,7 +23,9 @@
                 </div>
                 <div class="source-info">
                   <span>{{ event.title }}</span>
-                  <span>{{ formatDate(event.date) }}</span>
+                  <div>
+                    <span>{{ formatDate(event.date) }}</span>
+                  </div>
                   <h3>About</h3>
                   <p class="description">
                     {{ event.description }}
@@ -54,9 +56,7 @@ import router from '@/router/router'
 
 const event = ref(null)
 const username = ref('')
-const showCreateEventForm = ref(false)
 const isLoggedIn = inject('isLoggedIn')
-const showNoEventsMessage = ref(false)
 
 const axiosGetMyEvents = axios.create({
   baseURL: 'http://localhost:5000/api/events/'
@@ -78,60 +78,10 @@ const handleClick = section => {
   console.log(`Clicked on ${section}`)
 }
 
-const handleCreateEvent = () => {
-  showCreateEventForm.value = true
-}
-
-const handleClose = () => {
-  showCreateEventForm.value = false
-}
-
-const fetchEventsByDate = async date => {
-  try {
-    let searchDate = new Date()
-
-    switch (date) {
-      case 'Today':
-        searchDate = searchDate.toISOString().split('T')[0] // Dzisiejsza data
-        break
-      case 'Tomorrow':
-        searchDate.setDate(searchDate.getDate() + 1)
-        searchDate = searchDate.toISOString().split('T')[0] // Jutrzejsza data
-        break
-    }
-
-    console.log('Search Date:', searchDate)
-
-    const response = await axiosInstanceEvent.get(
-      `/getEventsByDate/${searchDate}`,
-      {
-        params: {
-          date: searchDate
-        }
-      }
-    )
-
-    events.value = response.data
-    console.log(response.data) // Wyświetlenie odpowiedzi w konsoli
-  } catch (error) {
-    console.error('Error while fetching events:', error)
-  }
-}
-
 const formatDate = date => {
   const eventDate = new Date(date)
   const options = { day: '2-digit', month: '2-digit', year: 'numeric' }
   return eventDate.toLocaleDateString('en-GB', options) // Ustawienia regionalne dla formatu DD-MM-YYYY
-}
-
-const fetchEventsForThisWeek = async () => {
-  try {
-    const response = await axiosInstanceEvent.get('/getEventsThisWeek')
-    events.value = response.data
-    console.log(response.data) // Wyświetlenie odpowiedzi w konsoli
-  } catch (error) {
-    console.error('Error while fetching events:', error)
-  }
 }
 
 const getImageUrl = base64Image => {

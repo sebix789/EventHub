@@ -39,7 +39,7 @@
           >
             <!-- Visible Events -->
             <div class="myevent-image-container">
-              <div class="myevent-image">
+              <div class="myevent-image" @click="handleOnClickEvent(event)">
                 <img :src="getImageUrl(event.image)" alt="Event Image" />
               </div>
             </div>
