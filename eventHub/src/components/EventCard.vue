@@ -16,27 +16,26 @@
       <template v-slot:header>
         <div class="main-page-container">
           <div class="card">
-            <h1>event name</h1>
-            <div class="event-container">
+            <div
+              class="event-container"
+              v-for="event in events"
+              :key="event._id"
+            >
               <div class="event-detail">
                 <div class="image-event">
-                  <img src="" alt="" />
+                  <img :src="getImageUrl(event.image)" alt="Event Image" />
                 </div>
                 <div class="source-info">
-                  <span>summer cos tam</span>
-                  <span>data 00.00.00</span>
+                  <span>{{ event.title }}</span>
+                  <span>{{ formatDate(event.date) }}</span>
                   <h3>About</h3>
                   <p class="description">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Debitis, atque, dolores nam, omnis totam fugit voluptatibus
-                    dolor hic illo consequatur pariatur excepturi distinctio
-                    ratione maiores consequuntur unde numquam! Esse, voluptate!
+                    {{ event.description }}
                   </p>
                 </div>
               </div>
               <div class="location">
-                <div class="map">xd</div>
-                <button>Edit</button>
+                <div class="map">tu bedzie mapa moze</div>
               </div>
             </div>
           </div>
@@ -50,32 +49,29 @@
 import { ref, onMounted, inject } from 'vue'
 import axios from 'axios'
 import LandingPage from './LandingPage.vue'
-import CreateEvent from './CreateEvent.vue'
+
 import '@/assets/loggedMainPage.css'
 import '@/assets/card.css'
 import '@/assets/landingPage.css'
 import '@/assets/eventCard.css'
 
+const event = ref(null)
 const username = ref('')
 const showCreateEventForm = ref(false)
 const isLoggedIn = inject('isLoggedIn')
-const events = ref([]) // Nowa zmienna reaktywna na wydarzenia
-const showNoEventsMessage = ref(false) // Flaga dla komunikatu o braku wydarzeń
+const events = ref([])
+const showNoEventsMessage = ref(false)
 
-const axiosInstanceEvent = axios.create({
-  baseURL: 'http://localhost:5000/api/events'
+const axiosGetMyEvents = axios.create({
+  baseURL: 'http://localhost:5000/api/events/'
 })
 
-onMounted(() => {
-  try {
-    const localUsername = localStorage.getItem('username')
-    if (localUsername) {
-      username.value = localUsername
-    } else {
-      throw new Error('Username not found in local storage')
-    }
-  } catch (error) {
-    console.error(error)
+onMounted(async () => {
+  const localUsername = localStorage.getItem('username')
+  if (localUsername) {
+    username.value = localUsername
+    const response = await axiosGetMyEvents.get(`getEvents/${username.value}`)
+    events.value = response.data
   }
 })
 

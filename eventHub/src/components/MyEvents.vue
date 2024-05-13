@@ -9,7 +9,10 @@
       <div class="myevent-arrowSlider">
         <div v-for="event in events" :key="event._id" class="myevent-card">
           <!-- Event Card -->
-          <div class="myevent-image-container">
+          <div
+            class="myevent-image-container"
+            @click="handleOnClickEvent(event)"
+          >
             <div class="myevent-image">
               <img :src="getImageUrl(event.image)" alt="Event Image" />
             </div>
@@ -117,4 +120,10 @@ const visibleEvents = computed(() => {
     )
   ]
 })
+
+const handleOnClickEvent = clickedEvent => {
+  // Emitowanie zdarzenia 'onSelectedEvent' z przekazanym obiektem event
+  emit('onSelectedEvent', clickedEvent)
+  console.log('clg shdfbvgjhdsfvbgjhd')
+}
 </script>

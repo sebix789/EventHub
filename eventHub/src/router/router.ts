@@ -39,8 +39,7 @@ const routes = [
   {
     path: '/event',
     name: 'EventCard',
-    component: EventCard,
-    component: LoginCard
+    component: EventCard
   }
 ]
 

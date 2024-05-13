@@ -27,7 +27,8 @@
     "nodemon": "^3.1.0",
     "ts-node": "^10.9.2",
     "vue": "^3.4.21",
-    "vue-router": "^4.3.2"
+    "vue-router": "^4.3.2",
+    "vue3-google-map": "^0.20.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.24.5",
