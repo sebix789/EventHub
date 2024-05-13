@@ -3,73 +3,55 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
   />
-  <div class="landing-page">
-    <div class="top-app-bar">
-      <div class="title">
-        <router-link to="/" class="title">
-            <img src="../assets/title.png" alt="EventHub" />
-        </router-link>
+  <LandingPage :isLoggedIn="isLoggedIn.value">
+    <template v-slot:header>
+      <div class="card login-signup-card">
+        <button class="close-button" @click="handleClose">
+          <i class="fas fa-times"></i>
+        </button>
+        <form class="login-form" @submit.prevent="handleSubmit">
+          <div class="content-wrapper">
+            <label class="card-label" for="username">Username:</label>
+            <input
+              class="card-input"
+              id="username"
+              placeholder="Username"
+              v-model="username"
+              type="text"
+              required
+            />
+          </div>
+          <div class="content-wrapper">
+            <label class="card-label" for="password">Password:</label>
+            <input
+              class="card-input"
+              id="password"
+              placeholder="Password"
+              v-model="password"
+              type="password"
+              required
+            />
+          </div>
+          <p v-if="errorMessage" class="bottom-label error-message err">
+            {{ errorMessage }}
+          </p>
+          <button class="btn login-button" type="submit">Log in</button>
+        </form>
+        <label class="bottom-label card-label" for="signup"
+          >Need an account?</label
+        >
+        <button class="signup-button" @click="handleSwitchCard">Sign Up</button>
       </div>
-
-      <button
-        v-if="!isLoggedIn"
-        :isLoggedIn="isLoggedIn"
-        @click="redirectToLogin"
-        class="login-button"
-      >
-        Log in
-      </button>
-      <button v-else @click="logout" class="login-button">Logout</button>
-    </div>
-    <div class="main-container">
-      <div class="left-bar-container">
-        <slot name="left-bar"></slot>
-      </div>
-    </div>
-  </div>
-  <div class="card">
-    <button class="close-button" @click="handleClose">
-      <i class="fas fa-times"></i>
-    </button>
-    <form class="login-form" @submit.prevent="handleSubmit">
-      <div class="content-wrapper">
-        <label class="card-label" for="username">Username:</label>
-        <input
-          class="card-input"
-          id="username"
-          placeholder="Username"
-          v-model="username"
-          type="text"
-          required
-        />
-      </div>
-      <div class="content-wrapper">
-        <label class="card-label" for="password">Password:</label>
-        <input
-          class="card-input"
-          id="password"
-          placeholder="Password"
-          v-model="password"
-          type="password"
-          required
-        />
-      </div>
-      <p v-if="errorMessage" class="bottom-label error-message err">
-        {{ errorMessage }}
-      </p>
-      <button class="btn login-button" type="submit">Log in</button>
-    </form>
-    <label class="bottom-label card-label" for="signup">Need an account?</label>
-    <button class="signup-button" @click="handleSwitchCard">Sign Up</button>
-  </div>
+    </template>
+  </LandingPage>
 </template>
 
 <script setup>
 import { ref, defineEmits, inject, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
-import '@/assets/card.css'
 import LandingPage from './LandingPage.vue'
+import '@/assets/card.css'
 
 axios.defaults.baseURL = 'http://localhost:5000'
 
@@ -100,7 +82,7 @@ const handleSubmit = async () => {
 }
 
 const handleClose = () => {
-  emit('close')
+  router.push('/')
 }
 
 const handleSwitchCard = () => {
@@ -116,7 +98,7 @@ watch([username, password], () => {
 .err {
   margin-top: 0;
 }
- .header-wrapper{
+.header-wrapper {
   display: none;
 }
 </style>

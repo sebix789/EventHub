@@ -5,9 +5,9 @@
   />
   <div class="landing-page">
     <div class="top-app-bar">
-        <router-link to="/" class="title">
-            <img src="../assets/title.png" alt="EventHub" />
-        </router-link>
+      <router-link to="/" class="title">
+        <img src="../assets/title.png" alt="EventHub" />
+      </router-link>
       <div class="search-container">
         <input
           type="text"
@@ -31,42 +31,49 @@
       <div class="left-bar-container">
         <slot name="left-bar"></slot>
       </div>
-      <div class="header-container">
+      <div class="header-container header-base-container">
         <slot name="header">
-          <transition name="slide-fade" mode="out-in">
-            <component
-              v-if="currentView"
-              :is="currentView"
-              :key="currentViewKey"
-              @close="handleClose"
-              @switch-card="handleSwitch"
-            />
-            <div v-else class="header header-wrapper">
-              <h2 class="header">Welcome to EventHub</h2>
-              <button class="header-filter" @click="fetchEventsByDate('Today')">
-                Today
-              </button>
-              <button
-                class="header-filter"
-                @click="fetchEventsByDate('Tomorrow')"
-              >
-                Tomorrow
-              </button>
-              <button class="header-filter" @click="fetchEventsForThisWeek()">
-                This week
-              </button>
-            </div>
-          </transition>
+          <div class="header header-wrapper">
+            <h2 class="header">Welcome to EventHub</h2>
+            <button class="header-filter" @click="fetchEventsByDate('Today')">
+              Today
+            </button>
+            <button
+              class="header-filter"
+              @click="fetchEventsByDate('Tomorrow')"
+            >
+              Tomorrow
+            </button>
+            <button class="header-filter" @click="fetchEventsForThisWeek()">
+              This Week
+            </button>
+            <button class="header-filter" @click="fetchAllEvents()">
+              All Events
+            </button>
+          </div>
         </slot>
         <div v-if="events.length > 0" class="events-container">
-          <div class="events-container">
+          <button
+            class="slider-button left btn-slide-left"
+            @click="scrollSlider(-1)"
+          >
+            <!-- Left Navigation Button -->
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <div class="events-container events-wrapper">
             <div v-for="event in events" :key="event._id" class="event-card">
-              <h2>{{ event.title }}</h2>
-              <p>Date:{{ formatDate(event.date) }}</p>
+              <div class="myevent-image-container">
+                <img
+                  class="myevent-image"
+                  :src="getImageUrl(event.image)"
+                  alt="Event Image"
+                />
+              </div>
+              <h2 class="event-data">{{ event.title }}</h2>
+              <p class="event-data">{{ formatDate(event.date) }}</p>
               <!-- Formatowanie daty przy użyciu metody formatDate -->
-              <p>Location: {{ event.location }}</p>
-              <p>Description: {{ event.description }}</p>
-              <img :src="getImageUrl(event.image)" alt="Event Image" />
+              <p class="event-data">{{ event.location }}</p>
+              <p class="event-data">{{ event.description }}</p>
             </div>
           </div>
           <div
@@ -75,6 +82,13 @@
           >
             No events to display.
           </div>
+          <button
+            class="slider-button right btn-slide-right"
+            @click="scrollSlider(1)"
+          >
+            <!-- Right Navigation Button -->
+            <i class="fas fa-chevron-right"></i>
+          </button>
         </div>
       </div>
     </div>
@@ -82,11 +96,10 @@
 </template>
 
 <script setup>
-import { ref, computed, inject, defineProps, onMounted } from 'vue'
+import { ref, inject, defineProps, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import LoginCard from './LoginCard.vue'
-import SignupCard from './SignupCard.vue'
 import '@/assets/landingPage.css'
+import '@/assets/myEvents.css'
 import axios from 'axios'
 
 const router = useRouter()
@@ -113,39 +126,6 @@ onMounted(() => {
 const handleSearch = () => {
   alert(`Searching for: ${searchQuery.value}`)
 }
-
-const toggleSignup = () => {
-  signup.value = !signup.value
-}
-
-const toggleLogin = () => {
-  login.value = !login.value
-}
-
-const handleSwitch = () => {
-  if (login.value) {
-    login.value = false
-    signup.value = true
-  } else if (signup.value) {
-    login.value = true
-    signup.value = false
-  }
-}
-
-const handleClose = () => {
-  login.value = false
-  signup.value = false
-}
-
-const currentView = computed(() => {
-  if (login.value) return LoginCard
-  if (signup.value) return SignupCard
-  return null
-})
-
-const currentViewKey = computed(() => {
-  return login.value ? 'login' : signup.value ? 'signup' : 'none'
-})
 
 const logout = () => {
   isLoggedIn.value = false
@@ -206,36 +186,21 @@ const fetchEventsForThisWeek = async () => {
   }
 }
 
+const fetchAllEvents = async () => {
+  try {
+    const response = await axiosInstanceEvent.get('/getAllEvents')
+    events.value = response.data
+    console.log(response.data) // Wyświetlenie odpowiedzi w konsoli
+  } catch (error) {
+    console.error('Error while fetching events:', error)
+  }
+}
+
 const getImageUrl = base64Image => {
   if (base64Image) {
-    return `data:image/jpeg;base64,${base64Image}`;
+    return `data:image/jpeg;base64,${base64Image}`
   }
   // Default image URL or placeholder if no image available
-  return 'https://via.placeholder.com/150';
-};
+  return 'https://via.placeholder.com/150'
+}
 </script>
-<style>
-/* Style dla wydarzeń */
-.events-container {
-  display: flex;
-  flex-wrap: wrap;
-  background-color: white;
-}
-
-.event-card {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  margin: 10px;
-}
-
-/* Styl dla komunikatu o braku wydarzeń */
-.no-events-message {
-  margin-top: 20px;
-  font-weight: bold;
-  color: red;
-}
-img{
-  width: 150px;
-}
-</style>

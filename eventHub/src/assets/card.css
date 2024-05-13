@@ -13,6 +13,7 @@
   transform: translateY(0);
   padding-bottom: 0.5rem;
   margin-top: 5rem;
+  width: fit-content;
 }
 
 .content-wrapper {
@@ -49,6 +50,10 @@
   margin-right: auto;
   padding: 0.7rem 3.5rem 0.7rem 3.5rem;
   font-size: 1rem;
+}
+
+.login-button.btn-disabled {
+  color: rgb(117, 116, 122) !important;
 }
 
 .close-button {
@@ -93,4 +98,8 @@
 .success-message {
   color: green;
   font-size: 0.8rem;
+}
+
+.card.login-signup-card {
+  margin-top: 0;
 }
