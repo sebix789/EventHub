@@ -7,6 +7,7 @@ export interface UserInterface extends Document {
   firstname: string
   surname: string
   userImage: string
+  favorites: string[]
 }
 
 const userSchema = new Schema<UserInterface>({
@@ -15,7 +16,8 @@ const userSchema = new Schema<UserInterface>({
   password: { type: String, required: true },
   firstname: { type: String },
   surname: { type: String },
-  userImage: { type: String }
+  userImage: { type: String },
+  favorites: { type: [String] }
 })
 
 const User = mongoose.model<UserInterface>('User', userSchema)

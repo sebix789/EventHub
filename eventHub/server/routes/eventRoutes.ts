@@ -112,6 +112,19 @@ router.get('/getEventsThisWeek', async (req: Request, res: Response) => {
   }
 })
 
+router.get('/getEventByTitle/:title', async (req: Request, res: Response) => {
+  try {
+    const event = await Event.findOne({ title: req.params.title })
+    if (!event) {
+      return res.status(404).json({ message: 'Event not found' })
+    }
+    res.status(200).json(event)
+  } catch (error) {
+    console.error('Error while fetching event:', error)
+    res.status(500).json({ message: 'Internal Server Error' })
+  }
+})
+
 router.post('/search', async (req: Request, res: Response) => {
   let search = req.body.searchQuery
   let find = await Event.find({
