@@ -16,24 +16,33 @@
       <template v-slot:header>
         <div v-if="event != null" class="main-page-container">
           <div class="card">
-            <div class="event-container">
+            <h1 class="">{{ event.title }}</h1>
+            <div class="event-container-event">
               <div class="event-detail">
-                <div class="image-event">
+                <div class="event-image">
                   <img :src="getImageUrl(event.image)" alt="Event Image" />
                 </div>
-                <div class="source-info">
+                <div class="event-info">
                   <span>{{ event.title }}</span>
                   <div>
                     <span>{{ formatDate(event.date) }}</span>
                   </div>
                   <h3>About</h3>
-                  <p class="description">
+                  <p>
                     {{ event.description }}
                   </p>
                 </div>
               </div>
-              <div class="location">
-                <div class="map">tu bedzie mapa moze</div>
+              <div class="event-location">
+                <div class="event-map">
+                  <img
+                    src="https://mt1.google.com/vt/lyrs=r&x=9100&y=5553&z=14"
+                    alt=""
+                  />
+                </div>
+                <div class="event-info-event">
+                  <button @click="handleEdit">Edit</button>
+                </div>
               </div>
             </div>
           </div>
@@ -82,6 +91,9 @@ const handleEvent = () => {
   router.push('/logged-main-page/my-events')
 }
 
+const handleEdit = section => {
+  router.push('/logged-main-page/edit-event')
+}
 
 const handleClick = section => {
   console.log(`Clicked on ${section}`)
