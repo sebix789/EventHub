@@ -188,10 +188,12 @@ const fetchEventsByDate = async date => {
     switch (date) {
       case 'Today':
         searchDate = searchDate.toISOString().split('T')[0] // Dzisiejsza data
+        console.log(searchDate)
         break
       case 'Tomorrow':
         searchDate.setDate(searchDate.getDate() + 1)
         searchDate = searchDate.toISOString().split('T')[0] // Jutrzejsza data
+        console.log(searchDate)
         break
     }
 

@@ -70,9 +70,34 @@ router.get('/getEventsByDate/:date', async (req: Request, res: Response) => {
   try {
     const date = req.params.date
 
-    const events = await Event.find({ date: { $eq: new Date(date) } }).sort({
-      date: 1
-    })
+    // Pobranie daty z parametru żądania
+    const selectedDate = new Date(date)
+
+    // Ustawienie godziny na 00:00:00 dla wybranej daty
+    const fromDate = new Date(
+      selectedDate.getFullYear(),
+      selectedDate.getMonth(),
+      selectedDate.getDate(),
+      0,
+      0,
+      0
+    )
+
+    // Ustawienie godziny na 23:59:59 dla następnego dnia
+    const nextDay = new Date(selectedDate)
+    nextDay.setDate(nextDay.getDate() + 1)
+    const toDate = new Date(
+      nextDay.getFullYear(),
+      nextDay.getMonth(),
+      nextDay.getDate(),
+      0,
+      0,
+      0
+    )
+
+    const events = await Event.find({
+      date: { $gte: fromDate, $lt: toDate }
+    }).sort({ date: 1 })
     res.status(200).json(events)
   } catch (error) {
     console.error('Error while fetching events:', error)
