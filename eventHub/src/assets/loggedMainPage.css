@@ -11,7 +11,7 @@
   background-color: rgba(217, 217, 217, 0.67);
   color: #000;
   padding: 20px;
-  height: 100vh;
+  height: 300vh;
   padding-top: 2rem;
   padding-left: 2rem;
 }
@@ -63,4 +63,10 @@
   flex-wrap: wrap;
   padding-top: 2rem;
   background-color: transparent;
+}
+
+.favorite-icon {
+  color: #ff0352;
+  font-size: 28px;
+  padding-left: 3rem;
 }

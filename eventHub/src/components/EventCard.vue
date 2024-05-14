@@ -82,7 +82,6 @@ const handleEvent = () => {
   router.push('/logged-main-page/my-events')
 }
 
-
 const handleClick = section => {
   console.log(`Clicked on ${section}`)
 }
