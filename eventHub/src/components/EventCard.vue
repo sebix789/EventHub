@@ -3,7 +3,7 @@
     <LandingPage :isLoggedIn="isLoggedIn.value">
       <template v-slot:left-bar>
         <div class="left-bar">
-          <div class="section" @click="handleClick('profile')">
+          <div class="section" @click="handleProfile">
             <i class="fas fa-user"></i>
             <span>My Profile</span>
           </div>
@@ -73,6 +73,15 @@ onMounted(async () => {
     )
   }
 })
+
+const handleProfile = section => {
+  router.push('/logged-main-page/my-profile')
+}
+
+const handleEvent = () => {
+  router.push('/logged-main-page/my-events')
+}
+
 
 const handleClick = section => {
   console.log(`Clicked on ${section}`)
