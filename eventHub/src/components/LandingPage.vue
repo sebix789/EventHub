@@ -66,9 +66,12 @@
             </button>
           </div>
         </slot>
-        <div v-if="events.length > 0" class="events-container">
+        <div
+          v-if="events.length > 0 && !selectedEvent"
+          class="events-container event-box"
+        >
           <button
-            v-if="events.length > 2"
+            v-if="events.length > 2 && !selectedEvent"
             class="slider-button left btn-slide-left"
             @click="scrollSlider(-1)"
           >
@@ -77,6 +80,7 @@
           </button>
           <div class="events-container events-wrapper">
             <div
+              v-if="!selectedEvent"
               v-for="event in visibleEvents"
               :key="event._id"
               class="event-card"
@@ -92,12 +96,14 @@
               <p class="event-data">{{ formatDate(event.date) }}</p>
               <!-- Formatowanie daty przy użyciu metody formatDate -->
               <p class="event-data">{{ event.location }}</p>
-              <p class="event-data">{{ event.description }}</p>
+              <button class="event-button" @click="selectEvent(event._id)">
+                Details
+              </button>
             </div>
           </div>
 
           <button
-            v-if="events.length > 2"
+            v-if="events.length > 2 && !selectedEvent"
             class="slider-button right btn-slide-right"
             @click="scrollSlider(1)"
           >
@@ -105,6 +111,11 @@
             <i class="fas fa-chevron-right"></i>
           </button>
         </div>
+        <EventDetails
+          v-if="selectedEvent"
+          :event="selectedEvent"
+          :key="selectedEvent._id"
+        />
         <div
           v-if="showNoEventsMessage && events != null && events.length === 0"
           class="no-events-message"
@@ -119,8 +130,10 @@
 <script setup>
 import { ref, inject, defineProps, onMounted, computed, reactive } from 'vue'
 import { useRouter } from 'vue-router'
+import EventDetails from './EventDetails.vue'
 import '@/assets/landingPage.css'
 import '@/assets/myEvents.css'
+import '@/assets/eventDetails.css'
 import axios from 'axios'
 
 const router = useRouter()
@@ -132,6 +145,7 @@ const isLoggedIn = inject('isLoggedIn')
 const events = ref([])
 const visibleEventsIndex = ref(0)
 const showNoEventsMessage = ref(false)
+const selectedEvent = ref(null)
 
 const props = defineProps({
   isLoggedIn: Boolean
@@ -173,7 +187,7 @@ const handleSearch = async event => {
 const logout = () => {
   isLoggedIn.value = false
   // Remove the token from local storage and reload the page
-  localStorage.removeItem('token')
+  localStorage.clear()
   router.push({ name: 'LandingPage' })
 }
 
@@ -183,6 +197,7 @@ const redirectToLogin = () => {
 
 const fetchEventsByDate = async date => {
   try {
+    selectedEvent.value = false
     let searchDate = new Date()
 
     switch (date) {
@@ -221,6 +236,7 @@ const formatDate = date => {
 
 const fetchEventsForThisWeek = async () => {
   try {
+    selectedEvent.value = false
     const response = await axiosInstanceEvent.get('/getEventsThisWeek')
     events.value = response.data
     console.log(response.data) // Wyświetlenie odpowiedzi w konsoli
@@ -232,6 +248,7 @@ const fetchEventsForThisWeek = async () => {
 
 const fetchAllEvents = async () => {
   try {
+    selectedEvent.value = false
     const response = await axiosInstanceEvent.get('/getAllEvents')
     events.value = response.data
     console.log(response.data) // Wyświetlenie odpowiedzi w konsoli
@@ -270,6 +287,17 @@ const visibleEvents = computed(() => {
     ...events.value.slice(0, Math.max(0, 2 - (totalEvents - startIndex)))
   ]
 })
+
+const selectEvent = async eventId => {
+  try {
+    const response = await axiosInstanceEvent.get(`getEventById/${eventId}`)
+    selectedEvent.value = response.data
+    console.log('Selected event:', eventId)
+    console.log('Selected event:', selectedEvent.value)
+  } catch (error) {
+    console.error('Error fetching event:', error)
+  }
+}
 
 const handleClickEvent = result => {
   console.log('Click on:' + result)

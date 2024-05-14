@@ -127,8 +127,10 @@ import axios from 'axios'
 import LandingPage from './LandingPage.vue'
 import '@/assets/card.css'
 import { useRouter } from 'vue-router'
+import { useToast } from 'vue-toastification'
 
 const router = useRouter()
+const toast = useToast()
 
 axios.defaults.baseURL = 'http://localhost:5000'
 
@@ -161,7 +163,9 @@ const handleSubmit = async () => {
         surname: surname.value
       })
       router.push('/login')
+      toast.success('Account created successfully!')
     } catch (error) {
+      toast.error('Something went wrong, Please try again.')
       console.error(error)
     }
   }

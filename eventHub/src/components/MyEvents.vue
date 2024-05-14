@@ -62,6 +62,12 @@
         </button>
       </div>
     </div>
+    <div
+      v-if="showNoEventsMessage && events != null && events.length === 0"
+      class="no-events-message"
+    >
+      No events to display.
+    </div>
   </div>
 </template>
 
@@ -76,6 +82,7 @@ const username = ref('')
 const events = ref([])
 const emit = defineEmits('close')
 const visibleEventsIndex = ref(0)
+const showNoEventsMessage = ref(false)
 
 const axiosGetMyEvents = axios.create({
   baseURL: 'http://localhost:5000/api/events/'
@@ -87,6 +94,7 @@ onMounted(async () => {
     username.value = localUsername
     const response = await axiosGetMyEvents.get(`getEvents/${username.value}`)
     events.value = response.data
+    showNoEventsMessage.value = events.value.length === 0
   }
 })
 

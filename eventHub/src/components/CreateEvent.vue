@@ -79,12 +79,15 @@
 <script setup>
 import { ref, defineEmits, watch } from 'vue'
 import axios from 'axios'
+import { useToast } from 'vue-toastification'
 import '@/assets/card.css'
 import '@/assets/createEvent.css'
 
 axios.defaults.baseURL = 'http://localhost:5000'
 
+const toast = useToast()
 const emit = defineEmits(['close'])
+
 const title = ref('')
 const date = ref('')
 const location = ref('')
@@ -115,7 +118,7 @@ const handleSubmit = async () => {
         'Content-Type': 'multipart/form-data'
       }
     })
-
+    toast.success('Event created successfully')
     console.log('Response:', response.data)
 
     // Clear the form fields
