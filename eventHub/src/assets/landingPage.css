@@ -170,6 +170,10 @@ body {
   border-radius: 8px;
 }
 
+.events-container.event-box {
+  background-color: transparent;
+}
+
 .events-container.events-wrapper {
   background-color: #fff;
 }
@@ -179,6 +183,7 @@ body {
   border-radius: 5px;
   padding: 10px;
   margin: 10px;
+  width: 300px;
 }
 
 /* Styl dla komunikatu o braku wydarzeń */
@@ -202,4 +207,15 @@ img {
   color: lightgray;
   border-top: none;
   margin: -1.3rem 0 0.5rem 0;
+}
+
+.event-data.description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Show 3 lines of text */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.event-data.description.expanded {
+  -webkit-line-clamp: none; /* Show all lines of text when expanded */
 }

@@ -123,6 +123,53 @@ router.get('/users/:username', async (req: Request, res: Response) => {
   }
 })
 
+router.put(
+  '/updateFavorites/:username',
+  async (req: Request, res: Response) => {
+    try {
+      const username = req.params.username
+      const favorites = req.body.favorites
+
+      const user = await User.findOne({ username })
+
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' })
+      }
+
+      user.favorites = favorites
+      await user.save()
+
+      res.status(200).json({ message: 'Favorites updated successfully' })
+    } catch (error) {
+      console.error('Failed to update favorites:', error)
+      res
+        .status(500)
+        .json({ message: 'An error occurred', error: (error as Error).message })
+    }
+  }
+)
+
+router.get('/getFavorites/:username', async (req: Request, res: Response) => {
+  try {
+    const username = req.params.username
+    console.log('Username:', username) // Add this line
+
+    const user = await User.findOne({ username })
+    console.log('User:', user) // Add this line
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' })
+    }
+
+    res.status(200).json(user.favorites)
+  } catch (error) {
+    console.error('Failed to get favorites:', error)
+    res
+      .status(500)
+      .json({ message: 'An error occurred', error: (error as Error).message })
+  }
+})
+
 /////TO FIX GET ROUTE/////
 // router.get('/user', authenticateToken, (req: CustomRequest, res: Response) => {
 //   // Assuming req.user contains the authenticated user

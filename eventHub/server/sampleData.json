@@ -1,0 +1,1114 @@
+[
+  {
+    "username": "admin",
+    "title": "Koncert Metalowy",
+    "date": "2024-05-15T21:00:00.000Z",
+    "location": "Warszawa, Polska",
+    "description": "Wieczór pełen energetycznych dźwięków muzyki metalowej.",
+    "image": "koncert.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Spotkanie Networkingowe",
+    "date": "2024-05-16T18:00:00.000Z",
+    "location": "Kraków, Polska",
+    "description": "Okazja do nawiązania nowych kontaktów biznesowych i wymiany doświadczeń.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Warsztaty Fotograficzne",
+    "date": "2024-05-17T10:00:00.000Z",
+    "location": "Gdańsk, Polska",
+    "description": "Szkolenie praktyczne z zakresu fotografii dla entuzjastów i profesjonalistów.",
+    "image": "warsztaty.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Wydarzenie Sportowe",
+    "date": "2024-05-18T15:00:00.000Z",
+    "location": "Poznań, Polska",
+    "description": "Zawody sportowe dla wszystkich miłośników aktywności fizycznej.",
+    "image": "wydarzenie_sportowe.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Wystawa Sztuki",
+    "date": "2024-05-19T17:30:00.000Z",
+    "location": "Katowice, Polska",
+    "description": "Wystawa prezentująca prace utalentowanych artystów z różnych dziedzin sztuki.",
+    "image": "wystawa_sztuki.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Koncert Rockowy",
+    "date": "2024-05-20T09:00:00.000Z",
+    "location": "Szczecin, Polska",
+    "description": "Wieczór z mocnymi brzmieniami rockowej muzyki na żywo.",
+    "image": "koncert.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Konferencja Biznesowa",
+    "date": "2024-05-21T20:00:00.000Z",
+    "location": "Łódź, Polska",
+    "description": "Spotkanie dla przedsiębiorców i specjalistów z różnych branż w celu wymiany doświadczeń i pomysłów.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Warsztaty Rękodzielnicze",
+    "date": "2024-05-22T11:00:00.000Z",
+    "location": "Wrocław, Polska",
+    "description": "Szkolenie praktyczne z technik rękodzielniczych dla osób zainteresowanych twórczą pracą manualną.",
+    "image": "warsztaty.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Wydarzenie Sportowe",
+    "date": "2024-05-23T19:30:00.000Z",
+    "location": "Kraków, Polska",
+    "description": "Zawody sportowe dla wszystkich entuzjastów aktywności fizycznej.",
+    "image": "wydarzenie_sportowe.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Wystawa Sztuki",
+    "date": "2024-05-24T08:00:00.000Z",
+    "location": "Gdańsk, Polska",
+    "description": "Przegląd dzieł sztuki prezentowanych przez uznanego artystę.",
+    "image": "wystawa_sztuki.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Koncert Jazzowy",
+    "date": "2024-05-25T19:00:00.000Z",
+    "location": "Warszawa, Polska",
+    "description": "Wieczór pełen harmonicznych dźwięków muzyki jazzowej.",
+    "image": "koncert.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Konferencja Naukowa",
+    "date": "2024-05-26T09:00:00.000Z",
+    "location": "Kraków, Polska",
+    "description": "Spotkanie naukowców z różnych dziedzin w celu dyskusji nad najnowszymi odkryciami i badaniami.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Warsztaty Kulinarno",
+    "date": "2024-05-27T14:00:00.000Z",
+    "location": "Poznań, Polska",
+    "description": "Szkolenie kulinarne z udziałem wybitnych kucharzy prezentujących różnorodne techniki gotowania.",
+    "image": "warsztaty.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Wydarzenie Sportowe",
+    "date": "2024-05-28T16:30:00.000Z",
+    "location": "Warszawa, Polska",
+    "description": "Zawody sportowe dla wszystkich entuzjastów aktywności fizycznej.",
+    "image": "wydarzenie_sportowe.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Koncert Folkowy",
+    "date": "2024-05-29T20:00:00.000Z",
+    "location": "Kraków, Polska",
+    "description": "Wieczór pełen tradycyjnych dźwięków muzyki ludowej.",
+    "image": "koncert.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Konferencja Edukacyjna",
+    "date": "2024-05-30T09:00:00.000Z",
+    "location": "Gdańsk, Polska",
+    "description": "Spotkanie dla nauczycieli i edukatorów w celu wymiany doświadczeń i omówienia nowych metod nauczania.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Wystawa Fotograficzna",
+    "date": "2024-05-31T12:00:00.000Z",
+    "location": "Poznań, Polska",
+    "description": "Prezentacja fotografii artystycznej autorstwa utalentowanych fotografów.",
+    "image": "wystawa_sztuki.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Koncert Popowy",
+    "date": "2024-06-01T18:00:00.000Z",
+    "location": "Katowice, Polska",
+    "description": "Wieczór pełen przebojów i energetycznej muzyki popowej.",
+    "image": "koncert.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Spotkanie Autorskie",
+    "date": "2024-06-02T17:00:00.000Z",
+    "location": "Wrocław, Polska",
+    "description": "Spotkanie z autorem bestsellerowych książek z możliwością autografu i dyskusji na temat twórczości.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Sesja Naukowa",
+    "date": "2024-06-03T09:30:00.000Z",
+    "location": "Gdynia, Polska",
+    "description": "Dyskusja naukowa nad najnowszymi odkryciami w dziedzinie nauki i technologii.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Warsztaty Graficzne",
+    "date": "2024-06-04T10:30:00.000Z",
+    "location": "Kraków, Polska",
+    "description": "Praktyczne warsztaty z grafiki komputerowej dla początkujących i zaawansowanych.",
+    "image": "warsztaty.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Wydarzenie Motywacyjne",
+    "date": "2024-06-05T19:00:00.000Z",
+    "location": "Poznań, Polska",
+    "description": "Inspirujące wystąpienie motywacyjne prowadzone przez znanego mówcę.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Koncert Akustyczny",
+    "date": "2024-06-06T20:30:00.000Z",
+    "location": "Warszawa, Polska",
+    "description": "Intymny wieczór z akustycznymi aranżacjami znanych utworów muzycznych.",
+    "image": "koncert.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Pokaz Mody",
+    "date": "2024-06-07T16:30:00.000Z",
+    "location": "Wrocław, Polska",
+    "description": "Prezentacja najnowszych trendów modowych przez znanych projektantów.",
+    "image": "wystawa_sztuki.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Koncert Orkiestry Symfonicznej",
+    "date": "2024-06-08T19:00:00.000Z",
+    "location": "Gdańsk, Polska",
+    "description": "Wieczór z klasycznymi dziełami muzyki wykonywanymi przez renomowaną orkiestrę symfoniczną.",
+    "image": "koncert.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Konferencja Marketingowa",
+    "date": "2024-06-09T08:30:00.000Z",
+    "location": "Kraków, Polska",
+    "description": "Spotkanie dla specjalistów ds. marketingu w celu omówienia najnowszych trendów i strategii marketingowych.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Warsztaty Kreatywne",
+    "date": "2024-06-10T11:00:00.000Z",
+    "location": "Poznań, Polska",
+    "description": "Szkolenie praktyczne z technik kreatywnego myślenia i rozwiązywania problemów.",
+    "image": "warsztaty.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Wydarzenie Społeczne",
+    "date": "2024-06-11T14:00:00.000Z",
+    "location": "Warszawa, Polska",
+    "description": "Spotkanie charytatywne na rzecz osób potrzebujących, z atrakcjami dla całych rodzin.",
+    "image": "wydarzenie_sportowe.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Pokaz Sztucznych ogni",
+    "date": "2024-06-12T21:30:00.000Z",
+    "location": "Gdańsk, Polska",
+    "description": "Spektakularny pokaz sztucznych ogni na plaży przy akompaniamencie muzyki.",
+    "image": "wydarzenie_sportowe.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Koncert Operowy",
+    "date": "2024-06-13T19:00:00.000Z",
+    "location": "Kraków, Polska",
+    "description": "Wieczór z operowymi ariami i solistycznymi występami renomowanych śpiewaków operowych.",
+    "image": "koncert.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Konferencja Technologiczna",
+    "date": "2024-06-14T08:00:00.000Z",
+    "location": "Wrocław, Polska",
+    "description": "Spotkanie dla specjalistów ds. technologii w celu omówienia najnowszych osiągnięć i innowacji technologicznych.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Warsztaty Taneczne",
+    "date": "2024-06-15T10:30:00.000Z",
+    "location": "Poznań, Polska",
+    "description": "Szkolenie praktyczne z różnych stylów tańca dla początkujących i zaawansowanych.",
+    "image": "warsztaty.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Pokaz Sztuki Nowoczesnej",
+    "date": "2024-06-16T12:00:00.000Z",
+    "location": "Warszawa, Polska",
+    "description": "Prezentacja nowoczesnych dzieł sztuki w galerii sztuki współczesnej.",
+    "image": "wystawa_sztuki.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Koncert Electro",
+    "date": "2024-06-17T20:00:00.000Z",
+    "location": "Gdańsk, Polska",
+    "description": "Wieczór z energetyczną muzyką electro i występami DJ-ów.",
+    "image": "koncert.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Spotkanie Literackie",
+    "date": "2024-06-18T18:00:00.000Z",
+    "location": "Kraków, Polska",
+    "description": "Spotkanie z cenionymi pisarzami i dyskusja na temat literatury.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Warsztaty Psychologiczne",
+    "date": "2024-06-19T10:00:00.000Z",
+    "location": "Wrocław, Polska",
+    "description": "Szkolenie praktyczne z zakresu psychologii i rozwoju osobistego.",
+    "image": "warsztaty.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Wydarzenie Kulturalne",
+    "date": "2024-06-20T17:30:00.000Z",
+    "location": "Poznań, Polska",
+    "description": "Wieczór pełen kulturalnych atrakcji, koncertów i występów artystycznych.",
+    "image": "wystawa_sztuki.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Festiwal Filmowy",
+    "date": "2024-06-21T19:00:00.000Z",
+    "location": "Warszawa, Polska",
+    "description": "Prezentacja najnowszych filmów fabularnych i dokumentalnych.",
+    "image": "wystawa_sztuki.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Koncert Reggae",
+    "date": "2024-06-22T20:30:00.000Z",
+    "location": "Gdańsk, Polska",
+    "description": "Wieczór pełen relaksujących dźwięków muzyki reggae i występów zespołów z kraju i zagranicy.",
+    "image": "koncert.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Konferencja Medyczna",
+    "date": "2024-06-23T08:30:00.000Z",
+    "location": "Kraków, Polska",
+    "description": "Spotkanie dla lekarzy i specjalistów z dziedziny medycyny w celu omówienia najnowszych osiągnięć i technologii medycznych.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Warsztaty Muzyczne",
+    "date": "2024-06-24T11:00:00.000Z",
+    "location": "Wrocław, Polska",
+    "description": "Szkolenie praktyczne z gry na instrumentach muzycznych i technik wokalnych.",
+    "image": "warsztaty.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Sesja Networkingowa",
+    "date": "2024-06-25T14:30:00.000Z",
+    "location": "Poznań, Polska",
+    "description": "Spotkanie networkingowe dla przedsiębiorców i specjalistów w celu nawiązania nowych kontaktów biznesowych.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Impreza Plenerowa",
+    "date": "2024-06-26T16:00:00.000Z",
+    "location": "Warszawa, Polska",
+    "description": "Impreza plenerowa z muzyką na żywo, jedzeniem ulicznym i różnorodnymi atrakcjami.",
+    "image": "wydarzenie_sportowe.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Pokaz Teatralny",
+    "date": "2024-06-27T19:30:00.000Z",
+    "location": "Gdańsk, Polska",
+    "description": "Spektakl teatralny wystawiany przez renomowany teatr.",
+    "image": "wystawa_sztuki.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Koncert Hip-Hopowy",
+    "date": "2024-06-28T21:00:00.000Z",
+    "location": "Kraków, Polska",
+    "description": "Wieczór z rapowymi rytmami i występami znanych artystów hip-hopowych.",
+    "image": "koncert.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Konferencja HR",
+    "date": "2024-06-29T08:00:00.000Z",
+    "location": "Wrocław, Polska",
+    "description": "Spotkanie dla specjalistów z działu HR w celu omówienia nowych strategii rekrutacyjnych i zarządzania personelem.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Warsztaty Artystyczne",
+    "date": "2024-06-30T10:30:00.000Z",
+    "location": "Poznań, Polska",
+    "description": "Szkolenie praktyczne z różnych dziedzin sztuki dla osób chcących rozwijać swoje umiejętności artystyczne.",
+    "image": "warsztaty.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Wydarzenie Gastronomiczne",
+    "date": "2024-07-01T13:00:00.000Z",
+    "location": "Warszawa, Polska",
+    "description": "Festiwal kulinarny z udziałem najlepszych szefów kuchni prezentujących swoje mistrzowskie dania.",
+    "image": "wydarzenie_sportowe.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Koncert Kameralny",
+    "date": "2024-07-02T18:30:00.000Z",
+    "location": "Gdańsk, Polska",
+    "description": "Wieczór z kameralnymi utworami muzycznymi w wykonaniu utalentowanych muzyków.",
+    "image": "koncert.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Szkolenie Biznesowe",
+    "date": "2024-07-03T09:00:00.000Z",
+    "location": "Kraków, Polska",
+    "description": "Szkolenie dla przedsiębiorców z zakresu zarządzania firmą i strategii biznesowej.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Warsztaty Filmowe",
+    "date": "2024-07-04T11:30:00.000Z",
+    "location": "Wrocław, Polska",
+    "description": "Szkolenie praktyczne z produkcji filmowej dla pasjonatów kina i twórców filmowych.",
+    "image": "warsztaty.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Spotkanie Informatyczne",
+    "date": "2024-07-05T14:00:00.000Z",
+    "location": "Poznań, Polska",
+    "description": "Spotkanie dla specjalistów IT w celu omówienia nowych technologii i trendów w branży informatycznej.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Pokaz Magii",
+    "date": "2024-07-06T16:30:00.000Z",
+    "location": "Warszawa, Polska",
+    "description": "Spektakl magiczny z udziałem znanych iluzjonistów i sztukmistrzów.",
+    "image": "wystawa_sztuki.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Koncert Symfoniczny",
+    "date": "2024-07-07T20:00:00.000Z",
+    "location": "Gdańsk, Polska",
+    "description": "Wieczór z monumentalnymi utworami muzycznymi w wykonaniu orkiestry symfonicznej.",
+    "image": "koncert.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Konferencja Edukacyjna",
+    "date": "2024-07-08T08:00:00.000Z",
+    "location": "Kraków, Polska",
+    "description": "Spotkanie dla nauczycieli i pedagogów w celu omówienia nowoczesnych metod nauczania.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Warsztaty Językowe",
+    "date": "2024-07-09T10:30:00.000Z",
+    "location": "Wrocław, Polska",
+    "description": "Szkolenie praktyczne z nauki języków obcych dla osób chcących doskonalić swoje umiejętności lingwistyczne.",
+    "image": "warsztaty.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Wydarzenie Motywacyjne",
+    "date": "2024-07-10T13:00:00.000Z",
+    "location": "Poznań, Polska",
+    "description": "Inspirujące wystąpienie motywacyjne prowadzone przez znanego mówcę.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Koncert Bluesowy",
+    "date": "2024-07-11T18:00:00.000Z",
+    "location": "Warszawa, Polska",
+    "description": "Wieczór pełen melancholijnych dźwięków muzyki bluesowej.",
+    "image": "koncert.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Spotkanie Literackie",
+    "date": "2024-07-12T17:30:00.000Z",
+    "location": "Gdańsk, Polska",
+    "description": "Spotkanie z cenionymi pisarzami i dyskusja na temat literatury.",
+    "image": "wystawa_sztuki.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Warsztaty Fotograficzne",
+    "date": "2024-07-13T09:00:00.000Z",
+    "location": "Kraków, Polska",
+    "description": "Szkolenie praktyczne z zakresu fotografii dla entuzjastów i profesjonalistów.",
+    "image": "warsztaty.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Wydarzenie Kulinarno",
+    "date": "2024-07-14T11:00:00.000Z",
+    "location": "Wrocław, Polska",
+    "description": "Festiwal kulinarny z degustacją potraw z różnych kuchni świata.",
+    "image": "wydarzenie_sportowe.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Impreza Plenerowa",
+    "date": "2024-07-15T14:30:00.000Z",
+    "location": "Poznań, Polska",
+    "description": "Impreza plenerowa z muzyką na żywo, jedzeniem ulicznym i różnorodnymi atrakcjami.",
+    "image": "wydarzenie_sportowe.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Koncert Metalowy",
+    "date": "2024-07-16T17:00:00.000Z",
+    "location": "Warszawa, Polska",
+    "description": "Wieczór pełen energetycznych dźwięków muzyki metalowej.",
+    "image": "koncert.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Konferencja Biznesowa",
+    "date": "2024-07-17T20:00:00.000Z",
+    "location": "Gdańsk, Polska",
+    "description": "Spotkanie dla przedsiębiorców i specjalistów z różnych branż w celu wymiany doświadczeń i pomysłów.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Spotkanie Networkingowe",
+    "date": "2024-07-18T09:30:00.000Z",
+    "location": "Kraków, Polska",
+    "description": "Okazja do nawiązania nowych kontaktów biznesowych i wymiany doświadczeń.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Warsztaty Rękodzielnicze",
+    "date": "2024-07-19T11:30:00.000Z",
+    "location": "Wrocław, Polska",
+    "description": "Szkolenie praktyczne z technik rękodzielniczych dla osób zainteresowanych twórczą pracą manualną.",
+    "image": "warsztaty.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Wydarzenie Sportowe",
+    "date": "2024-07-20T15:30:00.000Z",
+    "location": "Poznań, Polska",
+    "description": "Zawody sportowe dla wszystkich miłośników aktywności fizycznej.",
+    "image": "wydarzenie_sportowe.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Wystawa Sztuki",
+    "date": "2024-07-21T18:00:00.000Z",
+    "location": "Warszawa, Polska",
+    "description": "Wystawa prezentująca prace utalentowanych artystów z różnych dziedzin sztuki.",
+    "image": "wystawa_sztuki.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Koncert Rockowy",
+    "date": "2024-07-22T19:00:00.000Z",
+    "location": "Gdańsk, Polska",
+    "description": "Wieczór z mocnymi brzmieniami rockowej muzyki na żywo.",
+    "image": "koncert.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Konferencja Naukowa",
+    "date": "2024-07-23T08:00:00.000Z",
+    "location": "Kraków, Polska",
+    "description": "Spotkanie naukowców z różnych dziedzin w celu dyskusji nad najnowszymi odkryciami i badaniami.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Warsztaty Kulinarno",
+    "date": "2024-07-24T10:30:00.000Z",
+    "location": "Wrocław, Polska",
+    "description": "Szkolenie kulinarne z udziałem wybitnych kucharzy prezentujących różnorodne techniki gotowania.",
+    "image": "warsztaty.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Wydarzenie Sportowe",
+    "date": "2024-07-25T14:00:00.000Z",
+    "location": "Poznań, Polska",
+    "description": "Zawody sportowe dla wszystkich entuzjastów aktywności fizycznej.",
+    "image": "wydarzenie_sportowe.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Koncert Folkowy",
+    "date": "2024-07-26T17:30:00.000Z",
+    "location": "Warszawa, Polska",
+    "description": "Wieczór pełen tradycyjnych dźwięków muzyki ludowej.",
+    "image": "koncert.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Konferencja Edukacyjna",
+    "date": "2024-07-27T09:00:00.000Z",
+    "location": "Gdańsk, Polska",
+    "description": "Spotkanie dla nauczycieli i edukatorów w celu wymiany doświadczeń i omówienia nowych metod nauczania.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Wystawa Fotograficzna",
+    "date": "2024-07-28T12:00:00.000Z",
+    "location": "Kraków, Polska",
+    "description": "Prezentacja fotografii artystycznej autorstwa utalentowanych fotografów.",
+    "image": "wystawa_sztuki.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Koncert Popowy",
+    "date": "2024-07-29T15:00:00.000Z",
+    "location": "Wrocław, Polska",
+    "description": "Wieczór pełen przebojów i energetycznej muzyki popowej.",
+    "image": "koncert.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Spotkanie Autorskie",
+    "date": "2024-07-30T17:00:00.000Z",
+    "location": "Poznań, Polska",
+    "description": "Spotkanie z autorem bestsellerowych książek z możliwością autografu i dyskusji na temat twórczości.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Sesja Naukowa",
+    "date": "2024-07-31T09:30:00.000Z",
+    "location": "Warszawa, Polska",
+    "description": "Dyskusja naukowa nad najnowszymi odkryciami w dziedzinie nauki i technologii.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Warsztaty Graficzne",
+    "date": "2024-08-01T10:30:00.000Z",
+    "location": "Kraków, Polska",
+    "description": "Praktyczne warsztaty z grafiki komputerowej dla początkujących i zaawansowanych.",
+    "image": "warsztaty.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Wydarzenie Motywacyjne",
+    "date": "2024-08-02T13:00:00.000Z",
+    "location": "Gdańsk, Polska",
+    "description": "Inspirujące wystąpienie motywacyjne prowadzone przez znanego mówcę.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Koncert Akustyczny",
+    "date": "2024-08-03T15:30:00.000Z",
+    "location": "Wrocław, Polska",
+    "description": "Intymny wieczór z akustycznymi aranżacjami znanych utworów muzycznych.",
+    "image": "koncert.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Pokaz Mody",
+    "date": "2024-08-04T17:00:00.000Z",
+    "location": "Poznań, Polska",
+    "description": "Prezentacja najnowszych trendów modowych przez znanych projektantów.",
+    "image": "wystawa_sztuki.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Koncert Orkiestry Symfonicznej",
+    "date": "2024-08-05T20:00:00.000Z",
+    "location": "Warszawa, Polska",
+    "description": "Wieczór z klasycznymi dziełami muzyki wykonywanymi przez renomowaną orkiestrę symfoniczną.",
+    "image": "koncert.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Konferencja Marketingowa",
+    "date": "2024-08-06T08:30:00.000Z",
+    "location": "Gdańsk, Polska",
+    "description": "Spotkanie dla specjalistów ds. marketingu w celu omówienia najnowszych trendów i strategii marketingowych.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Warsztaty Kreatywne",
+    "date": "2024-08-07T11:00:00.000Z",
+    "location": "Kraków, Polska",
+    "description": "Szkolenie praktyczne z technik kreatywnego myślenia i rozwiązywania problemów.",
+    "image": "warsztaty.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Wydarzenie Społeczne",
+    "date": "2024-08-08T14:00:00.000Z",
+    "location": "Wrocław, Polska",
+    "description": "Spotkanie charytatywne na rzecz osób potrzebujących, z atrakcjami dla całych rodzin.",
+    "image": "wydarzenie_sportowe.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Pokaz Sztucznych ogni",
+    "date": "2024-08-09T16:30:00.000Z",
+    "location": "Poznań, Polska",
+    "description": "Spektakularny pokaz sztucznych ogni na plaży przy akompaniamencie muzyki.",
+    "image": "wydarzenie_sportowe.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Koncert Operowy",
+    "date": "2024-08-10T19:00:00.000Z",
+    "location": "Warszawa, Polska",
+    "description": "Wieczór z operowymi ariami i solistycznymi występami renomowanych śpiewaków operowych.",
+    "image": "koncert.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Konferencja Technologiczna",
+    "date": "2024-08-11T08:00:00.000Z",
+    "location": "Gdańsk, Polska",
+    "description": "Spotkanie dla specjalistów ds. technologii w celu omówienia najnowszych osiągnięć i innowacji technologicznych.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Warsztaty Taneczne",
+    "date": "2024-08-12T10:30:00.000Z",
+    "location": "Kraków, Polska",
+    "description": "Szkolenie praktyczne z różnych stylów tańca dla początkujących i zaawansowanych.",
+    "image": "warsztaty.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Pokaz Sztuki Nowoczesnej",
+    "date": "2024-08-13T12:00:00.000Z",
+    "location": "Wrocław, Polska",
+    "description": "Prezentacja nowoczesnych dzieł sztuki w galerii sztuki współczesnej.",
+    "image": "wystawa_sztuki.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Koncert Electro",
+    "date": "2024-08-14T20:00:00.000Z",
+    "location": "Poznań, Polska",
+    "description": "Wieczór z energetyczną muzyką electro i występami DJ-ów.",
+    "image": "koncert.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Spotkanie Literackie",
+    "date": "2024-08-15T18:00:00.000Z",
+    "location": "Warszawa, Polska",
+    "description": "Spotkanie z cenionymi pisarzami i dyskusja na temat literatury.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Warsztaty Psychologiczne",
+    "date": "2024-08-16T10:00:00.000Z",
+    "location": "Gdańsk, Polska",
+    "description": "Szkolenie praktyczne z zakresu psychologii i rozwoju osobistego.",
+    "image": "warsztaty.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Wydarzenie Kulturalne",
+    "date": "2024-08-17T17:30:00.000Z",
+    "location": "Kraków, Polska",
+    "description": "Wieczór pełen kulturalnych atrakcji, koncertów i występów artystycznych.",
+    "image": "wystawa_sztuki.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Festiwal Filmowy",
+    "date": "2024-08-18T19:00:00.000Z",
+    "location": "Wrocław, Polska",
+    "description": "Prezentacja najnowszych filmów fabularnych i dokumentalnych.",
+    "image": "wystawa_sztuki.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Koncert Reggae",
+    "date": "2024-08-19T20:30:00.000Z",
+    "location": "Poznań, Polska",
+    "description": "Wieczór pełen relaksujących dźwięków muzyki reggae i występów zespołów z kraju i zagranicy.",
+    "image": "koncert.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Konferencja Medyczna",
+    "date": "2024-08-20T08:30:00.000Z",
+    "location": "Warszawa, Polska",
+    "description": "Spotkanie dla lekarzy i specjalistów z dziedziny medycyny w celu omówienia najnowszych osiągnięć i technologii medycznych.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Warsztaty Muzyczne",
+    "date": "2024-08-21T11:00:00.000Z",
+    "location": "Gdańsk, Polska",
+    "description": "Szkolenie praktyczne z gry na instrumentach muzycznych i technik wokalnych.",
+    "image": "warsztaty.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Sesja Networkingowa",
+    "date": "2024-08-22T14:30:00.000Z",
+    "location": "Kraków, Polska",
+    "description": "Spotkanie networkingowe dla przedsiębiorców i specjalistów w celu nawiązania nowych kontaktów biznesowych.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Impreza Plenerowa",
+    "date": "2024-08-23T16:00:00.000Z",
+    "location": "Wrocław, Polska",
+    "description": "Impreza plenerowa z muzyką na żywo, jedzeniem ulicznym i różnorodnymi atrakcjami.",
+    "image": "wydarzenie_sportowe.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Pokaz Teatralny",
+    "date": "2024-08-24T19:30:00.000Z",
+    "location": "Poznań, Polska",
+    "description": "Spektakl teatralny wystawiany przez renomowany teatr.",
+    "image": "wystawa_sztuki.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Koncert Hip-Hopowy",
+    "date": "2024-08-25T21:00:00.000Z",
+    "location": "Warszawa, Polska",
+    "description": "Wieczór z rapowymi rytmami i występami znanych artystów hip-hopowych.",
+    "image": "koncert.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Konferencja HR",
+    "date": "2024-08-26T08:00:00.000Z",
+    "location": "Gdańsk, Polska",
+    "description": "Spotkanie dla specjalistów z działu HR w celu omówienia nowych strategii rekrutacyjnych i zarządzania personelem.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Warsztaty Artystyczne",
+    "date": "2024-08-27T10:30:00.000Z",
+    "location": "Kraków, Polska",
+    "description": "Szkolenie praktyczne z różnych dziedzin sztuki dla osób chcących rozwijać swoje umiejętności artystyczne.",
+    "image": "warsztaty.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Wydarzenie Gastronomiczne",
+    "date": "2024-08-28T13:00:00.000Z",
+    "location": "Wrocław, Polska",
+    "description": "Festiwal kulinarny z udziałem najlepszych szefów kuchni prezentujących swoje mistrzowskie dania.",
+    "image": "wydarzenie_sportowe.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Koncert Kameralny",
+    "date": "2024-08-29T18:30:00.000Z",
+    "location": "Poznań, Polska",
+    "description": "Wieczór z kameralnymi utworami muzycznymi w wykonaniu utalentowanych muzyków.",
+    "image": "koncert.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Szkolenie Biznesowe",
+    "date": "2024-08-30T09:00:00.000Z",
+    "location": "Warszawa, Polska",
+    "description": "Szkolenie dla przedsiębiorców z zakresu zarządzania firmą i strategii biznesowej.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Warsztaty Filmowe",
+    "date": "2024-08-31T11:30:00.000Z",
+    "location": "Gdańsk, Polska",
+    "description": "Szkolenie praktyczne z produkcji filmowej dla pasjonatów kina i twórców filmowych.",
+    "image": "warsztaty.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Spotkanie Informatyczne",
+    "date": "2024-09-01T14:00:00.000Z",
+    "location": "Kraków, Polska",
+    "description": "Spotkanie dla specjalistów IT w celu omówienia nowych technologii i trendów w branży informatycznej.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Pokaz Magii",
+    "date": "2024-09-02T16:30:00.000Z",
+    "location": "Wrocław, Polska",
+    "description": "Spektakl magiczny z udziałem znanych iluzjonistów i sztukmistrzów.",
+    "image": "wystawa_sztuki.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Koncert Symfoniczny",
+    "date": "2024-09-03T20:00:00.000Z",
+    "location": "Poznań, Polska",
+    "description": "Wieczór z monumentalnymi utworami muzycznymi w wykonaniu orkiestry symfonicznej.",
+    "image": "koncert.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Konferencja Edukacyjna",
+    "date": "2024-09-04T08:00:00.000Z",
+    "location": "Warszawa, Polska",
+    "description": "Spotkanie dla nauczycieli i pedagogów w celu omówienia nowoczesnych metod nauczania.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Warsztaty Językowe",
+    "date": "2024-09-05T10:30:00.000Z",
+    "location": "Gdańsk, Polska",
+    "description": "Szkolenie praktyczne z nauki języków obcych dla osób chcących doskonalić swoje umiejętności lingwistyczne.",
+    "image": "warsztaty.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Wydarzenie Motywacyjne",
+    "date": "2024-09-06T13:00:00.000Z",
+    "location": "Kraków, Polska",
+    "description": "Inspirujące wystąpienie motywacyjne prowadzone przez znanego mówcę.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Koncert Bluesowy",
+    "date": "2024-09-07T18:00:00.000Z",
+    "location": "Wrocław, Polska",
+    "description": "Wieczór pełen melancholijnych dźwięków muzyki bluesowej.",
+    "image": "koncert.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Spotkanie Literackie",
+    "date": "2024-09-08T17:30:00.000Z",
+    "location": "Poznań, Polska",
+    "description": "Spotkanie z cenionymi pisarzami i dyskusja na temat literatury.",
+    "image": "wystawa_sztuki.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Warsztaty Fotograficzne",
+    "date": "2024-09-09T09:00:00.000Z",
+    "location": "Warszawa, Polska",
+    "description": "Szkolenie praktyczne z zakresu fotografii dla entuzjastów i profesjonalistów.",
+    "image": "warsztaty.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Wydarzenie Kulinarno",
+    "date": "2024-09-10T11:00:00.000Z",
+    "location": "Gdańsk, Polska",
+    "description": "Festiwal kulinarny z degustacją potraw z różnych kuchni świata.",
+    "image": "wydarzenie_sportowe.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Impreza Plenerowa",
+    "date": "2024-09-11T14:30:00.000Z",
+    "location": "Kraków, Polska",
+    "description": "Impreza plenerowa z muzyką na żywo, jedzeniem ulicznym i różnorodnymi atrakcjami.",
+    "image": "wydarzenie_sportowe.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Koncert Metalowy",
+    "date": "2024-09-12T17:00:00.000Z",
+    "location": "Wrocław, Polska",
+    "description": "Wieczór pełen energetycznych dźwięków muzyki metalowej.",
+    "image": "koncert.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Konferencja Biznesowa",
+    "date": "2024-09-13T20:00:00.000Z",
+    "location": "Poznań, Polska",
+    "description": "Spotkanie dla przedsiębiorców i specjalistów z różnych branż w celu wymiany doświadczeń i pomysłów.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Spotkanie Networkingowe",
+    "date": "2024-09-14T09:30:00.000Z",
+    "location": "Warszawa, Polska",
+    "description": "Okazja do nawiązania nowych kontaktów biznesowych i wymiany doświadczeń.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Warsztaty Rękodzielnicze",
+    "date": "2024-09-15T11:30:00.000Z",
+    "location": "Gdańsk, Polska",
+    "description": "Szkolenie praktyczne z technik rękodzielniczych dla osób zainteresowanych twórczą pracą manualną.",
+    "image": "warsztaty.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Wydarzenie Sportowe",
+    "date": "2024-09-16T15:30:00.000Z",
+    "location": "Kraków, Polska",
+    "description": "Zawody sportowe dla wszystkich miłośników aktywności fizycznej.",
+    "image": "wydarzenie_sportowe.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Wystawa Sztuki",
+    "date": "2024-09-17T18:00:00.000Z",
+    "location": "Wrocław, Polska",
+    "description": "Wystawa prezentująca prace utalentowanych artystów z różnych dziedzin sztuki.",
+    "image": "wystawa_sztuki.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Koncert Rockowy",
+    "date": "2024-09-18T19:00:00.000Z",
+    "location": "Poznań, Polska",
+    "description": "Wieczór z mocnymi brzmieniami rockowej muzyki na żywo.",
+    "image": "koncert.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Konferencja Naukowa",
+    "date": "2024-09-19T08:00:00.000Z",
+    "location": "Warszawa, Polska",
+    "description": "Spotkanie naukowców z różnych dziedzin w celu dyskusji nad najnowszymi odkryciami i badaniami.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Warsztaty Kulinarno",
+    "date": "2024-09-20T10:30:00.000Z",
+    "location": "Gdańsk, Polska",
+    "description": "Szkolenie kulinarne z udziałem wybitnych kucharzy prezentujących różnorodne techniki gotowania.",
+    "image": "warsztaty.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Wydarzenie Sportowe",
+    "date": "2024-09-21T14:00:00.000Z",
+    "location": "Kraków, Polska",
+    "description": "Zawody sportowe dla wszystkich entuzjastów aktywności fizycznej.",
+    "image": "wydarzenie_sportowe.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Koncert Folkowy",
+    "date": "2024-09-22T17:30:00.000Z",
+    "location": "Wrocław, Polska",
+    "description": "Wieczór pełen tradycyjnych dźwięków muzyki ludowej.",
+    "image": "koncert.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Konferencja Edukacyjna",
+    "date": "2024-09-23T09:00:00.000Z",
+    "location": "Poznań, Polska",
+    "description": "Spotkanie dla nauczycieli i edukatorów w celu wymiany doświadczeń i omówienia nowych metod nauczania.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Wystawa Fotograficzna",
+    "date": "2024-09-24T12:00:00.000Z",
+    "location": "Warszawa, Polska",
+    "description": "Prezentacja fotografii artystycznej autorstwa utalentowanych fotografów.",
+    "image": "wystawa_sztuki.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Koncert Popowy",
+    "date": "2024-09-25T15:00:00.000Z",
+    "location": "Gdańsk, Polska",
+    "description": "Wieczór pełen przebojów i energetycznej muzyki popowej.",
+    "image": "koncert.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Spotkanie Autorskie",
+    "date": "2024-09-26T17:00:00.000Z",
+    "location": "Kraków, Polska",
+    "description": "Spotkanie z autorem bestsellerowych książek z możliwością autografu i dyskusji na temat twórczości.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Sesja Naukowa",
+    "date": "2024-09-27T09:30:00.000Z",
+    "location": "Wrocław, Polska",
+    "description": "Dyskusja naukowa nad najnowszymi odkryciami w dziedzinie nauki i technologii.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Warsztaty Graficzne",
+    "date": "2024-09-28T10:30:00.000Z",
+    "location": "Poznań, Polska",
+    "description": "Praktyczne warsztaty z grafiki komputerowej dla początkujących i zaawansowanych.",
+    "image": "warsztaty.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Wydarzenie Motywacyjne",
+    "date": "2024-09-29T13:00:00.000Z",
+    "location": "Warszawa, Polska",
+    "description": "Inspirujące wystąpienie motywacyjne prowadzone przez znanego mówcę.",
+    "image": "konferencja.jpg"
+  },
+  {
+    "username": "admin",
+    "title": "Koncert Akustyczny",
+    "date": "2024-09-30T15:30:00.000Z",
+    "location": "Gdańsk, Polska",
+    "description": "Intymny wieczór z akustycznymi aranżacjami znanych utworów muzycznych.",
+    "image": "koncert.jpg"
+  }
+]

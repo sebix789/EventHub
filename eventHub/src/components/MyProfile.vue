@@ -117,18 +117,30 @@
       </form>
     </div>
   </div>
+  <div class="header-section card logged-card">
+    <h1>Events I will be part of</h1>
+    <div class="btn-header-container">
+      <div v-for="favorite in favorites" :key="favorite.id">
+      <img :src="getImageUrl(favorite.image)" alt="Event image">
+      <h2>{{ favorite.title }}</h2>
+      <p>{{ formatDate(favorite.date) }}</p>
+    </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
-import { ref, defineEmits, watch, computed, onMounted } from 'vue'
+import { ref, defineEmits, watch, computed, onMounted, inject } from 'vue'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
+import { useToast } from 'vue-toastification'
 import '@/assets/card.css'
 import '@/assets/myProfile.css'
 
 axios.defaults.baseURL = 'http://localhost:5000'
 
 const router = useRouter()
+const toast = useToast()
 const emit = defineEmits(['close'])
 
 const firstname = ref('')
@@ -144,6 +156,7 @@ const isTouched = ref(false)
 const errorMessage = ref('')
 const localUsername = ref('')
 const users = ref([])
+const favorites = inject('favorites')
 
 onMounted(async () => {
   localUsername.value = localStorage.getItem('username')
@@ -157,6 +170,7 @@ onMounted(async () => {
       email.value = users.value[0].email
       console.log('Firstname:', firstname.value)
     }
+    console.log(favorites)
   } catch (error) {
     console.error('Failed to fetch profile:', error)
   }
@@ -205,7 +219,7 @@ const handleSubmit = async () => {
       repeatPassword.value = ''
       userImage.value = null
       imageFile.value = null
-      alert('Profile updated')
+      toast.success('Profile updated successfully')
 
       // After successful update, update form fields
       const response = await axios.get(
@@ -219,6 +233,7 @@ const handleSubmit = async () => {
         email.value = user.email
       }
     } catch (error) {
+      toast.error('Something went wrong, Please try again.')
       console.error('Failed to update profile:', error)
       if (error.response && error.response.status === 500) {
         errorMessage.value =
@@ -230,6 +245,12 @@ const handleSubmit = async () => {
   } else {
     errorMessage.value = 'Please fill in all required fields'
   }
+}
+
+const formatDate = date => {
+  const eventDate = new Date(date)
+  const options = { day: '2-digit', month: '2-digit', year: 'numeric' }
+  return eventDate.toLocaleDateString('en-GB', options) // Ustawienia regionalne dla formatu DD-MM-YYYY
 }
 
 const handleImageUpload = event => {

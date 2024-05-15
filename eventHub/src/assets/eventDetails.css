@@ -1,0 +1,40 @@
+/* Style dla wydarzeń */
+.events-container {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: white;
+}
+
+.event-card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+  width: 300px;
+}
+
+.event-details-card {
+  width: 100%;
+}
+
+/* Styl dla komunikatu o braku wydarzeń */
+.no-events-message {
+  margin-top: 20px;
+  font-weight: bold;
+  color: red;
+}
+img {
+  width: 150px;
+}
+
+.event-details-box {
+  width: 60%;
+}
+
+.event-details-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 3rem;
+  padding-right: 20px;
+}

@@ -54,9 +54,12 @@
             </div>
           </div>
           <!-- Dodaj sekcję na wyświetlanie wydarzeń -->
-          <div v-if="events.length > 0" class="logged-event-container">
+          <div
+            v-if="events.length > 0 && !selectedEvent"
+            class="logged-event-container"
+          >
             <button
-              v-if="events.length > 2"
+              v-if="events.length > 2 && !selectedEvent"
               class="slider-button left btn-slide-left"
               @click="scrollSlider(-1)"
             >
@@ -80,11 +83,22 @@
                 <p class="event-data">{{ formatDate(event.date) }}</p>
                 <!-- Formatowanie daty przy użyciu metody formatDate -->
                 <p class="event-data">{{ event.location }}</p>
-                <p class="event-data">{{ event.description }}</p>
+                <button class="event-button" @click="selectEvent(event.title)">
+                  Details
+                </button>
+                <i
+                  class="favorite-icon"
+                  :class="
+                    favorites.includes(event.title)
+                      ? 'fas fa-heart'
+                      : 'far fa-heart'
+                  "
+                  @click="toggleFavorite(event.title)"
+                ></i>
               </div>
             </div>
             <button
-              v-if="events.length > 2"
+              v-if="events.length > 2 && !selectedEvent"
               class="slider-button right btn-slide-right"
               @click="scrollSlider(1)"
             >
@@ -92,6 +106,11 @@
               <i class="fas fa-chevron-right"></i>
             </button>
           </div>
+          <EventDetails
+            v-if="selectedEvent"
+            :event="selectedEvent"
+            :key="selectedEvent._id"
+          />
           <div
             v-if="showNoEventsMessage && events != null && events.length === 0"
             class="no-events-message"
@@ -105,16 +124,21 @@
 </template>
 
 <script setup>
-import { ref, onMounted, inject, computed } from 'vue'
+import { ref, onMounted, inject, computed, provide } from 'vue'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
 import LandingPage from './LandingPage.vue'
+import EventDetails from './EventDetails.vue'
 import '@/assets/loggedMainPage.css'
 import '@/assets/card.css'
 import '@/assets/landingPage.css'
+import '@/assets/eventDetails.css'
+import '@/assets/myEvents.css'
 
 const router = useRouter()
 
+const favorites = ref([])
+const selectedEvent = ref(null)
 const username = ref('')
 const showCreateEventForm = ref(false)
 const isLoggedIn = inject('isLoggedIn')
@@ -122,23 +146,57 @@ const events = ref([]) // Nowa zmienna reaktywna na wydarzenia
 const showNoEventsMessage = ref(false) // Flaga dla komunikatu o braku wydarzeń
 const visibleEventsIndex = ref(0)
 
+const axiosInstanceUser = axios.create({
+  baseURL: 'http://localhost:5000/api/auth'
+})
+
 const axiosInstanceEvent = axios.create({
   baseURL: 'http://localhost:5000/api/events'
 })
+
 const showMyEvents = ref(false)
 
 onMounted(() => {
-  try {
-    const localUsername = localStorage.getItem('username')
-    if (localUsername) {
-      username.value = localUsername
-    } else {
-      throw new Error('Username not found in local storage')
-    }
-  } catch (error) {
-    console.error(error)
+  const localUsername = localStorage.getItem('username')
+  if (localUsername) {
+    username.value = localUsername
+
+    // Fetch the user's favorites from the database
+    axiosInstanceUser.get(`/getFavorites/${localUsername}`)
+      .then(response => {
+        favorites.value = response.data
+        provide('favorites', favorites)
+      })
+      .catch(error => {
+        console.error(error)
+      })
+  } else {
+    console.error('Username not found in local storage')
   }
 })
+
+const toggleFavorite = async eventTitle => {
+  const localUsername = localStorage.getItem('username')
+  if (localUsername) {
+    if (favorites.value.includes(eventTitle)) {
+      favorites.value = favorites.value.filter(
+        favorite => favorite !== eventTitle
+      )
+    } else {
+      favorites.value = [...favorites.value, eventTitle]
+    }
+
+    console.log('Favorites:', favorites.value)
+
+    try {
+      await axiosInstanceUser.put(`/updateFavorites/${localUsername}`, {
+        favorites: favorites.value
+      })
+    } catch (error) {
+      console.error('Failed to update favorites:', error)
+    }
+  }
+}
 
 const handleProfile = section => {
   router.push('/logged-main-page/my-profile')
@@ -160,6 +218,7 @@ const handleClose = () => {
 
 const fetchEventsByDate = async date => {
   try {
+    selectedEvent.value = false
     let searchDate = new Date()
 
     switch (date) {
@@ -219,6 +278,7 @@ const formatDate = date => {
 
 const fetchEventsForThisWeek = async () => {
   try {
+    selectedEvent.value = false
     const response = await axiosInstanceEvent.get('/getEventsThisWeek')
     events.value = response.data
     showNoEventsMessage.value = events.value.length === 0
@@ -229,6 +289,7 @@ const fetchEventsForThisWeek = async () => {
 
 const fetchAllEvents = async () => {
   try {
+    selectedEvent.value = false
     const response = await axiosInstanceEvent.get('/getAllEvents')
     events.value = response.data
     showNoEventsMessage.value = events.value.length === 0
@@ -243,6 +304,17 @@ const getImageUrl = base64Image => {
   }
   // Default image URL or placeholder if no image available
   return 'https://via.placeholder.com/150'
+}
+
+const selectEvent = async eventTitle => {
+  try {
+    const response = await axiosInstanceEvent.get(`getEventByTitle/${eventTitle}`)
+    selectedEvent.value = response.data
+    console.log('Selected event:', eventTitle)
+    console.log('Selected event:', selectedEvent.value)
+  } catch (error) {
+    console.error('Error fetching event:', error)
+  }
 }
 </script>
 

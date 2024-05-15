@@ -91,10 +91,6 @@ const handleEvent = () => {
   router.push('/logged-main-page/my-events')
 }
 
-const handleEdit = section => {
-  router.push('/logged-main-page/edit-event')
-}
-
 const handleClick = section => {
   console.log(`Clicked on ${section}`)
 }
