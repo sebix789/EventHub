@@ -11,3 +11,16 @@ Technical Overview:
 - Create Event Details: display a specific form used to create Event
 - My Event: display all events created
 - My Event Details: display specific details about created event: name, date, map with localisation, description and possibility to edit event details
+
+Getting Started
+
+You need to download database MongoDB and connect with following link:
+mongodb://localhost:27017
+
+First you need to type "cd eventHub"
+Next you need to run command 'npm install' to download all neceserry dependencies.
+If there is any error, run an 'npm i "missing dependencie"' and it should work.
+
+Next you need to run in terminal "cd eventHub" and then "npm start" it should run your server MongoDB.
+
+In another command prompt type "cd eventHub" and then "npm run dev" to view your website clicking on your link following link that popped up on terminal.
