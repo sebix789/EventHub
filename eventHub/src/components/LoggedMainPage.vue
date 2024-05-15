@@ -43,7 +43,8 @@
             v-if="
               !$route.path.includes('/my-events') &&
               !$route.path.includes('/create-event') &&
-              !$route.path.includes('/my-profile')
+              !$route.path.includes('/my-profile') &&
+              !$route.path.includes('/edit-event')
             "
             class="header-section card logged-card"
           >
@@ -205,6 +206,13 @@ onMounted(() => {
     console.error('Username not found in local storage')
   }
 })
+
+const logout = () => {
+  isLoggedIn.value = false
+  // Remove the token from local storage and reload the page
+  localStorage.clear()
+  router.push({ name: 'LandingPage' })
+}
 
 const handleSearch = async () => {
   try {

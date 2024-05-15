@@ -27,6 +27,13 @@
         >
           Log in
         </button>
+        <button
+          v-else-if="isLoggedIn"
+          @click="returnToMainPage"
+          class="login-button"
+        >
+          Return to Main Page
+        </button>
         <button v-else @click="logout" class="login-button">Logout</button>
       </slot>
     </div>
@@ -184,6 +191,10 @@ const handleSearch = async () => {
   } catch (error) {
     console.error('Error while searching:', error)
   }
+}
+
+const returnToMainPage = () => {
+  router.push('/logged-main-page')
 }
 
 const logout = () => {

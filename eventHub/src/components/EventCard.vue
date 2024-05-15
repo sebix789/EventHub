@@ -16,24 +16,33 @@
       <template v-slot:header>
         <div v-if="event != null" class="main-page-container">
           <div class="card">
-            <div class="event-container">
+            <h1 class="">{{ event.title }}</h1>
+            <div class="event-container-event">
               <div class="event-detail">
-                <div class="image-event">
+                <div class="event-image">
                   <img :src="getImageUrl(event.image)" alt="Event Image" />
                 </div>
-                <div class="source-info">
+                <div class="event-info">
                   <span>{{ event.title }}</span>
                   <div>
                     <span>{{ formatDate(event.date) }}</span>
                   </div>
                   <h3>About</h3>
-                  <p class="description">
+                  <p>
                     {{ event.description }}
                   </p>
                 </div>
               </div>
-              <div class="location">
-                <div class="map">tu bedzie mapa moze</div>
+              <div class="event-location">
+                <div class="event-map">
+                  <img
+                    src="https://mt1.google.com/vt/lyrs=r&x=9100&y=5553&z=14"
+                    alt=""
+                  />
+                </div>
+                <div class="event-info-event">
+                  <button @click="handleEdit">Edit</button>
+                </div>
               </div>
             </div>
           </div>
@@ -45,14 +54,13 @@
 
 <script setup>
 import { ref, onMounted, inject } from 'vue'
+import router from '@/router/router'
 import axios from 'axios'
 import LandingPage from './LandingPage.vue'
-
 import '@/assets/loggedMainPage.css'
 import '@/assets/card.css'
 import '@/assets/landingPage.css'
 import '@/assets/eventCard.css'
-import router from '@/router/router'
 
 const event = ref(null)
 const username = ref('')
@@ -86,6 +94,10 @@ const handleClick = section => {
   console.log(`Clicked on ${section}`)
 }
 
+const handleEdit = section => {
+  router.push(`/logged-main-page/edit-event/${event.value._id}`)
+}
+
 const formatDate = date => {
   const eventDate = new Date(date)
   const options = { day: '2-digit', month: '2-digit', year: 'numeric' }
@@ -100,29 +112,3 @@ const getImageUrl = base64Image => {
   return 'https://via.placeholder.com/150'
 }
 </script>
-
-<style>
-/* Style dla wydarzeń */
-.events-container {
-  display: flex;
-  flex-wrap: wrap;
-  background-color: white;
-}
-
-.event-card {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  margin: 10px;
-}
-
-/* Styl dla komunikatu o braku wydarzeń */
-.no-events-message {
-  margin-top: 20px;
-  font-weight: bold;
-  color: red;
-}
-img {
-  width: 150px;
-}
-</style>

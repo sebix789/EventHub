@@ -4,6 +4,7 @@ import LoggedMainPage from '@/components/LoggedMainPage.vue'
 import SignupCard from '@/components/SignupCard.vue'
 import LoginCard from '@/components/LoginCard.vue'
 import EventCard from '@/components/EventCard.vue'
+import EditEvent from '@/components/EditEvent.vue'
 
 import MyProfile from '@/components/MyProfile.vue'
 import MyEvents from '@/components/MyEvents.vue'
@@ -22,7 +23,8 @@ const routes = [
     children: [
       { path: 'my-events', component: MyEvents },
       { path: 'create-event', component: CreateEvent },
-      { path: 'my-profile', component: MyProfile }
+      { path: 'my-profile', component: MyProfile },
+      { path: 'edit-event/:id', component: EditEvent }
     ],
     meta: { requiresAuth: true }
   },

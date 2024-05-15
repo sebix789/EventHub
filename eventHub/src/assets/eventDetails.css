@@ -17,6 +17,10 @@
   width: 100%;
 }
 
+.events-container.events-wrapper.event-details-box {
+  margin-top: 2rem;
+}
+
 /* Styl dla komunikatu o braku wydarzeń */
 .no-events-message {
   margin-top: 20px;
