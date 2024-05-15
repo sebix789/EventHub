@@ -35,7 +35,11 @@
               </div>
               <div class="event-location">
                 <div class="event-map">
-                  <l-map :zoom="13" :center="[51.505, -0.09]">
+                  <l-map
+                    :use-global-leaflet="false"
+                    :zoom="13"
+                    :center="[51.505, -0.09]"
+                  >
                     <l-tile-layer
                       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     ></l-tile-layer>
