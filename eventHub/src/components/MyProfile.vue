@@ -117,16 +117,6 @@
       </form>
     </div>
   </div>
-  <div class="header-section card logged-card">
-    <h1>Events I will be part of</h1>
-    <div class="btn-header-container">
-      <div v-for="favorite in favorites" :key="favorite.id">
-      <img :src="getImageUrl(favorite.image)" alt="Event image">
-      <h2>{{ favorite.title }}</h2>
-      <p>{{ formatDate(favorite.date) }}</p>
-    </div>
-    </div>
-  </div>
 </template>
 
 <script setup>
