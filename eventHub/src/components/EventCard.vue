@@ -95,6 +95,10 @@ const handleClick = section => {
   console.log(`Clicked on ${section}`)
 }
 
+const handleEdit = section => {
+  router.push('/logged-main-page/edit-event')
+}
+
 const formatDate = date => {
   const eventDate = new Date(date)
   const options = { day: '2-digit', month: '2-digit', year: 'numeric' }
@@ -109,29 +113,3 @@ const getImageUrl = base64Image => {
   return 'https://via.placeholder.com/150'
 }
 </script>
-
-<style>
-/* Style dla wydarzeń */
-.events-container {
-  display: flex;
-  flex-wrap: wrap;
-  background-color: white;
-}
-
-.event-card {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  margin: 10px;
-}
-
-/* Styl dla komunikatu o braku wydarzeń */
-.no-events-message {
-  margin-top: 20px;
-  font-weight: bold;
-  color: red;
-}
-img {
-  width: 150px;
-}
-</style>

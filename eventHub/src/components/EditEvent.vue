@@ -18,7 +18,6 @@
           placeholder="Select Date"
           v-model="date"
           type="date"
-          required
         />
       </div>
       <div class="content-wrapper event-wrapper">
@@ -29,7 +28,6 @@
           placeholder="Enter Location"
           v-model="location"
           type="text"
-          required
         />
       </div>
       <div class="content-wrapper event-wrapper">
@@ -41,7 +39,6 @@
           id="description"
           placeholder="Enter event description"
           v-model="description"
-          required
         />
       </div>
       <div class="content-wrapper event-wrapper">
