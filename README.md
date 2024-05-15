@@ -21,7 +21,7 @@ First you need to type "cd eventHub"
 Next you need to run command 'npm install' to download all neceserry dependencies.
 If there is any error, run an 'npm i "missing dependencie"' and it should work.
 
-Next you need to run in terminal "cd eventHub" and then "npm start" it should run your server MongoDB.
+Next you need to run in terminal "cd eventHub/server" and then "ts-node server.ts" it should run your server MongoDB.
 
 In another command prompt type "cd eventHub" and then "npm run dev" to view your website clicking on your link following link that popped up on terminal.
 
