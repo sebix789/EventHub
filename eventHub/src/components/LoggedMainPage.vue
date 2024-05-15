@@ -1,6 +1,30 @@
 <template>
   <div>
     <LandingPage :isLoggedIn="isLoggedIn.value">
+      <template v-slot:topAppBar>
+        <router-link to="/" class="title">
+          <img src="../assets/title.png" alt="EventHub" />
+        </router-link>
+        <div class="search-container">
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Search for events"
+            v-model="searchInput"
+            @input="handleSearch"
+          />
+          <i @click="handleSearch" class="fas fa-search search-icon"></i>
+        </div>
+        <button
+          v-if="!isLoggedIn"
+          :isLoggedIn="isLoggedIn"
+          @click="redirectToLogin"
+          class="login-button"
+        >
+          Log in
+        </button>
+        <button v-else @click="logout" class="login-button">Logout</button>
+      </template>
       <template v-slot:left-bar>
         <div class="left-bar">
           <div class="section" @click="handleProfile">
@@ -124,7 +148,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, inject, computed, provide } from 'vue'
+import { ref, onMounted, inject, computed, provide, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
 import LandingPage from './LandingPage.vue'
@@ -145,6 +169,12 @@ const isLoggedIn = inject('isLoggedIn')
 const events = ref([]) // Nowa zmienna reaktywna na wydarzenia
 const showNoEventsMessage = ref(false) // Flaga dla komunikatu o braku wydarzeń
 const visibleEventsIndex = ref(0)
+const searchInput = ref('')
+
+const state = reactive({
+  searchResult: [],
+  noSearch: true
+})
 
 const axiosInstanceUser = axios.create({
   baseURL: 'http://localhost:5000/api/auth'
@@ -162,7 +192,8 @@ onMounted(() => {
     username.value = localUsername
 
     // Fetch the user's favorites from the database
-    axiosInstanceUser.get(`/getFavorites/${localUsername}`)
+    axiosInstanceUser
+      .get(`/getFavorites/${localUsername}`)
       .then(response => {
         favorites.value = response.data
         provide('favorites', favorites)
@@ -174,6 +205,32 @@ onMounted(() => {
     console.error('Username not found in local storage')
   }
 })
+
+const handleSearch = async () => {
+  try {
+    let searchQuery = searchInput.value.trim()
+
+    const res = await axiosInstanceEvent.get('/search', {
+      params: {
+        searchQuery
+      }
+    })
+
+    if (searchQuery === '') {
+      state.noSearch = true
+      return
+    }
+    state.noSearch = false
+    state.searchResult = res.data.map(event => event.title)
+    console.log('Search result:', state.searchResult)
+
+    if (state.searchResult.length > 0) {
+      await selectEvent(state.searchResult[0])
+    }
+  } catch (error) {
+    console.error('Error while searching:', error)
+  }
+}
 
 const toggleFavorite = async eventTitle => {
   const localUsername = localStorage.getItem('username')
@@ -308,7 +365,9 @@ const getImageUrl = base64Image => {
 
 const selectEvent = async eventTitle => {
   try {
-    const response = await axiosInstanceEvent.get(`getEventByTitle/${eventTitle}`)
+    const response = await axiosInstanceEvent.get(
+      `getEventByTitle/${eventTitle}`
+    )
     selectedEvent.value = response.data
     console.log('Selected event:', eventTitle)
     console.log('Selected event:', selectedEvent.value)

@@ -5,41 +5,30 @@
   />
   <div class="landing-page">
     <div class="top-app-bar">
-      <router-link to="/" class="title">
-        <img src="../assets/title.png" alt="EventHub" />
-      </router-link>
-      <div class="search-container">
-        <input
-          type="text"
-          class="search-input"
-          placeholder="Search for events"
-          v-model="searchQuery"
-          @keyup="handleSearch"
-        />
-        <div v-if="!state.noSearch && state.searchResult.length > 0">
-          <div
-            class="search-item"
-            v-for="(result, index) in state.searchResult"
-            :key="index"
-          >
-            <hr v-if="index > 0" />
-            <p @click="handleClickEvent(result)">{{ result }}</p>
-          </div>
+      <slot name="topAppBar">
+        <router-link to="/" class="title">
+          <img src="../assets/title.png" alt="EventHub" />
+        </router-link>
+        <div class="search-container">
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Search for events"
+            v-model="searchInput"
+            @input="handleSearch"
+          />
+          <i @click="handleSearch" class="fas fa-search search-icon"></i>
         </div>
-        <div v-else-if="!state.noSearch" class="search-item">
-          <p>Sorry. No Results</p>
-        </div>
-        <i @click="handleSearch" class="fas fa-search search-icon"></i>
-      </div>
-      <button
-        v-if="!isLoggedIn"
-        :isLoggedIn="isLoggedIn"
-        @click="redirectToLogin"
-        class="login-button"
-      >
-        Log in
-      </button>
-      <button v-else @click="logout" class="login-button">Logout</button>
+        <button
+          v-if="!isLoggedIn"
+          :isLoggedIn="isLoggedIn"
+          @click="redirectToLogin"
+          class="login-button"
+        >
+          Log in
+        </button>
+        <button v-else @click="logout" class="login-button">Logout</button>
+      </slot>
     </div>
     <div class="main-container">
       <div class="left-bar-container">
@@ -65,6 +54,11 @@
               All Events
             </button>
           </div>
+          <EventDetails
+            v-if="selectedEvent"
+            :event="selectedEvent"
+            :key="selectedEvent._id"
+          />
         </slot>
         <div
           v-if="events.length > 0 && !selectedEvent"
@@ -96,7 +90,7 @@
               <p class="event-data">{{ formatDate(event.date) }}</p>
               <!-- Formatowanie daty przy użyciu metody formatDate -->
               <p class="event-data">{{ event.location }}</p>
-              <button class="event-button" @click="selectEvent(event._id)">
+              <button class="event-button" @click="selectEvent(event.title)">
                 Details
               </button>
             </div>
@@ -111,11 +105,6 @@
             <i class="fas fa-chevron-right"></i>
           </button>
         </div>
-        <EventDetails
-          v-if="selectedEvent"
-          :event="selectedEvent"
-          :key="selectedEvent._id"
-        />
         <div
           v-if="showNoEventsMessage && events != null && events.length === 0"
           class="no-events-message"
@@ -128,7 +117,15 @@
 </template>
 
 <script setup>
-import { ref, inject, defineProps, onMounted, computed, reactive } from 'vue'
+import {
+  ref,
+  inject,
+  defineProps,
+  onMounted,
+  computed,
+  reactive,
+  provide
+} from 'vue'
 import { useRouter } from 'vue-router'
 import EventDetails from './EventDetails.vue'
 import '@/assets/landingPage.css'
@@ -138,14 +135,12 @@ import axios from 'axios'
 
 const router = useRouter()
 
-const searchQuery = ref('')
-const login = ref(false)
-const signup = ref(false)
 const isLoggedIn = inject('isLoggedIn')
 const events = ref([])
 const visibleEventsIndex = ref(0)
 const showNoEventsMessage = ref(false)
 const selectedEvent = ref(null)
+const searchInput = ref('')
 
 const props = defineProps({
   isLoggedIn: Boolean
@@ -165,12 +160,14 @@ onMounted(() => {
   isLoggedIn.value = !!token
 })
 
-const handleSearch = async event => {
+const handleSearch = async () => {
   try {
-    let searchQuery = event.target.value.trim()
+    let searchQuery = searchInput.value.trim()
 
-    const res = await axiosInstanceEvent.post('/search', {
-      searchQuery
+    const res = await axiosInstanceEvent.get('/search', {
+      params: {
+        searchQuery
+      }
     })
 
     if (searchQuery === '') {
@@ -179,6 +176,11 @@ const handleSearch = async event => {
     }
     state.noSearch = false
     state.searchResult = res.data.map(event => event.title)
+    console.log('Search result:', state.searchResult)
+
+    if (state.searchResult.length > 0) {
+      await selectEvent(state.searchResult[0])
+    }
   } catch (error) {
     console.error('Error while searching:', error)
   }
@@ -288,18 +290,21 @@ const visibleEvents = computed(() => {
   ]
 })
 
-const selectEvent = async eventId => {
+const selectEvent = async eventTitle => {
   try {
-    const response = await axiosInstanceEvent.get(`getEventById/${eventId}`)
+    const response = await axiosInstanceEvent.get(
+      `getEventByTitle/${eventTitle}`
+    )
     selectedEvent.value = response.data
-    console.log('Selected event:', eventId)
+    console.log('Selected event:', eventTitle)
     console.log('Selected event:', selectedEvent.value)
   } catch (error) {
     console.error('Error fetching event:', error)
   }
 }
 
-const handleClickEvent = result => {
-  console.log('Click on:' + result)
-}
+provide('handleSearch', handleSearch)
+provide('searchInput', searchInput)
+provide('selectEvent', selectEvent)
+provide('selectedEvent', selectedEvent)
 </script>
