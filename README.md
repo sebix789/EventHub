@@ -24,3 +24,28 @@ If there is any error, run an 'npm i "missing dependencie"' and it should work.
 Next you need to run in terminal "cd eventHub" and then "npm start" it should run your server MongoDB.
 
 In another command prompt type "cd eventHub" and then "npm run dev" to view your website clicking on your link following link that popped up on terminal.
+
+Package used in project:
+- @fortawesome/fontawesome-free: "^6.5.2",
+- @types/mongoose: "^5.11.97",
+- @types/multer-gridfs-storage: "^4.0.8",
+- @types/node: "^20.12.11",
+- axios: "^1.6.8",
+- bcryptjs: "^2.4.3",
+- body-parser: "^1.20.2",
+- cors: "^2.8.5",
+- express: "^4.19.2",
+- jsonwebtoken: "^9.0.2",
+- mongodb: "^6.6.1",
+- mongoose: "^8.3.4",
+- multer: "^1.4.4",
+- multer-gridfs-storage: "^1.3.0",
+- nodemon: "^3.1.0",
+- ts-node: "^10.9.2",
+- vue: "^3.4.21",
+- vue-leaflet: "^0.1.0",
+- vue-router: "^4.3.2",
+- vue-toastification: "^2.0.0-rc.5",
+- vue3-google-map: "^0.20.0",
+- vue3-leaflet: "^1.0.48",
+- vuex: "^4.0.2"
