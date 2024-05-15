@@ -35,10 +35,14 @@
               </div>
               <div class="event-location">
                 <div class="event-map">
-                  <img
-                    src="https://mt1.google.com/vt/lyrs=r&x=9100&y=5553&z=14"
-                    alt=""
-                  />
+                  <l-map :zoom="13" :center="[51.505, -0.09]">
+                    <l-tile-layer
+                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    ></l-tile-layer>
+                    <l-marker :lat-lng="[51.505, -0.09]">
+                      <l-popup>{{ event.location }}</l-popup>
+                    </l-marker>
+                  </l-map>
                 </div>
                 <div class="event-info-event">
                   <button @click="handleEdit">Edit</button>
@@ -57,6 +61,7 @@ import { ref, onMounted, inject } from 'vue'
 import router from '@/router/router'
 import axios from 'axios'
 import LandingPage from './LandingPage.vue'
+import { LMap, LTileLayer, LMarker, LPopup } from '@vue-leaflet/vue-leaflet'
 import '@/assets/loggedMainPage.css'
 import '@/assets/card.css'
 import '@/assets/landingPage.css'

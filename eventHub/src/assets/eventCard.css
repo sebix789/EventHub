@@ -49,14 +49,8 @@
 }
 
 .event-map {
-  width: 100%;
-  height: 400px;
-}
-
-.event-map img {
-  width: 100%;
   height: 100%;
-  object-fit: cover;
+  width: 100%;
 }
 
 .event-info-event {
