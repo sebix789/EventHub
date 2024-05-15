@@ -62,13 +62,18 @@
 <script setup>
 import { ref, defineEmits, watch } from 'vue'
 import axios from 'axios'
+import { useToast } from 'vue-toastification'
+import { useRoute } from 'vue-router'
 import '@/assets/card.css'
 import '@/assets/editEvent.css'
 
-axios.defaults.baseURL = 'http://localhost:5000'
+axios.defaults.baseURL = 'http://localhost:5000/api/events'
 
+const route = useRoute()
 const emit = defineEmits(['close'])
-const title = ref('')
+const toast = useToast()
+
+const eventId = ref(route.params.id)
 const date = ref('')
 const location = ref('')
 const description = ref('')
@@ -77,41 +82,41 @@ const imageFile = ref(null)
 const errorMessage = ref('')
 
 const handleSubmit = async () => {
-  // Get the username from local storage
-  const username = localStorage.getItem('username')
-
-  // Create a FormData instance
-  const formData = new FormData()
-
-  // Append the form fields to the FormData instance
-  formData.append('username', username)
-  formData.append('title', title.value)
-  formData.append('date', date.value)
-  formData.append('location', location.value)
-  formData.append('description', description.value)
-  formData.append('image', imageFile.value)
-
   try {
-    // Make a POST request to the server-side endpoint
-    const response = await axios.post('/api/events/createEvent', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    })
+    // Create a FormData instance
+    const formData = new FormData()
 
-    console.log('Response:', response.data)
-
-    // Clear the form fields
-    title.value = ''
-    date.value = ''
-    location.value = ''
-    description.value = ''
-    image.value = null
-    imageFile.value = null
-  } catch (error) {
-    if (error.response && error.response.status === 400) {
-      errorMessage.value = 'An event with this title already exists'
+    // Append the form fields to the FormData instance
+    formData.append('date', date.value)
+    formData.append('location', location.value)
+    formData.append('description', description.value)
+    if (imageFile.value) {
+      formData.append('image', imageFile.value)
     }
+
+    // Send a PUT request to the server to update the event
+    const response = await axios.put(
+      `/updateEvent/${eventId.value}`,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }
+    )
+
+    // Update the event data with the response data
+    date.value = response.data.date
+    location.value = response.data.location
+    description.value = response.data.description
+    image.value = response.data.image
+
+    console.log('Event updated:', response.data)
+    toast.success('Event updated successfully!')
+  } catch (error) {
+    toast.error('Error updating event')
+    errorMessage.value = 'Error updating event: ' + error.message
+    console.error(errorMessage.value)
   }
 }
 
@@ -125,7 +130,7 @@ const handleClose = () => {
   emit('close')
 }
 
-watch([title, date, location, description, image, imageFile], () => {
+watch([date, location, description, image, imageFile], () => {
   errorMessage.value = ''
 })
 </script>

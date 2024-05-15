@@ -117,6 +117,45 @@
       </form>
     </div>
   </div>
+  <div class="header-section card logged-card">
+    <h1>My Favorite Events</h1>
+  </div>
+  <div v-if="favorites.length > 0" class="logged-event-container">
+    <button
+      v-if="favorites.length > 2"
+      class="slider-button left btn-slide-left"
+      @click="scrollSlider(-1)"
+    >
+      <!-- Left Navigation Button -->
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <div class="events-container events-wrapper">
+      <div
+        v-for="favorite in visibleEvents"
+        :key="favorite._id"
+        class="event-card"
+      >
+        <div class="myevent-image-container">
+          <img
+            class="myevent-image"
+            :src="getImageUrl(favorite.image)"
+            alt="Event Image"
+          />
+        </div>
+        <h2 class="event-data">{{ favorite.title }}</h2>
+        <p class="event-data">{{ formatDate(favorite.date) }}</p>
+        <p class="event-data">{{ favorite.location }}</p>
+      </div>
+    </div>
+    <button
+      v-if="favorites.length > 2"
+      class="slider-button right btn-slide-right"
+      @click="scrollSlider(1)"
+    >
+      <!-- Right Navigation Button -->
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
 </template>
 
 <script setup>
@@ -146,7 +185,8 @@ const isTouched = ref(false)
 const errorMessage = ref('')
 const localUsername = ref('')
 const users = ref([])
-const favorites = inject('favorites')
+const favorites = ref([])
+const visibleEventsIndex = ref(0)
 
 onMounted(async () => {
   localUsername.value = localStorage.getItem('username')
@@ -160,10 +200,47 @@ onMounted(async () => {
       email.value = users.value[0].email
       console.log('Firstname:', firstname.value)
     }
+
+    // Fetch the favorites
+    const favoritesResponse = await axios.get(
+      `/api/auth/getFavorites/${localUsername.value}`
+    )
+    const favoriteIds = favoritesResponse.data
+
+    // Fetch the data for each favorite event
+    const favoritePromises = favoriteIds.map(title =>
+      axios.get(`/api/events/getEventByTitle/${title}`)
+    )
+    const favoriteResponses = await Promise.all(favoritePromises)
+    favorites.value = favoriteResponses.map(response => response.data)
+
+    console.log('Favorites:', favorites.value)
     console.log(favorites)
   } catch (error) {
     console.error('Failed to fetch profile:', error)
   }
+})
+
+const scrollSlider = direction => {
+  const totalEvents = favorites.value.length
+  visibleEventsIndex.value =
+    (visibleEventsIndex.value + direction + totalEvents) % totalEvents
+}
+
+const visibleEvents = computed(() => {
+  const totalEvents = favorites.value.length
+
+  if (totalEvents === 1) {
+    return favorites.value
+  }
+
+  const startIndex = visibleEventsIndex.value
+  const endIndex = startIndex + 2
+
+  return [
+    ...favorites.value.slice(startIndex, endIndex),
+    ...favorites.value.slice(0, Math.max(0, 2 - (totalEvents - startIndex)))
+  ]
 })
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/

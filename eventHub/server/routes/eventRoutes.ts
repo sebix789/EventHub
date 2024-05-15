@@ -161,4 +161,46 @@ router.get('/search', async (req: Request, res: Response) => {
   res.send(find)
 })
 
+router.put(
+  '/updateEvent/:id',
+  upload.single('image'),
+  async (req: Request, res: Response) => {
+    try {
+      const { date, location, description } = req.body
+      const image = req.file?.buffer.toString('base64')
+      const event = await Event.findOne({ _id: req.params.id })
+
+      if (!event) {
+        return res.status(404).json({ message: 'Event not found' })
+      }
+
+      const updateEventFields: Partial<EventInterface> = {}
+
+      if (date) {
+        updateEventFields.date = date
+      }
+
+      if (location) {
+        updateEventFields.location = location
+      }
+
+      if (description) {
+        updateEventFields.description = description
+      }
+      if (image) {
+        updateEventFields.image = image
+      }
+
+      await Event.updateOne({ _id: req.params.id }, { $set: updateEventFields })
+
+      const updatedEventFromDb = await Event.findOne({ _id: req.params.id })
+      res.json(updatedEventFromDb)
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: 'An error occurred', error: (error as Error).message })
+    }
+  }
+)
+
 export default router

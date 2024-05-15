@@ -54,14 +54,13 @@
 
 <script setup>
 import { ref, onMounted, inject } from 'vue'
+import router from '@/router/router'
 import axios from 'axios'
 import LandingPage from './LandingPage.vue'
-
 import '@/assets/loggedMainPage.css'
 import '@/assets/card.css'
 import '@/assets/landingPage.css'
 import '@/assets/eventCard.css'
-import router from '@/router/router'
 
 const event = ref(null)
 const username = ref('')
@@ -96,7 +95,7 @@ const handleClick = section => {
 }
 
 const handleEdit = section => {
-  router.push('/logged-main-page/edit-event')
+  router.push(`/logged-main-page/edit-event/${event.value._id}`)
 }
 
 const formatDate = date => {

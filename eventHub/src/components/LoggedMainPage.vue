@@ -207,6 +207,13 @@ onMounted(() => {
   }
 })
 
+const logout = () => {
+  isLoggedIn.value = false
+  // Remove the token from local storage and reload the page
+  localStorage.clear()
+  router.push({ name: 'LandingPage' })
+}
+
 const handleSearch = async () => {
   try {
     let searchQuery = searchInput.value.trim()

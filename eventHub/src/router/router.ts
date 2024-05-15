@@ -24,7 +24,7 @@ const routes = [
       { path: 'my-events', component: MyEvents },
       { path: 'create-event', component: CreateEvent },
       { path: 'my-profile', component: MyProfile },
-      { path: 'edit-event', component: EditEvent }
+      { path: 'edit-event/:id', component: EditEvent }
     ],
     meta: { requiresAuth: true }
   },
