@@ -97,13 +97,10 @@ const imageFile = ref(null)
 const errorMessage = ref('')
 
 const handleSubmit = async () => {
-  // Get the username from local storage
-  const username = localStorage.getItem('username')
+  const username = sessionStorage.getItem('username')
 
-  // Create a FormData instance
   const formData = new FormData()
 
-  // Append the form fields to the FormData instance
   formData.append('username', username)
   formData.append('title', title.value)
   formData.append('date', date.value)
@@ -112,7 +109,6 @@ const handleSubmit = async () => {
   formData.append('image', imageFile.value)
 
   try {
-    // Make a POST request to the server-side endpoint
     const response = await axios.post('/api/events/createEvent', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
@@ -121,7 +117,6 @@ const handleSubmit = async () => {
     toast.success('Event created successfully')
     console.log('Response:', response.data)
 
-    // Clear the form fields
     title.value = ''
     date.value = ''
     location.value = ''

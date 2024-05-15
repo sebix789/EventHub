@@ -68,9 +68,8 @@ const handleSubmit = async () => {
       username: username.value,
       password: password.value
     })
-    console.log('Received token:', response.data.token)
-    localStorage.setItem('token', response.data.token)
-    localStorage.setItem('username', response.data.username)
+    sessionStorage.setItem('token', response.data.token)
+    sessionStorage.setItem('username', response.data.username)
     router.push({ name: 'LoggedMainPage' })
   } catch (error) {
     if (error.response && error.response.status === 401) {

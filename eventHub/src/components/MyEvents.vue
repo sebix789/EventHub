@@ -89,7 +89,7 @@ const axiosGetMyEvents = axios.create({
 })
 
 onMounted(async () => {
-  const localUsername = localStorage.getItem('username')
+  const localUsername = sessionStorage.getItem('username')
   if (localUsername) {
     username.value = localUsername
     const response = await axiosGetMyEvents.get(`getEvents/${username.value}`)
@@ -134,7 +134,6 @@ const visibleEvents = computed(() => {
 })
 
 const handleOnClickEvent = clickedEvent => {
-  // Emitowanie zdarzenia 'onSelectedEvent' z przekazanym obiektem event
   const eventId = clickedEvent._id
   router.push(`/event/${eventId}`)
 }

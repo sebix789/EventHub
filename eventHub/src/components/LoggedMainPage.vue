@@ -78,7 +78,6 @@
               </button>
             </div>
           </div>
-          <!-- Dodaj sekcję na wyświetlanie wydarzeń -->
           <div
             v-if="events.length > 0 && !selectedEvent"
             class="logged-event-container"
@@ -106,7 +105,6 @@
                 </div>
                 <h2 class="event-data">{{ event.title }}</h2>
                 <p class="event-data">{{ formatDate(event.date) }}</p>
-                <!-- Formatowanie daty przy użyciu metody formatDate -->
                 <p class="event-data">{{ event.location }}</p>
                 <button class="event-button" @click="selectEvent(event.title)">
                   Details
@@ -167,8 +165,8 @@ const selectedEvent = ref(null)
 const username = ref('')
 const showCreateEventForm = ref(false)
 const isLoggedIn = inject('isLoggedIn')
-const events = ref([]) // Nowa zmienna reaktywna na wydarzenia
-const showNoEventsMessage = ref(false) // Flaga dla komunikatu o braku wydarzeń
+const events = ref([])
+const showNoEventsMessage = ref(false)
 const visibleEventsIndex = ref(0)
 const searchInput = ref('')
 
@@ -188,7 +186,7 @@ const axiosInstanceEvent = axios.create({
 const showMyEvents = ref(false)
 
 onMounted(() => {
-  const localUsername = localStorage.getItem('username')
+  const localUsername = sessionStorage.getItem('username')
   if (localUsername) {
     username.value = localUsername
 
@@ -210,7 +208,7 @@ onMounted(() => {
 const logout = () => {
   isLoggedIn.value = false
   // Remove the token from local storage and reload the page
-  localStorage.clear()
+  sessionStorage.clear()
   router.push({ name: 'LandingPage' })
 }
 
@@ -230,7 +228,6 @@ const handleSearch = async () => {
     }
     state.noSearch = false
     state.searchResult = res.data.map(event => event.title)
-    console.log('Search result:', state.searchResult)
 
     if (state.searchResult.length > 0) {
       await selectEvent(state.searchResult[0])
@@ -241,7 +238,7 @@ const handleSearch = async () => {
 }
 
 const toggleFavorite = async eventTitle => {
-  const localUsername = localStorage.getItem('username')
+  const localUsername = sessionStorage.getItem('username')
   if (localUsername) {
     if (favorites.value.includes(eventTitle)) {
       favorites.value = favorites.value.filter(
@@ -250,8 +247,6 @@ const toggleFavorite = async eventTitle => {
     } else {
       favorites.value = [...favorites.value, eventTitle]
     }
-
-    console.log('Favorites:', favorites.value)
 
     try {
       await axiosInstanceUser.put(`/updateFavorites/${localUsername}`, {
@@ -288,11 +283,11 @@ const fetchEventsByDate = async date => {
 
     switch (date) {
       case 'Today':
-        searchDate = searchDate.toISOString().split('T')[0] // Dzisiejsza data
+        searchDate = searchDate.toISOString().split('T')[0]
         break
       case 'Tomorrow':
         searchDate.setDate(searchDate.getDate() + 1)
-        searchDate = searchDate.toISOString().split('T')[0] // Jutrzejsza data
+        searchDate = searchDate.toISOString().split('T')[0]
         break
     }
 
@@ -306,7 +301,6 @@ const fetchEventsByDate = async date => {
     )
 
     events.value = response.data
-    console.log(response.data) // Wyświetlenie odpowiedzi w konsoli
     showNoEventsMessage.value = events.value.length === 0
   } catch (error) {
     console.error('Error while fetching events:', error)
@@ -338,7 +332,7 @@ const visibleEvents = computed(() => {
 const formatDate = date => {
   const eventDate = new Date(date)
   const options = { day: '2-digit', month: '2-digit', year: 'numeric' }
-  return eventDate.toLocaleDateString('en-GB', options) // Ustawienia regionalne dla formatu DD-MM-YYYY
+  return eventDate.toLocaleDateString('en-GB', options)
 }
 
 const fetchEventsForThisWeek = async () => {
@@ -377,8 +371,6 @@ const selectEvent = async eventTitle => {
       `getEventByTitle/${eventTitle}`
     )
     selectedEvent.value = response.data
-    console.log('Selected event:', eventTitle)
-    console.log('Selected event:', selectedEvent.value)
   } catch (error) {
     console.error('Error fetching event:', error)
   }
@@ -386,7 +378,6 @@ const selectEvent = async eventTitle => {
 </script>
 
 <style>
-/* Style dla wydarzeń */
 .events-container {
   display: flex;
   flex-wrap: wrap;
@@ -400,7 +391,6 @@ const selectEvent = async eventTitle => {
   margin: 10px;
 }
 
-/* Styl dla komunikatu o braku wydarzeń */
 .no-events-message {
   margin-top: 20px;
   font-weight: bold;

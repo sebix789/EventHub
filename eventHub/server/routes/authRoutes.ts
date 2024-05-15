@@ -113,7 +113,6 @@ router.get('/users/:username', async (req: Request, res: Response) => {
   try {
     const username = req.params.username
 
-    // Wypytanie bazy danych o wszystkie wydarzenia przypisane do użytkownika
     const actualUserData = await User.find({ username })
 
     res.status(200).json(actualUserData)
@@ -152,10 +151,8 @@ router.put(
 router.get('/getFavorites/:username', async (req: Request, res: Response) => {
   try {
     const username = req.params.username
-    console.log('Username:', username) // Add this line
 
     const user = await User.findOne({ username })
-    console.log('User:', user) // Add this line
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' })
@@ -169,11 +166,5 @@ router.get('/getFavorites/:username', async (req: Request, res: Response) => {
       .json({ message: 'An error occurred', error: (error as Error).message })
   }
 })
-
-/////TO FIX GET ROUTE/////
-// router.get('/user', authenticateToken, (req: CustomRequest, res: Response) => {
-//   // Assuming req.user contains the authenticated user
-//   res.status(200).json({ username: req.user?.username })
-// })
 
 export default router

@@ -163,7 +163,7 @@ const state = reactive({
 })
 
 onMounted(() => {
-  const token = localStorage.getItem('token')
+  const token = sessionStorage.getItem('token')
   isLoggedIn.value = !!token
 })
 
@@ -183,7 +183,6 @@ const handleSearch = async () => {
     }
     state.noSearch = false
     state.searchResult = res.data.map(event => event.title)
-    console.log('Search result:', state.searchResult)
 
     if (state.searchResult.length > 0) {
       await selectEvent(state.searchResult[0])
@@ -199,8 +198,8 @@ const returnToMainPage = () => {
 
 const logout = () => {
   isLoggedIn.value = false
-  // Remove the token from local storage and reload the page
-  localStorage.clear()
+
+  sessionStorage.clear()
   router.push({ name: 'LandingPage' })
 }
 
@@ -222,8 +221,6 @@ const fetchEventsByDate = async date => {
         searchDate = searchDate.toISOString().split('T')[0] // Jutrzejsza data
         break
     }
-
-    console.log('Search Date:', searchDate)
 
     const response = await axiosInstanceEvent.get(
       `/getEventsByDate/${searchDate}`,
@@ -252,7 +249,6 @@ const fetchEventsForThisWeek = async () => {
     selectedEvent.value = false
     const response = await axiosInstanceEvent.get('/getEventsThisWeek')
     events.value = response.data
-    console.log(response.data) // Wyświetlenie odpowiedzi w konsoli
     showNoEventsMessage.value = events.value.length === 0
   } catch (error) {
     console.error('Error while fetching events:', error)
@@ -264,7 +260,6 @@ const fetchAllEvents = async () => {
     selectedEvent.value = false
     const response = await axiosInstanceEvent.get('/getAllEvents')
     events.value = response.data
-    console.log(response.data) // Wyświetlenie odpowiedzi w konsoli
     showNoEventsMessage.value = events.value.length === 0
   } catch (error) {
     console.error('Error while fetching events:', error)
@@ -307,8 +302,6 @@ const selectEvent = async eventTitle => {
       `getEventByTitle/${eventTitle}`
     )
     selectedEvent.value = response.data
-    console.log('Selected event:', eventTitle)
-    console.log('Selected event:', selectedEvent.value)
   } catch (error) {
     console.error('Error fetching event:', error)
   }

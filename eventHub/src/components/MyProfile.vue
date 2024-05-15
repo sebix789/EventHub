@@ -189,7 +189,7 @@ const favorites = ref([])
 const visibleEventsIndex = ref(0)
 
 onMounted(async () => {
-  localUsername.value = localStorage.getItem('username')
+  localUsername.value = sessionStorage.getItem('username')
   try {
     const response = await axios.get(`/api/auth/users/${localUsername.value}`)
     users.value = response.data
@@ -198,7 +198,6 @@ onMounted(async () => {
       firstname.value = users.value[0].firstname
       surname.value = users.value[0].surname
       email.value = users.value[0].email
-      console.log('Firstname:', firstname.value)
     }
 
     // Fetch the favorites
@@ -213,9 +212,6 @@ onMounted(async () => {
     )
     const favoriteResponses = await Promise.all(favoritePromises)
     favorites.value = favoriteResponses.map(response => response.data)
-
-    console.log('Favorites:', favorites.value)
-    console.log(favorites)
   } catch (error) {
     console.error('Failed to fetch profile:', error)
   }
@@ -252,12 +248,12 @@ const passwordCheck = computed(() => password.value === repeatPassword.value)
 const handleSubmit = async () => {
   isTouched.value = true
   if (isValid.value && passwordCheck.value) {
-    const username = localStorage.getItem('username')
+    const username = sessionStorage.getItem('username')
 
     // Create a FormData instance
     const formData = new FormData()
 
-    formData.append('username', localStorage.getItem('username'))
+    formData.append('username', sessionStorage.getItem('username'))
     formData.append('firstname', firstname.value)
     formData.append('surname', surname.value)
 
@@ -317,13 +313,12 @@ const handleSubmit = async () => {
 const formatDate = date => {
   const eventDate = new Date(date)
   const options = { day: '2-digit', month: '2-digit', year: 'numeric' }
-  return eventDate.toLocaleDateString('en-GB', options) // Ustawienia regionalne dla formatu DD-MM-YYYY
+  return eventDate.toLocaleDateString('en-GB', options)
 }
 
 const handleImageUpload = event => {
   userImage.value = event.target.files[0]
   imageFile.value = event.target.files[0]
-  console.log('Image uploaded:', imageFile.value)
 }
 
 const getImageUrl = base64Image => {

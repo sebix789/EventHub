@@ -43,7 +43,6 @@ router.get('/getEvents/:username', async (req: Request, res: Response) => {
   try {
     const username = req.params.username
 
-    // Wypytanie bazy danych o wszystkie wydarzenia przypisane do użytkownika
     const events = await Event.find({ username })
 
     res.status(200).json(events)
@@ -70,10 +69,8 @@ router.get('/getEventsByDate/:date', async (req: Request, res: Response) => {
   try {
     const date = req.params.date
 
-    // Pobranie daty z parametru żądania
     const selectedDate = new Date(date)
 
-    // Ustawienie godziny na 00:00:00 dla wybranej daty
     const fromDate = new Date(
       selectedDate.getFullYear(),
       selectedDate.getMonth(),
@@ -83,7 +80,6 @@ router.get('/getEventsByDate/:date', async (req: Request, res: Response) => {
       0
     )
 
-    // Ustawienie godziny na 23:59:59 dla następnego dnia
     const nextDay = new Date(selectedDate)
     nextDay.setDate(nextDay.getDate() + 1)
     const toDate = new Date(
@@ -107,29 +103,24 @@ router.get('/getEventsByDate/:date', async (req: Request, res: Response) => {
 
 router.get('/getEventsThisWeek', async (req: Request, res: Response) => {
   try {
-    // Pobranie dzisiejszej daty
     const today = new Date()
 
-    // Obliczenie daty początkowej bieżącego tygodnia (poniedziałek)
     const startOfWeek = new Date(
       today.getFullYear(),
       today.getMonth(),
       today.getDate() - today.getDay() + 1
     )
 
-    // Obliczenie daty końcowej bieżącego tygodnia (niedziela)
     const endOfWeek = new Date(
       today.getFullYear(),
       today.getMonth(),
       startOfWeek.getDate() + 6
     )
 
-    // Znalezienie wydarzeń w zakresie od startOfWeek do endOfWeek
     const events = await Event.find({
       date: { $gte: startOfWeek, $lte: endOfWeek }
     }).sort({ date: 1 })
 
-    // Wysłanie znalezionych wydarzeń w odpowiedzi
     res.status(200).json(events)
   } catch (error) {
     console.error('Error while fetching events:', error)

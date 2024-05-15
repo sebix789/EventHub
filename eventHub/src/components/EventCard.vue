@@ -76,7 +76,7 @@ const axiosGetMyEvents = axios.create({
 })
 
 onMounted(async () => {
-  const localUsername = localStorage.getItem('username')
+  const localUsername = sessionStorage.getItem('username')
   if (localUsername) {
     username.value = localUsername
     const response = await axiosGetMyEvents.get(`getEvents/${username.value}`)
@@ -106,7 +106,7 @@ const handleEdit = section => {
 const formatDate = date => {
   const eventDate = new Date(date)
   const options = { day: '2-digit', month: '2-digit', year: 'numeric' }
-  return eventDate.toLocaleDateString('en-GB', options) // Ustawienia regionalne dla formatu DD-MM-YYYY
+  return eventDate.toLocaleDateString('en-GB', options)
 }
 
 const getImageUrl = base64Image => {

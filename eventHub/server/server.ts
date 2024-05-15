@@ -25,12 +25,9 @@ mongoose
   .then(async () => {
     console.log('MongoDB connected')
 
-    // Wczytywanie danych z pliku JSON
     try {
       const rawData = fs.readFileSync('sampleData.json')
       const jsonData: EventInterface[] = JSON.parse(rawData.toString())
-
-      // Przekonwertowanie wartości daty do formatu Date
       jsonData.forEach(event => {
         if (
           typeof event.date === 'object' &&
@@ -40,7 +37,6 @@ mongoose
           event.date = new Date(dateObject.$date)
         }
 
-        // Przekonwertowanie zdjęcia na dane typu Base64
         if (event.image) {
           const imagePath = path.join(__dirname, 'eventsImg', `${event.image}`)
           const base64Image = fs.readFileSync(imagePath, { encoding: 'base64' })
@@ -48,7 +44,6 @@ mongoose
         }
       })
 
-      // Wprowadzanie danych do bazy
       await Event.insertMany(jsonData)
       console.log('Data seeded successfully.')
     } catch (error) {
