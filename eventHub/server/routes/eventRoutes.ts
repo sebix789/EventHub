@@ -125,8 +125,8 @@ router.get('/getEventByTitle/:title', async (req: Request, res: Response) => {
   }
 })
 
-router.post('/search', async (req: Request, res: Response) => {
-  let search = req.body.searchQuery
+router.get('/search', async (req: Request, res: Response) => {
+  let search = req.query.searchQuery
   let find = await Event.find({
     title: { $regex: new RegExp('.*' + search + '.*', 'i') }
   })
